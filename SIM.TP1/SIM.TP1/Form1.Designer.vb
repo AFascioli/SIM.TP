@@ -25,6 +25,8 @@ Partial Class TrabajoPractico1
         Me.lbl_a = New System.Windows.Forms.Label()
         Me.txt_a = New System.Windows.Forms.TextBox()
         Me.grid1 = New System.Windows.Forms.DataGridView()
+        Me.indice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cmd_generar = New System.Windows.Forms.Button()
         Me.lbl_c = New System.Windows.Forms.Label()
         Me.lbl_m = New System.Windows.Forms.Label()
@@ -33,25 +35,25 @@ Partial Class TrabajoPractico1
         Me.cmd_siguiente = New System.Windows.Forms.Button()
         Me.lbl_seed = New System.Windows.Forms.Label()
         Me.txt_seed = New System.Windows.Forms.TextBox()
-        Me.indice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.grid1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'lbl_a
         '
         Me.lbl_a.AutoSize = True
-        Me.lbl_a.Location = New System.Drawing.Point(207, 20)
+        Me.lbl_a.Location = New System.Drawing.Point(73, 67)
+        Me.lbl_a.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_a.Name = "lbl_a"
-        Me.lbl_a.Size = New System.Drawing.Size(13, 13)
+        Me.lbl_a.Size = New System.Drawing.Size(18, 20)
         Me.lbl_a.TabIndex = 0
         Me.lbl_a.Text = "a"
         '
         'txt_a
         '
-        Me.txt_a.Location = New System.Drawing.Point(226, 13)
+        Me.txt_a.Location = New System.Drawing.Point(102, 56)
+        Me.txt_a.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.txt_a.Name = "txt_a"
-        Me.txt_a.Size = New System.Drawing.Size(100, 20)
+        Me.txt_a.Size = New System.Drawing.Size(148, 26)
         Me.txt_a.TabIndex = 1
         '
         'grid1
@@ -60,77 +62,12 @@ Partial Class TrabajoPractico1
         Me.grid1.AllowUserToDeleteRows = False
         Me.grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.indice, Me.numero})
-        Me.grid1.Location = New System.Drawing.Point(12, 125)
+        Me.grid1.Location = New System.Drawing.Point(18, 283)
+        Me.grid1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grid1.Name = "grid1"
         Me.grid1.ReadOnly = True
-        Me.grid1.Size = New System.Drawing.Size(400, 324)
+        Me.grid1.Size = New System.Drawing.Size(940, 407)
         Me.grid1.TabIndex = 2
-        '
-        'cmd_generar
-        '
-        Me.cmd_generar.Location = New System.Drawing.Point(12, 96)
-        Me.cmd_generar.Name = "cmd_generar"
-        Me.cmd_generar.Size = New System.Drawing.Size(75, 23)
-        Me.cmd_generar.TabIndex = 3
-        Me.cmd_generar.Text = "Generar"
-        Me.cmd_generar.UseVisualStyleBackColor = True
-        '
-        'lbl_c
-        '
-        Me.lbl_c.AutoSize = True
-        Me.lbl_c.Location = New System.Drawing.Point(207, 44)
-        Me.lbl_c.Name = "lbl_c"
-        Me.lbl_c.Size = New System.Drawing.Size(13, 13)
-        Me.lbl_c.TabIndex = 0
-        Me.lbl_c.Text = "c"
-        '
-        'lbl_m
-        '
-        Me.lbl_m.AutoSize = True
-        Me.lbl_m.Location = New System.Drawing.Point(207, 67)
-        Me.lbl_m.Name = "lbl_m"
-        Me.lbl_m.Size = New System.Drawing.Size(15, 13)
-        Me.lbl_m.TabIndex = 0
-        Me.lbl_m.Text = "m"
-        '
-        'txt_c
-        '
-        Me.txt_c.Location = New System.Drawing.Point(226, 37)
-        Me.txt_c.Name = "txt_c"
-        Me.txt_c.Size = New System.Drawing.Size(100, 20)
-        Me.txt_c.TabIndex = 1
-        '
-        'txt_m
-        '
-        Me.txt_m.Location = New System.Drawing.Point(226, 60)
-        Me.txt_m.Name = "txt_m"
-        Me.txt_m.Size = New System.Drawing.Size(100, 20)
-        Me.txt_m.TabIndex = 1
-        '
-        'cmd_siguiente
-        '
-        Me.cmd_siguiente.Location = New System.Drawing.Point(93, 96)
-        Me.cmd_siguiente.Name = "cmd_siguiente"
-        Me.cmd_siguiente.Size = New System.Drawing.Size(75, 23)
-        Me.cmd_siguiente.TabIndex = 3
-        Me.cmd_siguiente.Text = "Siguiente"
-        Me.cmd_siguiente.UseVisualStyleBackColor = True
-        '
-        'lbl_seed
-        '
-        Me.lbl_seed.AutoSize = True
-        Me.lbl_seed.Location = New System.Drawing.Point(30, 20)
-        Me.lbl_seed.Name = "lbl_seed"
-        Me.lbl_seed.Size = New System.Drawing.Size(32, 13)
-        Me.lbl_seed.TabIndex = 0
-        Me.lbl_seed.Text = "Seed"
-        '
-        'txt_seed
-        '
-        Me.txt_seed.Location = New System.Drawing.Point(68, 13)
-        Me.txt_seed.Name = "txt_seed"
-        Me.txt_seed.Size = New System.Drawing.Size(100, 20)
-        Me.txt_seed.TabIndex = 1
         '
         'indice
         '
@@ -144,11 +81,85 @@ Partial Class TrabajoPractico1
         Me.numero.Name = "numero"
         Me.numero.ReadOnly = True
         '
+        'cmd_generar
+        '
+        Me.cmd_generar.Location = New System.Drawing.Point(18, 238)
+        Me.cmd_generar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_generar.Name = "cmd_generar"
+        Me.cmd_generar.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_generar.TabIndex = 3
+        Me.cmd_generar.Text = "Generar"
+        Me.cmd_generar.UseVisualStyleBackColor = True
+        '
+        'lbl_c
+        '
+        Me.lbl_c.AutoSize = True
+        Me.lbl_c.Location = New System.Drawing.Point(73, 104)
+        Me.lbl_c.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_c.Name = "lbl_c"
+        Me.lbl_c.Size = New System.Drawing.Size(17, 20)
+        Me.lbl_c.TabIndex = 0
+        Me.lbl_c.Text = "c"
+        '
+        'lbl_m
+        '
+        Me.lbl_m.AutoSize = True
+        Me.lbl_m.Location = New System.Drawing.Point(73, 139)
+        Me.lbl_m.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_m.Name = "lbl_m"
+        Me.lbl_m.Size = New System.Drawing.Size(22, 20)
+        Me.lbl_m.TabIndex = 0
+        Me.lbl_m.Text = "m"
+        '
+        'txt_c
+        '
+        Me.txt_c.Location = New System.Drawing.Point(102, 93)
+        Me.txt_c.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_c.Name = "txt_c"
+        Me.txt_c.Size = New System.Drawing.Size(148, 26)
+        Me.txt_c.TabIndex = 1
+        '
+        'txt_m
+        '
+        Me.txt_m.Location = New System.Drawing.Point(102, 128)
+        Me.txt_m.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_m.Name = "txt_m"
+        Me.txt_m.Size = New System.Drawing.Size(148, 26)
+        Me.txt_m.TabIndex = 1
+        '
+        'cmd_siguiente
+        '
+        Me.cmd_siguiente.Location = New System.Drawing.Point(846, 238)
+        Me.cmd_siguiente.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_siguiente.Name = "cmd_siguiente"
+        Me.cmd_siguiente.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_siguiente.TabIndex = 3
+        Me.cmd_siguiente.Text = "Siguiente"
+        Me.cmd_siguiente.UseVisualStyleBackColor = True
+        '
+        'lbl_seed
+        '
+        Me.lbl_seed.AutoSize = True
+        Me.lbl_seed.Location = New System.Drawing.Point(45, 31)
+        Me.lbl_seed.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_seed.Name = "lbl_seed"
+        Me.lbl_seed.Size = New System.Drawing.Size(47, 20)
+        Me.lbl_seed.TabIndex = 0
+        Me.lbl_seed.Text = "Seed"
+        '
+        'txt_seed
+        '
+        Me.txt_seed.Location = New System.Drawing.Point(102, 20)
+        Me.txt_seed.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_seed.Name = "txt_seed"
+        Me.txt_seed.Size = New System.Drawing.Size(148, 26)
+        Me.txt_seed.TabIndex = 1
+        '
         'TrabajoPractico1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(443, 461)
+        Me.ClientSize = New System.Drawing.Size(971, 714)
         Me.Controls.Add(Me.cmd_siguiente)
         Me.Controls.Add(Me.cmd_generar)
         Me.Controls.Add(Me.grid1)
@@ -160,6 +171,7 @@ Partial Class TrabajoPractico1
         Me.Controls.Add(Me.lbl_seed)
         Me.Controls.Add(Me.lbl_c)
         Me.Controls.Add(Me.lbl_a)
+        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "TrabajoPractico1"
         Me.Text = "Form1"
         CType(Me.grid1, System.ComponentModel.ISupportInitialize).EndInit()

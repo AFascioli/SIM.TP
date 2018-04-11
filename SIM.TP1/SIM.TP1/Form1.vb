@@ -10,13 +10,16 @@
         cmb_intervalos.Items.Add("5")
         cmb_intervalos.Items.Add("10")
         cmb_intervalos.Items.Add("20")
+        cmb_cantIntC.Items.Add("5")
+        cmb_cantIntC.Items.Add("10")
+        cmb_cantIntC.Items.Add("20")
 
     End Sub
 
     Private Function congruencialMixto(a As Double, c As Double, m As Double, x As Double)
 
         Dim r, xi As Double 'r: numero random que genera.  xi: raiz.
-        Dim res(2) As Double 'vector de tamaño 2, tiene en (0) y en (1): el siguiente numero para generar.
+        Dim res(1) As Double 'vector de tamaño 2, tiene en (0) y en (1): el siguiente numero para generar.
 
         xi = (a * x + c) Mod m
 
@@ -28,7 +31,6 @@
         Return res
 
     End Function
-
 
     Private Sub cargarTabla()
         Dim vector(2) As Double
@@ -77,16 +79,16 @@
 
     Private Sub generadorRandom()
 
-        Dim numeros(Integer.Parse(Me.txt_cantidadNros.Text) - 1)
-        Dim contadorInter(Integer.Parse(Me.cmb_intervalos.SelectedItem) - 1) 'puede que se cague todo
-        Dim anchoInt = 1 / contadorInter.Length
-        Dim juancito As Integer
+        Dim numeros(Integer.Parse(Me.txt_cantidadNros.Text) - 1) 'vector para numeros generados por rnd
+        Dim contadorInter(Integer.Parse(Me.cmb_intervalos.SelectedItem) - 1) 'vector que cuenta cuantos numeros hay en cada intervalo
+        Dim anchoInt = 1 / contadorInter.Length 'ancho del intervalo
+        Dim cantEnInterv As Integer
 
         For index = 0 To numeros.Length - 1
 
             numeros(index) = Rnd()
-            juancito = Math.Truncate(numeros(index) / anchoInt)
-            contadorInter(juancito) += 1
+            cantEnInterv = Math.Truncate(numeros(index) / anchoInt) 'para saber en que intervalo corresponde ese rnd
+            contadorInter(cantEnInterv) += 1
 
             Me.grid3.Rows.Add() 'para mostrar numeros random generados
             Me.grid3.Rows(index).Cells(0).Value = numeros(index)
@@ -174,6 +176,11 @@
 
     End Sub
 
+    Private Sub cmd_generarC_Click(sender As Object, e As EventArgs) Handles cmd_generarC.Click
+        Me.numerosPuntoC()
+
+    End Sub
+
     Private Sub compararChi()
         Dim v(28) As Double
 
@@ -230,4 +237,54 @@
 
         Return contador
     End Function
+
+    Private Sub cargarGrid1C()
+        Me.grid1C.Rows.Clear()
+
+        Dim contChi As Double = 0
+        For index = 0 To contadorChi.Length - 1
+
+            Dim y = contadorChi(index)
+            If IsNothing(y) Then
+                y = 0
+            End If
+
+            Me.grid2.Rows.Add()
+            Me.grid2.Rows(index).Cells(0).Value = index + 1
+            Me.grid2.Rows(index).Cells(1).Value = y
+            Me.grid2.Rows(index).Cells(2).Value = numerosChi.Length / contadorChi.Length
+            Me.grid2.Rows(index).Cells(3).Value = ((contadorChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
+            contChi += Me.grid2.Rows(index).Cells(3).Value
+        Next
+        Me.txt_chiCal.Text = contChi
+        Me.compararChi()
+        If Me.grid2.Rows(0).Cells(2).Value < 5 Then
+            Me.cargarTabla3()
+        End If
+
+    End Sub
+
+    Private Sub numerosPuntoC()
+        Dim numerosC(Me.txt_cantNrosC.Text) As Double
+        Dim contadorInterC(Integer.Parse(Me.cmb_cantIntC.SelectedItem) - 1)
+        Dim anchoInt = 1 / contadorInterC.Length
+        Dim cantEnInt As Integer
+        Dim seedParcial As Integer = Me.txt_seedC.Text
+        Dim randomC As Double = 0
+        Dim vecAux(1) As Double
+
+        For index = 0 To numerosC.Length - 1
+            vecAux = Me.congruencialMixto(Me.txt_aC.Text, Me.txt_cC.Text, Me.txt_mC.Text, seedParcial)
+            randomC = vecAux(0)
+            seedParcial = vecAux(1)
+
+            numerosC(index) = randomC
+            cantEnInt = Math.Truncate(numerosC(index) / anchoInt)
+            contadorInterC(cantEnInt) += 1
+
+            Me.grid2C.Rows.Add() 'para mostrar numeros random generados
+            Me.grid2C.Rows(index).Cells(0).Value = numerosC(index)
+        Next
+
+    End Sub
 End Class

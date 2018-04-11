@@ -48,10 +48,12 @@
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.generadorRandom()
         Me.cargarTabla2()
-
+        Me.cargarGrafico()
     End Sub
 
     Private Sub cmd_generar_Click(sender As Object, e As EventArgs) Handles cmd_generar.Click
+        Me.contador = 0
+        Me.grid1.Rows.Clear()
         a = txt_a.Text
         c = txt_c.Text
         m = txt_m.Text
@@ -94,7 +96,7 @@
     End Sub
 
     Private Sub cargarTabla2()
-
+        Me.grid2.Rows.Clear()
         For index = 0 To contadorChi.Length - 1
 
             Dim y = contadorChi(index)
@@ -102,13 +104,24 @@
                 y = 0
             End If
             Me.grid2.Rows.Add()
-            Me.grid2.Rows(index).Cells(0).Value = index
+            Me.grid2.Rows(index).Cells(0).Value = index + 1
             Me.grid2.Rows(index).Cells(1).Value = y
             Me.grid2.Rows(index).Cells(2).Value = numerosChi.Length / contadorChi.Length
-            Me.grid2.Rows(index).Cells(3).Value = ((numerosChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
+            Me.grid2.Rows(index).Cells(3).Value = ((contadorChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
         Next
 
     End Sub
 
+    Private Sub cargarGrafico()
+        'El estilo del gráfico se edita en Propiedades, Series en la pestaña de diseño del form
+        Me.Chart1.Series("fe").Points.Clear()
+        Me.Chart1.Series("fo").Points.Clear()
+        Dim anchoInt = 1 / contadorChi.Length
+        For i = 0 To contadorChi.Length - 1
+            Me.Chart1.Series("fe").Points.AddXY(i + 1, Me.grid2.Rows(i).Cells(2).Value)
+            Me.Chart1.Series("fo").Points.AddXY(i + 1, Me.grid2.Rows(i).Cells(1).Value)
+        Next
+
+    End Sub
 
 End Class

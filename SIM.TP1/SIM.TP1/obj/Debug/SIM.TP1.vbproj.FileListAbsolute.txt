@@ -31,3 +31,14 @@ C:\Users\Administrador\Documents\GitHub\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1
 C:\Users\Administrador\Documents\GitHub\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.exe
 C:\Users\Administrador\Documents\GitHub\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.xml
 C:\Users\Administrador\Documents\GitHub\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.pdb
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\bin\Debug\SIM.TP1.exe.config
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.exe
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.xml
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.pdb
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\bin\Debug\SIM.TP1.exe
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\bin\Debug\SIM.TP1.pdb
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\bin\Debug\SIM.TP1.xml
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.vbprojResolveAssemblyReference.cache
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.TrabajoPractico1.resources
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.Resources.resources
+C:\Users\Mauro\Downloads\SIM.TP\SIM.TP1\SIM.TP1\obj\Debug\SIM.TP1.vbproj.GenerateResource.Cache

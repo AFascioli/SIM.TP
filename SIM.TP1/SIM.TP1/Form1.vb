@@ -88,27 +88,36 @@
             juancito = Math.Truncate(numeros(index) / anchoInt)
             contadorInter(juancito) += 1
 
+            Me.grid3.Rows.Add() 'para mostrar numeros random generados
+            Me.grid3.Rows(index).Cells(0).Value = numeros(index)
+
         Next
 
         numerosChi = numeros
         contadorChi = contadorInter
 
+
     End Sub
 
     Private Sub cargarTabla2()
         Me.grid2.Rows.Clear()
+        Dim contChi As Double = 0
         For index = 0 To contadorChi.Length - 1
 
             Dim y = contadorChi(index)
             If IsNothing(y) Then
                 y = 0
             End If
+
             Me.grid2.Rows.Add()
             Me.grid2.Rows(index).Cells(0).Value = index + 1
             Me.grid2.Rows(index).Cells(1).Value = y
             Me.grid2.Rows(index).Cells(2).Value = numerosChi.Length / contadorChi.Length
             Me.grid2.Rows(index).Cells(3).Value = ((contadorChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
+            contChi += Me.grid2.Rows(index).Cells(3).Value
         Next
+        Me.txt_chiCal.Text = contChi
+        Me.compararChi()
 
     End Sub
 
@@ -117,11 +126,69 @@
         Me.Chart1.Series("fe").Points.Clear()
         Me.Chart1.Series("fo").Points.Clear()
         Dim anchoInt = 1 / contadorChi.Length
+        Dim aux As Double = 0
         For i = 0 To contadorChi.Length - 1
-            Me.Chart1.Series("fe").Points.AddXY(i + 1, Me.grid2.Rows(i).Cells(2).Value)
-            Me.Chart1.Series("fo").Points.AddXY(i + 1, Me.grid2.Rows(i).Cells(1).Value)
+            aux += anchoInt
+            Me.Chart1.Series("fe").Points.AddXY(aux, Me.grid2.Rows(i).Cells(2).Value)
+            Me.Chart1.Series("fo").Points.AddXY(aux, Me.grid2.Rows(i).Cells(1).Value)
         Next
 
     End Sub
 
+    Private Sub compararChi()
+        Dim v(28) As Double
+
+        v(0) = 3.8415
+        v(1) = 5.9915
+        v(2) = 7.8147
+        v(3) = 9.4877
+        v(4) = 11.0705
+        v(5) = 12.5916
+        v(6) = 14.0671
+        v(7) = 15.5073
+        v(8) = 16.919
+        v(9) = 18.307
+        v(10) = 19.6752
+        v(11) = 21.0261
+        v(12) = 22.362
+        v(13) = 23.6848
+        v(14) = 24.9958
+        v(15) = 26.2962
+        v(16) = 27.5871
+        v(17) = 28.8693
+        v(18) = 30.1435
+        v(19) = 31.4104
+        v(20) = 32.6706
+        v(21) = 33.9245
+        v(22) = 35.1725
+        v(23) = 36.415
+        v(24) = 37.6525
+        v(25) = 38.8851
+        v(26) = 40.1133
+        v(27) = 41.3372
+        v(28) = 42.5569
+
+        Me.txt_chiTab.Text = v(Me.cmb_intervalos.SelectedItem - 1)
+
+        If v(Me.cmb_intervalos.SelectedItem - 1) > Me.txt_chiCal.Text Then
+
+            Me.lbl_resultado.Text = "Se acepta la hipótesis"
+        Else
+            Me.lbl_resultado.Text = "Se rechaza la hipótesis"
+        End If
+
+
+    End Sub
+
+    Private Function obtenerIntervalos() 'devuelve cuanto agrupar para cumplir con la restriccion de fe
+        Dim aux As Double = 0
+        Dim contador As Integer = 0
+
+        While aux < 5
+            aux += numerosChi.Length / contadorChi.Length
+            contador += 1
+        End While
+
+        Return contador
+    End Function
 End Class

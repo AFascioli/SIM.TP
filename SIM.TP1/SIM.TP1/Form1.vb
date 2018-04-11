@@ -119,6 +119,7 @@
         Dim anchoInt = 1 / contadorChi.Length
         For i = 0 To contadorChi.Length - 1
             Me.Chart1.Series("fe").Points.AddXY(i + 1, Me.grid2.Rows(i).Cells(2).Value)
+            Me.Chart1.Series("fo").Points.AddXY(i + 1, Me.grid2.Rows(i).Cells(1).Value)
         Next
 
     End Sub

@@ -118,6 +118,45 @@
         Next
         Me.txt_chiCal.Text = contChi
         Me.compararChi()
+        If Me.grid2.Rows(0).Cells(2).Value < 5 Then
+            Me.cargarTabla3()
+        End If
+    End Sub
+
+    Private Sub cargarTabla3()
+        Me.grid4.Rows.Clear()
+
+        Dim contadorSaltos = Me.obtenerIntervalos
+        Dim auxiliar = Integer.Parse(Me.cmb_intervalos.SelectedItem) / contadorSaltos 'cantidad de intervalos
+        Dim contSaltos As Integer = 0
+        Dim contChi As Double = 0
+        Dim extra As Integer
+
+        For index = 0 To auxiliar - 1
+
+            Me.grid4.Rows.Add()
+            Me.grid4.Rows(index).Cells(0).Value = index + 1
+
+            If index = 0 Then 'solo se hace una vez en la primera vuelta para evitar problemas
+                extra = Me.cmb_intervalos.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
+            End If
+
+            For index2 = 1 To contadorSaltos + extra 'los elementos que sobran, los ponemos en el primer grupo y de ahi nos queda siempre una cantidad justa para agrupar
+
+                Me.grid4.Rows(index).Cells(1).Value += Me.grid2.Rows(contSaltos).Cells(1).Value
+                Me.grid4.Rows(index).Cells(2).Value += Me.grid2.Rows(contSaltos).Cells(2).Value
+                contSaltos += 1
+            Next
+
+            extra = 0 'extra a partir de ahora no sirve entonces vale 0
+
+            Me.grid4.Rows(index).Cells(3).Value = ((Me.grid4.Rows(index).Cells(1).Value - Me.grid4.Rows(index).Cells(2).Value) ^ 2) / Me.grid4.Rows(index).Cells(2).Value
+            contChi += Me.grid2.Rows(index).Cells(3).Value
+
+        Next
+
+        Me.txt_chiCal.Text = contChi
+        Me.compararChi()
 
     End Sub
 

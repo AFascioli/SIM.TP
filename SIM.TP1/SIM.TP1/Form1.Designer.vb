@@ -22,47 +22,54 @@ Partial Class TrabajoPractico1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.txt_seed = New System.Windows.Forms.TextBox()
+        Me.grid1 = New System.Windows.Forms.DataGridView()
+        Me.indice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cmd_siguiente = New System.Windows.Forms.Button()
         Me.lbl_a = New System.Windows.Forms.Label()
+        Me.cmd_generar = New System.Windows.Forms.Button()
         Me.lbl_c = New System.Windows.Forms.Label()
         Me.lbl_seed = New System.Windows.Forms.Label()
-        Me.lbl_m = New System.Windows.Forms.Label()
-        Me.txt_a = New System.Windows.Forms.TextBox()
-        Me.txt_seed = New System.Windows.Forms.TextBox()
-        Me.txt_c = New System.Windows.Forms.TextBox()
         Me.txt_m = New System.Windows.Forms.TextBox()
-        Me.numero = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.indice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.grid1 = New System.Windows.Forms.DataGridView()
-        Me.cmd_generar = New System.Windows.Forms.Button()
-        Me.cmd_siguiente = New System.Windows.Forms.Button()
-        Me.lbl_nrosAleatorios = New System.Windows.Forms.Label()
-        Me.txt_cantidadNros = New System.Windows.Forms.TextBox()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lbl_m = New System.Windows.Forms.Label()
+        Me.txt_c = New System.Windows.Forms.TextBox()
+        Me.txt_a = New System.Windows.Forms.TextBox()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.cmb_intervalos = New System.Windows.Forms.ComboBox()
         Me.grid2 = New System.Windows.Forms.DataGridView()
         Me.k = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.chiCuadrado = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmb_intervalos = New System.Windows.Forms.ComboBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.txt_cantidadNros = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lbl_nrosAleatorios = New System.Windows.Forms.Label()
+        Me.Chart1 = New System.Windows.Forms.DataVisualization.Charting.Chart()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         CType(Me.grid1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
         CType(Me.grid2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(3, 12)
+        Me.TabControl1.Location = New System.Drawing.Point(2, 8)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(966, 704)
+        Me.TabControl1.Size = New System.Drawing.Size(861, 621)
         Me.TabControl1.TabIndex = 4
         '
         'TabPage1
@@ -78,113 +85,21 @@ Partial Class TrabajoPractico1
         Me.TabPage1.Controls.Add(Me.lbl_m)
         Me.TabPage1.Controls.Add(Me.txt_c)
         Me.TabPage1.Controls.Add(Me.txt_a)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(958, 671)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage1.Size = New System.Drawing.Size(853, 595)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "TabPage1"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.Button1)
-        Me.TabPage2.Controls.Add(Me.cmb_intervalos)
-        Me.TabPage2.Controls.Add(Me.grid2)
-        Me.TabPage2.Controls.Add(Me.txt_cantidadNros)
-        Me.TabPage2.Controls.Add(Me.Label1)
-        Me.TabPage2.Controls.Add(Me.lbl_nrosAleatorios)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(958, 671)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'lbl_a
-        '
-        Me.lbl_a.AutoSize = True
-        Me.lbl_a.Location = New System.Drawing.Point(29, 55)
-        Me.lbl_a.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lbl_a.Name = "lbl_a"
-        Me.lbl_a.Size = New System.Drawing.Size(18, 20)
-        Me.lbl_a.TabIndex = 0
-        Me.lbl_a.Text = "a"
-        '
-        'lbl_c
-        '
-        Me.lbl_c.AutoSize = True
-        Me.lbl_c.Location = New System.Drawing.Point(29, 92)
-        Me.lbl_c.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lbl_c.Name = "lbl_c"
-        Me.lbl_c.Size = New System.Drawing.Size(17, 20)
-        Me.lbl_c.TabIndex = 0
-        Me.lbl_c.Text = "c"
-        '
-        'lbl_seed
-        '
-        Me.lbl_seed.AutoSize = True
-        Me.lbl_seed.Location = New System.Drawing.Point(1, 19)
-        Me.lbl_seed.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lbl_seed.Name = "lbl_seed"
-        Me.lbl_seed.Size = New System.Drawing.Size(47, 20)
-        Me.lbl_seed.TabIndex = 0
-        Me.lbl_seed.Text = "Seed"
-        '
-        'lbl_m
-        '
-        Me.lbl_m.AutoSize = True
-        Me.lbl_m.Location = New System.Drawing.Point(29, 127)
-        Me.lbl_m.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lbl_m.Name = "lbl_m"
-        Me.lbl_m.Size = New System.Drawing.Size(22, 20)
-        Me.lbl_m.TabIndex = 0
-        Me.lbl_m.Text = "m"
-        '
-        'txt_a
-        '
-        Me.txt_a.Location = New System.Drawing.Point(58, 44)
-        Me.txt_a.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_a.Name = "txt_a"
-        Me.txt_a.Size = New System.Drawing.Size(148, 26)
-        Me.txt_a.TabIndex = 1
-        '
         'txt_seed
         '
-        Me.txt_seed.Location = New System.Drawing.Point(58, 8)
-        Me.txt_seed.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_seed.Location = New System.Drawing.Point(39, 5)
         Me.txt_seed.Name = "txt_seed"
-        Me.txt_seed.Size = New System.Drawing.Size(148, 26)
+        Me.txt_seed.Size = New System.Drawing.Size(100, 20)
         Me.txt_seed.TabIndex = 1
-        '
-        'txt_c
-        '
-        Me.txt_c.Location = New System.Drawing.Point(58, 81)
-        Me.txt_c.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_c.Name = "txt_c"
-        Me.txt_c.Size = New System.Drawing.Size(148, 26)
-        Me.txt_c.TabIndex = 1
-        '
-        'txt_m
-        '
-        Me.txt_m.Location = New System.Drawing.Point(58, 116)
-        Me.txt_m.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_m.Name = "txt_m"
-        Me.txt_m.Size = New System.Drawing.Size(148, 26)
-        Me.txt_m.TabIndex = 1
-        '
-        'numero
-        '
-        Me.numero.HeaderText = "Numero"
-        Me.numero.Name = "numero"
-        Me.numero.ReadOnly = True
-        '
-        'indice
-        '
-        Me.indice.HeaderText = "Indice"
-        Me.indice.Name = "indice"
-        Me.indice.ReadOnly = True
         '
         'grid1
         '
@@ -192,57 +107,136 @@ Partial Class TrabajoPractico1
         Me.grid1.AllowUserToDeleteRows = False
         Me.grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.indice, Me.numero})
-        Me.grid1.Location = New System.Drawing.Point(33, 210)
-        Me.grid1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grid1.Location = New System.Drawing.Point(22, 136)
         Me.grid1.Name = "grid1"
         Me.grid1.ReadOnly = True
-        Me.grid1.Size = New System.Drawing.Size(892, 453)
+        Me.grid1.Size = New System.Drawing.Size(595, 294)
         Me.grid1.TabIndex = 2
         '
-        'cmd_generar
+        'indice
         '
-        Me.cmd_generar.Location = New System.Drawing.Point(47, 165)
-        Me.cmd_generar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cmd_generar.Name = "cmd_generar"
-        Me.cmd_generar.Size = New System.Drawing.Size(112, 35)
-        Me.cmd_generar.TabIndex = 3
-        Me.cmd_generar.Text = "Generar"
-        Me.cmd_generar.UseVisualStyleBackColor = True
+        Me.indice.HeaderText = "Indice"
+        Me.indice.Name = "indice"
+        Me.indice.ReadOnly = True
+        '
+        'numero
+        '
+        Me.numero.HeaderText = "Numero"
+        Me.numero.Name = "numero"
+        Me.numero.ReadOnly = True
         '
         'cmd_siguiente
         '
-        Me.cmd_siguiente.Location = New System.Drawing.Point(813, 165)
-        Me.cmd_siguiente.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_siguiente.Location = New System.Drawing.Point(542, 107)
         Me.cmd_siguiente.Name = "cmd_siguiente"
-        Me.cmd_siguiente.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_siguiente.Size = New System.Drawing.Size(75, 23)
         Me.cmd_siguiente.TabIndex = 3
         Me.cmd_siguiente.Text = "Siguiente"
         Me.cmd_siguiente.UseVisualStyleBackColor = True
         '
-        'lbl_nrosAleatorios
+        'lbl_a
         '
-        Me.lbl_nrosAleatorios.AutoSize = True
-        Me.lbl_nrosAleatorios.Location = New System.Drawing.Point(30, 31)
-        Me.lbl_nrosAleatorios.Name = "lbl_nrosAleatorios"
-        Me.lbl_nrosAleatorios.Size = New System.Drawing.Size(170, 40)
-        Me.lbl_nrosAleatorios.TabIndex = 0
-        Me.lbl_nrosAleatorios.Text = "Ingrese la cantidad de " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "numeros aleatorios: "
+        Me.lbl_a.AutoSize = True
+        Me.lbl_a.Location = New System.Drawing.Point(19, 36)
+        Me.lbl_a.Name = "lbl_a"
+        Me.lbl_a.Size = New System.Drawing.Size(13, 13)
+        Me.lbl_a.TabIndex = 0
+        Me.lbl_a.Text = "a"
         '
-        'txt_cantidadNros
+        'cmd_generar
         '
-        Me.txt_cantidadNros.Location = New System.Drawing.Point(230, 45)
-        Me.txt_cantidadNros.Name = "txt_cantidadNros"
-        Me.txt_cantidadNros.Size = New System.Drawing.Size(100, 26)
-        Me.txt_cantidadNros.TabIndex = 1
+        Me.cmd_generar.Location = New System.Drawing.Point(31, 107)
+        Me.cmd_generar.Name = "cmd_generar"
+        Me.cmd_generar.Size = New System.Drawing.Size(75, 23)
+        Me.cmd_generar.TabIndex = 3
+        Me.cmd_generar.Text = "Generar"
+        Me.cmd_generar.UseVisualStyleBackColor = True
         '
-        'Label1
+        'lbl_c
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(30, 112)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(223, 20)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Ingrese la cantidad intervalos: "
+        Me.lbl_c.AutoSize = True
+        Me.lbl_c.Location = New System.Drawing.Point(19, 60)
+        Me.lbl_c.Name = "lbl_c"
+        Me.lbl_c.Size = New System.Drawing.Size(13, 13)
+        Me.lbl_c.TabIndex = 0
+        Me.lbl_c.Text = "c"
+        '
+        'lbl_seed
+        '
+        Me.lbl_seed.AutoSize = True
+        Me.lbl_seed.Location = New System.Drawing.Point(1, 12)
+        Me.lbl_seed.Name = "lbl_seed"
+        Me.lbl_seed.Size = New System.Drawing.Size(32, 13)
+        Me.lbl_seed.TabIndex = 0
+        Me.lbl_seed.Text = "Seed"
+        '
+        'txt_m
+        '
+        Me.txt_m.Location = New System.Drawing.Point(39, 75)
+        Me.txt_m.Name = "txt_m"
+        Me.txt_m.Size = New System.Drawing.Size(100, 20)
+        Me.txt_m.TabIndex = 1
+        '
+        'lbl_m
+        '
+        Me.lbl_m.AutoSize = True
+        Me.lbl_m.Location = New System.Drawing.Point(19, 83)
+        Me.lbl_m.Name = "lbl_m"
+        Me.lbl_m.Size = New System.Drawing.Size(15, 13)
+        Me.lbl_m.TabIndex = 0
+        Me.lbl_m.Text = "m"
+        '
+        'txt_c
+        '
+        Me.txt_c.Location = New System.Drawing.Point(39, 53)
+        Me.txt_c.Name = "txt_c"
+        Me.txt_c.Size = New System.Drawing.Size(100, 20)
+        Me.txt_c.TabIndex = 1
+        '
+        'txt_a
+        '
+        Me.txt_a.Location = New System.Drawing.Point(39, 29)
+        Me.txt_a.Name = "txt_a"
+        Me.txt_a.Size = New System.Drawing.Size(100, 20)
+        Me.txt_a.TabIndex = 1
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.Chart1)
+        Me.TabPage2.Controls.Add(Me.Button1)
+        Me.TabPage2.Controls.Add(Me.cmb_intervalos)
+        Me.TabPage2.Controls.Add(Me.grid2)
+        Me.TabPage2.Controls.Add(Me.txt_cantidadNros)
+        Me.TabPage2.Controls.Add(Me.Label1)
+        Me.TabPage2.Controls.Add(Me.lbl_nrosAleatorios)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage2.Size = New System.Drawing.Size(853, 595)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(405, 42)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(74, 33)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'cmb_intervalos
+        '
+        Me.cmb_intervalos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmb_intervalos.FormattingEnabled = True
+        Me.cmb_intervalos.Location = New System.Drawing.Point(153, 81)
+        Me.cmb_intervalos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cmb_intervalos.Name = "cmb_intervalos"
+        Me.cmb_intervalos.Size = New System.Drawing.Size(82, 21)
+        Me.cmb_intervalos.TabIndex = 3
         '
         'grid2
         '
@@ -250,11 +244,12 @@ Partial Class TrabajoPractico1
         Me.grid2.AllowUserToDeleteRows = False
         Me.grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.k, Me.fo, Me.fe, Me.chiCuadrado})
-        Me.grid2.Location = New System.Drawing.Point(34, 182)
+        Me.grid2.Location = New System.Drawing.Point(23, 118)
+        Me.grid2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid2.Name = "grid2"
         Me.grid2.ReadOnly = True
         Me.grid2.RowTemplate.Height = 28
-        Me.grid2.Size = New System.Drawing.Size(909, 479)
+        Me.grid2.Size = New System.Drawing.Size(456, 238)
         Me.grid2.TabIndex = 2
         '
         'k
@@ -281,39 +276,75 @@ Partial Class TrabajoPractico1
         Me.chiCuadrado.Name = "chiCuadrado"
         Me.chiCuadrado.ReadOnly = True
         '
-        'cmb_intervalos
+        'txt_cantidadNros
         '
-        Me.cmb_intervalos.FormattingEnabled = True
-        Me.cmb_intervalos.Location = New System.Drawing.Point(230, 124)
-        Me.cmb_intervalos.Name = "cmb_intervalos"
-        Me.cmb_intervalos.Size = New System.Drawing.Size(121, 28)
-        Me.cmb_intervalos.TabIndex = 3
+        Me.txt_cantidadNros.Location = New System.Drawing.Point(153, 29)
+        Me.txt_cantidadNros.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txt_cantidadNros.Name = "txt_cantidadNros"
+        Me.txt_cantidadNros.Size = New System.Drawing.Size(68, 20)
+        Me.txt_cantidadNros.TabIndex = 1
         '
-        'Button1
+        'Label1
         '
-        Me.Button1.Location = New System.Drawing.Point(607, 64)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(75, 23)
-        Me.Button1.TabIndex = 4
-        Me.Button1.Text = "Button1"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(20, 73)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(100, 26)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Ingrese la cantidad " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "intervalos: "
+        '
+        'lbl_nrosAleatorios
+        '
+        Me.lbl_nrosAleatorios.AutoSize = True
+        Me.lbl_nrosAleatorios.Location = New System.Drawing.Point(20, 20)
+        Me.lbl_nrosAleatorios.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lbl_nrosAleatorios.Name = "lbl_nrosAleatorios"
+        Me.lbl_nrosAleatorios.Size = New System.Drawing.Size(115, 26)
+        Me.lbl_nrosAleatorios.TabIndex = 0
+        Me.lbl_nrosAleatorios.Text = "Ingrese la cantidad de " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "numeros aleatorios: "
+        '
+        'Chart1
+        '
+        ChartArea1.Area3DStyle.WallWidth = 0
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
+        Me.Chart1.Location = New System.Drawing.Point(6, 361)
+        Me.Chart1.Name = "Chart1"
+        Series1.ChartArea = "ChartArea1"
+        Series1.CustomProperties = "DrawSideBySide=True, EmptyPointValue=Zero, LabelStyle=Right"
+        Series1.Legend = "Legend1"
+        Series1.Name = "fo"
+        Series2.BorderWidth = 3
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series2.Color = System.Drawing.Color.Red
+        Series2.Legend = "Legend1"
+        Series2.Name = "fe"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Series.Add(Series2)
+        Me.Chart1.Size = New System.Drawing.Size(842, 212)
+        Me.Chart1.TabIndex = 5
+        Me.Chart1.Text = "Chart1"
         '
         'TrabajoPractico1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(971, 714)
+        Me.ClientSize = New System.Drawing.Size(885, 666)
         Me.Controls.Add(Me.TabControl1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "TrabajoPractico1"
         Me.Text = "Form1"
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        CType(Me.grid1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        CType(Me.grid1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.grid2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -344,4 +375,5 @@ Partial Class TrabajoPractico1
     Friend WithEvents chiCuadrado As DataGridViewTextBoxColumn
     Friend WithEvents cmb_intervalos As ComboBox
     Friend WithEvents Button1 As Button
+    Friend WithEvents Chart1 As DataVisualization.Charting.Chart
 End Class

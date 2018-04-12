@@ -5,17 +5,17 @@
     End Enum
     Dim a, c, m, seed As Double
     Dim contador As Integer = 0
-    Dim numerosChi(), contadorChi()
-    Dim numerosChiC()
-    Dim contadorChiC As Integer()
+    Dim numerosChiB(), contadorChiB() As Double
+    Dim numerosChiC() As Double
+    Dim contadorChiC() As Double
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
-        cmb_intervalos.Items.Add("5")
-        cmb_intervalos.Items.Add("10")
-        cmb_intervalos.Items.Add("20")
-        cmb_intervalos.SelectedIndex = 0
+        cmb_intervalosB.Items.Add("5")
+        cmb_intervalosB.Items.Add("10")
+        cmb_intervalosB.Items.Add("20")
+        cmb_intervalosB.SelectedIndex = 0
         cmb_cantIntC.Items.Add("5")
         cmb_cantIntC.Items.Add("10")
         cmb_cantIntC.Items.Add("20")
@@ -39,46 +39,46 @@
 
     End Function
 
-    Private Sub cargarTabla()
+    Private Sub cargarGrid1A()
         Dim vector(2) As Double
         Dim r As Double = Me.seed
 
         For index = 0 To 19
             vector = Me.congruencialMixto(Me.a, Me.c, Me.m, r)
-            Me.grid1.Rows.Add()
-            Me.grid1.Rows(index).Cells(0).Value = index + Me.contador + 1
-            Me.grid1.Rows(index).Cells(1).Value = vector(0)
+            Me.grid1A.Rows.Add()
+            Me.grid1A.Rows(index).Cells(0).Value = index + Me.contador + 1
+            Me.grid1A.Rows(index).Cells(1).Value = vector(0)
             r = vector(1)
         Next
         Me.seed = r
         Me.contador = 20
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+    Private Sub cmd_generarB_Click(sender As Object, e As EventArgs) Handles cmd_generarB.Click
         Me.generadorRandom()
-        Me.cargarTabla2()
-        Me.cargarGrafico()
+        Me.cargarGrid1B()
+        Me.cargarGraficoB()
     End Sub
 
-    Private Sub cmd_generar_Click(sender As Object, e As EventArgs) Handles cmd_generar.Click
+    Private Sub cmd_generarA_Click(sender As Object, e As EventArgs) Handles cmd_generarA.Click
         Me.contador = 0
-        Me.grid1.Rows.Clear()
-        a = txt_a.Text
-        c = txt_c.Text
-        m = txt_m.Text
-        seed = txt_seed.Text
+        Me.grid1A.Rows.Clear()
+        a = txt_aA.Text
+        c = txt_cA.Text
+        m = txt_mA.Text
+        seed = txt_seedA.Text
 
-        cargarTabla()
+        cargarGrid1A()
 
     End Sub
 
-    Private Sub cmd_siguiente_Click(sender As Object, e As EventArgs) Handles cmd_siguiente.Click
+    Private Sub cmd_siguienteA_Click(sender As Object, e As EventArgs) Handles cmd_siguienteA.Click
 
         Dim vector(2) As Double
         vector = Me.congruencialMixto(Me.a, Me.c, Me.m, Me.seed)
-        Me.grid1.Rows.Add()
-        Me.grid1.Rows(Me.contador).Cells(0).Value = Me.contador + 1
-        Me.grid1.Rows(Me.contador).Cells(1).Value = vector(0)
+        Me.grid1A.Rows.Add()
+        Me.grid1A.Rows(Me.contador).Cells(0).Value = Me.contador + 1
+        Me.grid1A.Rows(Me.contador).Cells(1).Value = vector(0)
         Me.contador += 1
         Me.seed = vector(1)
 
@@ -86,8 +86,8 @@
 
     Private Sub generadorRandom()
 
-        Dim numeros(Integer.Parse(Me.txt_cantidadNros.Text) - 1) 'vector para numeros generados por rnd
-        Dim contadorInter(Integer.Parse(Me.cmb_intervalos.SelectedItem) - 1) 'vector que cuenta cuantos numeros hay en cada intervalo
+        Dim numeros(Integer.Parse(Me.txt_cantidadNrosB.Text) - 1) As Double 'vector para numeros generados por rnd
+        Dim contadorInter(Integer.Parse(Me.cmb_intervalosB.SelectedItem) - 1) As Double 'vector que cuenta cuantos numeros hay en cada intervalo
         Dim anchoInt = 1 / contadorInter.Length 'ancho del intervalo
         Dim cantEnInterv As Integer
 
@@ -97,91 +97,91 @@
             cantEnInterv = Math.Truncate(numeros(index) / anchoInt) 'para saber en que intervalo corresponde ese rnd
             contadorInter(cantEnInterv) += 1
 
-            Me.grid3.Rows.Add() 'para mostrar numeros random generados
-            Me.grid3.Rows(index).Cells(0).Value = numeros(index)
+            Me.grid2B.Rows.Add() 'para mostrar numeros random generados
+            Me.grid2B.Rows(index).Cells(0).Value = numeros(index)
 
         Next
 
-        numerosChi = numeros
-        contadorChi = contadorInter
+        numerosChiB = numeros
+        contadorChiB = contadorInter
 
 
     End Sub
 
-    Private Sub cargarTabla2()
-        Me.grid2.Rows.Clear()
+    Private Sub cargarGrid1B()
+        Me.grid1B.Rows.Clear()
         Dim contChi As Double = 0
-        For index = 0 To contadorChi.Length - 1
+        For index = 0 To contadorChiB.Length - 1
 
-            Dim y = contadorChi(index)
+            Dim y = contadorChiB(index)
             If IsNothing(y) Then
                 y = 0
             End If
 
-            Me.grid2.Rows.Add()
-            Me.grid2.Rows(index).Cells(0).Value = index + 1
-            Me.grid2.Rows(index).Cells(1).Value = y
-            Me.grid2.Rows(index).Cells(2).Value = numerosChi.Length / contadorChi.Length
-            Me.grid2.Rows(index).Cells(3).Value = ((contadorChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
-            contChi += Me.grid2.Rows(index).Cells(3).Value
+            Me.grid1B.Rows.Add()
+            Me.grid1B.Rows(index).Cells(0).Value = index + 1
+            Me.grid1B.Rows(index).Cells(1).Value = y
+            Me.grid1B.Rows(index).Cells(2).Value = numerosChiB.Length / contadorChiB.Length
+            Me.grid1B.Rows(index).Cells(3).Value = ((contadorChiB(index) - numerosChiB.Length / contadorChiB.Length) ^ 2) / (numerosChiB.Length / contadorChiB.Length)
+            contChi += Me.grid1B.Rows(index).Cells(3).Value
         Next
 
 
-        If Me.grid2.Rows(0).Cells(2).Value < 5 Then
-            Me.cargarTabla3()
+        If Me.grid1B.Rows(0).Cells(2).Value < 5 Then
+            Me.cargarGrid3B()
         Else
-            Me.txt_chiCal.Text = contChi
+            Me.txt_chiCalB.Text = contChi
             Me.compararChi(NroPunto.b)
         End If
     End Sub
 
-    Private Sub cargarTabla3()
-        Me.grid4.Rows.Clear()
+    Private Sub cargarGrid3B()
+        Me.grid3B.Rows.Clear()
 
-        Dim contadorSaltos = Me.obtenerIntervalos()
-        Dim auxiliar = Integer.Parse(Me.cmb_intervalos.SelectedItem) / contadorSaltos 'cantidad de intervalos
+        Dim contadorSaltos = Me.obtenerIntervalos(Me.numerosChiB, Me.contadorChiB)
+        Dim auxiliar = Integer.Parse(Me.cmb_intervalosB.SelectedItem) / contadorSaltos 'cantidad de intervalos
         Dim contSaltos As Integer = 0
         Dim contChi As Double = 0
         Dim extra As Integer
 
         For index = 0 To auxiliar - 1
 
-            Me.grid4.Rows.Add()
-            Me.grid4.Rows(index).Cells(0).Value = index + 1
+            Me.grid3B.Rows.Add()
+            Me.grid3B.Rows(index).Cells(0).Value = index + 1
 
             If index = 0 Then 'solo se hace una vez en la primera vuelta para evitar problemas
-                extra = Me.cmb_intervalos.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
+                extra = Me.cmb_intervalosB.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
             End If
 
             For index2 = 1 To contadorSaltos + extra 'los elementos que sobran, los ponemos en el primer grupo y de ahi nos queda siempre una cantidad justa para agrupar
 
-                Me.grid4.Rows(index).Cells(1).Value += Me.grid2.Rows(contSaltos).Cells(1).Value
-                Me.grid4.Rows(index).Cells(2).Value += Me.grid2.Rows(contSaltos).Cells(2).Value
+                Me.grid3B.Rows(index).Cells(1).Value += Me.grid1B.Rows(contSaltos).Cells(1).Value
+                Me.grid3B.Rows(index).Cells(2).Value += Me.grid1B.Rows(contSaltos).Cells(2).Value
                 contSaltos += 1
             Next
 
             extra = 0 'extra a partir de ahora no sirve entonces vale 0
 
-            Me.grid4.Rows(index).Cells(3).Value = ((Me.grid4.Rows(index).Cells(1).Value - Me.grid4.Rows(index).Cells(2).Value) ^ 2) / Me.grid4.Rows(index).Cells(2).Value
-            contChi += Me.grid2.Rows(index).Cells(3).Value
+            Me.grid3B.Rows(index).Cells(3).Value = ((Me.grid3B.Rows(index).Cells(1).Value - Me.grid3B.Rows(index).Cells(2).Value) ^ 2) / Me.grid3B.Rows(index).Cells(2).Value
+            contChi += Me.grid1B.Rows(index).Cells(3).Value
 
         Next
 
-        Me.txt_chiCal.Text = contChi
+        Me.txt_chiCalB.Text = contChi
         Me.compararChi(NroPunto.b)
 
     End Sub
 
-    Private Sub cargarGrafico()
+    Private Sub cargarGraficoB()
         'El estilo del gráfico se edita en Propiedades, Series en la pestaña de diseño del form
-        Me.Chart1.Series("fe").Points.Clear()
-        Me.Chart1.Series("fo").Points.Clear()
-        Dim anchoInt = 1 / contadorChi.Length
+        Me.Chart1B.Series("fe").Points.Clear()
+        Me.Chart1B.Series("fo").Points.Clear()
+        Dim anchoInt = 1 / contadorChiB.Length
         Dim aux As Double = 0
-        For i = 0 To contadorChi.Length - 1
+        For i = 0 To contadorChiB.Length - 1
             aux += anchoInt
-            Me.Chart1.Series("fe").Points.AddXY(aux, Me.grid2.Rows(i).Cells(2).Value)
-            Me.Chart1.Series("fo").Points.AddXY(aux, Me.grid2.Rows(i).Cells(1).Value)
+            Me.Chart1B.Series("fe").Points.AddXY(aux, Me.grid1B.Rows(i).Cells(2).Value)
+            Me.Chart1B.Series("fo").Points.AddXY(aux, Me.grid1B.Rows(i).Cells(1).Value)
         Next
 
     End Sub
@@ -226,13 +226,13 @@
         v(28) = 42.5569
 
         If punto = NroPunto.b Then
-            Me.txt_chiTab.Text = v(Me.cmb_intervalos.SelectedItem - 1)
+            Me.txt_chiTabB.Text = v(Me.cmb_intervalosB.SelectedItem - 1)
 
-            If v(Me.cmb_intervalos.SelectedItem - 1) > Me.txt_chiCal.Text Then
+            If v(Me.cmb_intervalosB.SelectedItem - 1) > Me.txt_chiCalB.Text Then
 
-                Me.lbl_resultado.Text = "Se acepta la hipótesis"
+                Me.lbl_resultadoB.Text = "Se acepta la hipótesis"
             Else
-                Me.lbl_resultado.Text = "Se rechaza la hipótesis"
+                Me.lbl_resultadoB.Text = "Se rechaza la hipótesis"
             End If
         Else
             Me.txt_chiTabC.Text = v(Me.cmb_cantIntC.SelectedItem - 1)
@@ -245,16 +245,14 @@
             End If
         End If
 
-
-
     End Sub
 
-    Private Function obtenerIntervalos() 'devuelve cuanto agrupar para cumplir con la restriccion de fe
+    Private Function obtenerIntervalos(numeros() As Double, contadorChi() As Double) 'devuelve cuanto agrupar para cumplir con la restriccion de fe
         Dim aux As Double = 0
         Dim contador As Integer = 0
 
         While aux < 5
-            aux += numerosChi.Length / contadorChi.Length
+            aux += numeros.Length / contadorChi.Length
             contador += 1
         End While
 
@@ -313,7 +311,7 @@
         Next
 
         If numerosChiC.Length / contadorChiC.Length < 5 Then
-            Me.cargarTabla3C()
+            Me.cargarGrid3C()
         Else
             Me.txt_chiCalcC.Text = contChi
             Me.compararChi(NroPunto.c)
@@ -322,8 +320,8 @@
     End Sub
 
     Private Sub numerosPuntoC()
-        Dim numerosC(Integer.Parse(Me.txt_cantNrosC.Text) - 1)
-        Dim contadorInterC(Integer.Parse(Me.cmb_cantIntC.SelectedItem) - 1) As Integer
+        Dim numerosC(Integer.Parse(Me.txt_cantNrosC.Text) - 1) As Double
+        Dim contadorInterC(Integer.Parse(Me.cmb_cantIntC.SelectedItem) - 1) As Double
         Dim anchoInt = 1 / contadorInterC.Length
         Dim cantEnInt As Integer
         Dim seedParcial As Integer = Me.txt_seedC.Text
@@ -350,46 +348,51 @@
     End Sub
 
     Private Sub cargarGraficoC()
-        Me.Chart2.Series("fe").Points.Clear()
-        Me.Chart2.Series("fo").Points.Clear()
+        Me.Chart1C.Series("fe").Points.Clear()
+        Me.Chart1C.Series("fo").Points.Clear()
         Dim anchoInt = 1 / contadorChiC.Length
         Dim aux As Double = 0
         For i = 0 To contadorChiC.Length - 1
             aux += anchoInt
-            Me.Chart2.Series("fe").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(2).Value)
-            Me.Chart2.Series("fo").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(1).Value)
+            Me.Chart1C.Series("fe").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(2).Value)
+            Me.Chart1C.Series("fo").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(1).Value)
         Next
     End Sub
 
-    Private Sub cargarTabla3C()
+    Private Sub cargarGrid3C()
         Me.grid3C.Rows.Clear()
 
-        Dim fe = Me.grid1C.Rows(0).Cells(2).Value
-        Dim intervalos As List(Of Integer()) = Me.obtenerIntervalosV2(fe, Me.contadorChiC)
+        Dim contadorSaltos = Me.obtenerIntervalos(Me.numerosChiC, Me.contadorChiC)
+        Dim auxiliar = Integer.Parse(Me.cmb_cantIntC.SelectedItem) / contadorSaltos 'cantidad de intervalos
+        Dim contSaltos As Integer = 0
         Dim contChi As Double = 0
+        Dim extra As Integer
 
-        For i = 0 To intervalos.Count - 1
-            Dim inicio As Integer = intervalos(i)(0)
-            Dim fin As Integer = intervalos(i)(1)
-            Dim foAcum As Integer = intervalos(i)(2)
+        For index = 0 To auxiliar - 1
+
             Me.grid3C.Rows.Add()
-            If inicio <> fin Then
-                Me.grid3C.Rows(i).Cells(0).Value = (inicio + 1) & " - " & (fin + 1)
-            Else
-                Me.grid3C.Rows(i).Cells(0).Value = inicio + 1
+            Me.grid3C.Rows(index).Cells(0).Value = index + 1
+
+            If index = 0 Then 'solo se hace una vez en la primera vuelta para evitar problemas
+                extra = Me.cmb_cantIntC.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
             End If
 
-            Me.grid3C.Rows(i).Cells(1).Value = foAcum
-            Me.grid3C.Rows(i).Cells(2).Value = fe * (fin - inicio + 1)
+            For index2 = 1 To contadorSaltos + extra 'los elementos que sobran, los ponemos en el primer grupo y de ahi nos queda siempre una cantidad justa para agrupar
 
-            Me.grid3C.Rows(i).Cells(3).Value = ((Me.grid3C.Rows(i).Cells(1).Value - Me.grid3C.Rows(i).Cells(2).Value) ^ 2) / Me.grid3C.Rows(i).Cells(2).Value
-            contChi += Me.grid3C.Rows(i).Cells(3).Value
+                Me.grid3C.Rows(index).Cells(1).Value += Me.grid1C.Rows(contSaltos).Cells(1).Value
+                Me.grid3C.Rows(index).Cells(2).Value += Me.grid1C.Rows(contSaltos).Cells(2).Value
+                contSaltos += 1
+            Next
+
+            extra = 0 'extra a partir de ahora no sirve entonces vale 0
+
+            Me.grid3C.Rows(index).Cells(3).Value = ((Me.grid3C.Rows(index).Cells(1).Value - Me.grid3C.Rows(index).Cells(2).Value) ^ 2) / Me.grid3C.Rows(index).Cells(2).Value
+            contChi += Me.grid1C.Rows(index).Cells(3).Value
+
         Next
-
 
         Me.txt_chiCalcC.Text = contChi
         Me.compararChi(NroPunto.c)
-
     End Sub
 
 

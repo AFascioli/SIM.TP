@@ -125,11 +125,14 @@
             Me.grid2.Rows(index).Cells(3).Value = ((contadorChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
             contChi += Me.grid2.Rows(index).Cells(3).Value
         Next
-        Me.txt_chiCal.Text = contChi
-        'Me.compararChi(NroPunto.b)
-        'If Me.grid2.Rows(0).Cells(2).Value < 5 Then
-        Me.cargarTabla3()
-        'End If
+
+
+        If Me.grid2.Rows(0).Cells(2).Value < 5 Then
+            Me.cargarTabla3()
+        Else
+            Me.txt_chiCal.Text = contChi
+            Me.compararChi(NroPunto.b)
+        End If
     End Sub
 
     Private Sub cargarTabla3()
@@ -258,29 +261,31 @@
         Return contador
     End Function
 
-    Private Function obtenerIntervalosV2(contador As Integer())
+    Private Function obtenerIntervalosV2(fe As Double, contador As Integer())
         Dim ret As New List(Of Integer())
         Dim inicio As Integer
-        Dim acum As Integer
+        Dim acumFo As Integer
+        Dim acumFe
         Dim i As Integer
         Dim agregar As Boolean = True
         While i < contador.Length
-            acum = 0
+            acumFo = 0
+            acumFe = 0
             inicio = i
-            While acum < 5
+            While acumFe < 5
                 If i >= (contador.Length - 1) Then
-                    'MessageBox.Show(ret(ret.Count - 1).ToString)
                     agregar = False
                     ret(ret.Count - 1)(1) = i
-                    ret(ret.Count - 1)(2) += acum + contador(i)
+                    ret(ret.Count - 1)(2) += acumFo + contador(i)
                     i += 1
                     Exit While
                 End If
-                acum += contador(i)
+                acumFo += contador(i)
+                acumFe += fe
                 i += 1
             End While
             If agregar Then
-                ret.Add({inicio, i - 1, acum})
+                ret.Add({inicio, i - 1, acumFo})
             End If
         End While
 
@@ -306,8 +311,13 @@
             Me.grid1C.Rows(index).Cells(3).Value = ((contadorChiC(index) - numerosChiC.Length / contadorChiC.Length) ^ 2) / (numerosChiC.Length / contadorChiC.Length)
             contChi += Me.grid1C.Rows(index).Cells(3).Value
         Next
-        Me.txt_chiCalcC.Text = contChi
-        Me.cargarTabla3C()
+
+        If numerosChiC.Length / contadorChiC.Length < 5 Then
+            Me.cargarTabla3C()
+        Else
+            Me.txt_chiCalcC.Text = contChi
+            Me.compararChi(NroPunto.c)
+        End If
 
     End Sub
 
@@ -354,8 +364,8 @@
     Private Sub cargarTabla3C()
         Me.grid3C.Rows.Clear()
 
-        Dim intervalos As List(Of Integer()) = Me.obtenerIntervalosV2(Me.contadorChiC)
         Dim fe = Me.grid1C.Rows(0).Cells(2).Value
+        Dim intervalos As List(Of Integer()) = Me.obtenerIntervalosV2(fe, Me.contadorChiC)
         Dim contChi As Integer = 0
 
         For i = 0 To intervalos.Count - 1

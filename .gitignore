@@ -3,3 +3,5 @@ SIM.TP1/.vs/SIM.TP1/v15/.suo
 SIM.TP1/SIM.TP1/obj/Debug/DesignTimeResolveAssemblyReferences.cache
 SIM.TP1/SIM.TP1/obj/Debug/SIM.TP1.vbproj.GenerateResource.Cache
 SIM.TP1/.vs/SIM.TP1/v15/.suo
+SIM.TP1/*/bin
+SIM.TP1/*/obj

@@ -22,14 +22,14 @@ Partial Class TrabajoPractico1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series7 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series8 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim ChartArea3 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend3 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series5 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series6 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.txt_seed = New System.Windows.Forms.TextBox()
@@ -70,10 +70,10 @@ Partial Class TrabajoPractico1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.lbl_nrosAleatorios = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.txt_chiTabC = New System.Windows.Forms.TextBox()
+        Me.txt_chiCalcC = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label11 = New System.Windows.Forms.Label()
+        Me.lbl_resultadoC = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.grid3C = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -121,10 +121,11 @@ Partial Class TrabajoPractico1
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Location = New System.Drawing.Point(3, 12)
+        Me.TabControl1.Location = New System.Drawing.Point(2, 8)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1673, 1020)
+        Me.TabControl1.Size = New System.Drawing.Size(1115, 663)
         Me.TabControl1.TabIndex = 4
         '
         'TabPage1
@@ -140,20 +141,20 @@ Partial Class TrabajoPractico1
         Me.TabPage1.Controls.Add(Me.lbl_m)
         Me.TabPage1.Controls.Add(Me.txt_c)
         Me.TabPage1.Controls.Add(Me.txt_a)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1665, 987)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage1.Size = New System.Drawing.Size(1107, 637)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Punto a"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'txt_seed
         '
-        Me.txt_seed.Location = New System.Drawing.Point(58, 8)
-        Me.txt_seed.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_seed.Location = New System.Drawing.Point(39, 5)
         Me.txt_seed.Name = "txt_seed"
-        Me.txt_seed.Size = New System.Drawing.Size(148, 26)
+        Me.txt_seed.Size = New System.Drawing.Size(100, 20)
         Me.txt_seed.TabIndex = 1
         '
         'grid1
@@ -162,11 +163,10 @@ Partial Class TrabajoPractico1
         Me.grid1.AllowUserToDeleteRows = False
         Me.grid1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.indice, Me.numero})
-        Me.grid1.Location = New System.Drawing.Point(33, 209)
-        Me.grid1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.grid1.Location = New System.Drawing.Point(22, 136)
         Me.grid1.Name = "grid1"
         Me.grid1.ReadOnly = True
-        Me.grid1.Size = New System.Drawing.Size(892, 452)
+        Me.grid1.Size = New System.Drawing.Size(595, 294)
         Me.grid1.TabIndex = 2
         '
         'indice
@@ -183,10 +183,9 @@ Partial Class TrabajoPractico1
         '
         'cmd_siguiente
         '
-        Me.cmd_siguiente.Location = New System.Drawing.Point(813, 165)
-        Me.cmd_siguiente.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_siguiente.Location = New System.Drawing.Point(542, 107)
         Me.cmd_siguiente.Name = "cmd_siguiente"
-        Me.cmd_siguiente.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_siguiente.Size = New System.Drawing.Size(75, 23)
         Me.cmd_siguiente.TabIndex = 3
         Me.cmd_siguiente.Text = "Siguiente"
         Me.cmd_siguiente.UseVisualStyleBackColor = True
@@ -194,19 +193,17 @@ Partial Class TrabajoPractico1
         'lbl_a
         '
         Me.lbl_a.AutoSize = True
-        Me.lbl_a.Location = New System.Drawing.Point(28, 55)
-        Me.lbl_a.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_a.Location = New System.Drawing.Point(19, 36)
         Me.lbl_a.Name = "lbl_a"
-        Me.lbl_a.Size = New System.Drawing.Size(18, 20)
+        Me.lbl_a.Size = New System.Drawing.Size(13, 13)
         Me.lbl_a.TabIndex = 0
         Me.lbl_a.Text = "a"
         '
         'cmd_generar
         '
-        Me.cmd_generar.Location = New System.Drawing.Point(46, 165)
-        Me.cmd_generar.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_generar.Location = New System.Drawing.Point(31, 107)
         Me.cmd_generar.Name = "cmd_generar"
-        Me.cmd_generar.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_generar.Size = New System.Drawing.Size(75, 23)
         Me.cmd_generar.TabIndex = 3
         Me.cmd_generar.Text = "Generar"
         Me.cmd_generar.UseVisualStyleBackColor = True
@@ -214,55 +211,49 @@ Partial Class TrabajoPractico1
         'lbl_c
         '
         Me.lbl_c.AutoSize = True
-        Me.lbl_c.Location = New System.Drawing.Point(28, 92)
-        Me.lbl_c.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_c.Location = New System.Drawing.Point(19, 60)
         Me.lbl_c.Name = "lbl_c"
-        Me.lbl_c.Size = New System.Drawing.Size(17, 20)
+        Me.lbl_c.Size = New System.Drawing.Size(13, 13)
         Me.lbl_c.TabIndex = 0
         Me.lbl_c.Text = "c"
         '
         'lbl_seed
         '
         Me.lbl_seed.AutoSize = True
-        Me.lbl_seed.Location = New System.Drawing.Point(2, 18)
-        Me.lbl_seed.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_seed.Location = New System.Drawing.Point(1, 12)
         Me.lbl_seed.Name = "lbl_seed"
-        Me.lbl_seed.Size = New System.Drawing.Size(47, 20)
+        Me.lbl_seed.Size = New System.Drawing.Size(32, 13)
         Me.lbl_seed.TabIndex = 0
         Me.lbl_seed.Text = "Seed"
         '
         'txt_m
         '
-        Me.txt_m.Location = New System.Drawing.Point(58, 115)
-        Me.txt_m.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_m.Location = New System.Drawing.Point(39, 75)
         Me.txt_m.Name = "txt_m"
-        Me.txt_m.Size = New System.Drawing.Size(148, 26)
+        Me.txt_m.Size = New System.Drawing.Size(100, 20)
         Me.txt_m.TabIndex = 1
         '
         'lbl_m
         '
         Me.lbl_m.AutoSize = True
-        Me.lbl_m.Location = New System.Drawing.Point(28, 128)
-        Me.lbl_m.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_m.Location = New System.Drawing.Point(19, 83)
         Me.lbl_m.Name = "lbl_m"
-        Me.lbl_m.Size = New System.Drawing.Size(22, 20)
+        Me.lbl_m.Size = New System.Drawing.Size(15, 13)
         Me.lbl_m.TabIndex = 0
         Me.lbl_m.Text = "m"
         '
         'txt_c
         '
-        Me.txt_c.Location = New System.Drawing.Point(58, 82)
-        Me.txt_c.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_c.Location = New System.Drawing.Point(39, 53)
         Me.txt_c.Name = "txt_c"
-        Me.txt_c.Size = New System.Drawing.Size(148, 26)
+        Me.txt_c.Size = New System.Drawing.Size(100, 20)
         Me.txt_c.TabIndex = 1
         '
         'txt_a
         '
-        Me.txt_a.Location = New System.Drawing.Point(58, 45)
-        Me.txt_a.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_a.Location = New System.Drawing.Point(39, 29)
         Me.txt_a.Name = "txt_a"
-        Me.txt_a.Size = New System.Drawing.Size(148, 26)
+        Me.txt_a.Size = New System.Drawing.Size(100, 20)
         Me.txt_a.TabIndex = 1
         '
         'TabPage2
@@ -281,47 +272,48 @@ Partial Class TrabajoPractico1
         Me.TabPage2.Controls.Add(Me.lbl_resultado)
         Me.TabPage2.Controls.Add(Me.Label2)
         Me.TabPage2.Controls.Add(Me.lbl_nrosAleatorios)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1665, 987)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage2.Size = New System.Drawing.Size(1107, 637)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Punto b"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'Chart1
         '
-        ChartArea4.Area3DStyle.WallWidth = 0
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend4)
-        Me.Chart1.Location = New System.Drawing.Point(9, 555)
-        Me.Chart1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        ChartArea1.Area3DStyle.WallWidth = 0
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
+        Me.Chart1.Location = New System.Drawing.Point(6, 361)
         Me.Chart1.Name = "Chart1"
-        Series7.ChartArea = "ChartArea1"
-        Series7.CustomProperties = "DrawSideBySide=True, EmptyPointValue=Zero, LabelStyle=Right"
-        Series7.IsXValueIndexed = True
-        Series7.Legend = "Legend1"
-        Series7.Name = "fo"
-        Series8.BorderWidth = 3
-        Series8.ChartArea = "ChartArea1"
-        Series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series8.Color = System.Drawing.Color.Red
-        Series8.IsXValueIndexed = True
-        Series8.Legend = "Legend1"
-        Series8.Name = "fe"
-        Me.Chart1.Series.Add(Series7)
-        Me.Chart1.Series.Add(Series8)
-        Me.Chart1.Size = New System.Drawing.Size(1140, 326)
+        Series1.ChartArea = "ChartArea1"
+        Series1.CustomProperties = "DrawSideBySide=True, EmptyPointValue=Zero, LabelStyle=Right"
+        Series1.IsXValueIndexed = True
+        Series1.Legend = "Legend1"
+        Series1.Name = "fo"
+        Series2.BorderWidth = 3
+        Series2.ChartArea = "ChartArea1"
+        Series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series2.Color = System.Drawing.Color.Red
+        Series2.IsXValueIndexed = True
+        Series2.Legend = "Legend1"
+        Series2.Name = "fe"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Series.Add(Series2)
+        Me.Chart1.Size = New System.Drawing.Size(760, 212)
         Me.Chart1.TabIndex = 5
         Me.Chart1.Text = "Chart1"
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(441, 33)
+        Me.Button1.Location = New System.Drawing.Point(294, 21)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(111, 51)
+        Me.Button1.Size = New System.Drawing.Size(74, 33)
         Me.Button1.TabIndex = 4
         Me.Button1.Text = "Play"
         Me.Button1.UseVisualStyleBackColor = True
@@ -330,9 +322,10 @@ Partial Class TrabajoPractico1
         '
         Me.cmb_intervalos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_intervalos.FormattingEnabled = True
-        Me.cmb_intervalos.Location = New System.Drawing.Point(230, 125)
+        Me.cmb_intervalos.Location = New System.Drawing.Point(153, 81)
+        Me.cmb_intervalos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.cmb_intervalos.Name = "cmb_intervalos"
-        Me.cmb_intervalos.Size = New System.Drawing.Size(121, 28)
+        Me.cmb_intervalos.Size = New System.Drawing.Size(82, 21)
         Me.cmb_intervalos.TabIndex = 3
         '
         'grid3
@@ -341,11 +334,12 @@ Partial Class TrabajoPractico1
         Me.grid3.AllowUserToDeleteRows = False
         Me.grid3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.random})
-        Me.grid3.Location = New System.Drawing.Point(749, 182)
+        Me.grid3.Location = New System.Drawing.Point(499, 118)
+        Me.grid3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid3.Name = "grid3"
         Me.grid3.ReadOnly = True
         Me.grid3.RowTemplate.Height = 28
-        Me.grid3.Size = New System.Drawing.Size(160, 366)
+        Me.grid3.Size = New System.Drawing.Size(107, 238)
         Me.grid3.TabIndex = 2
         '
         'random
@@ -360,11 +354,12 @@ Partial Class TrabajoPractico1
         Me.grid4.AllowUserToDeleteRows = False
         Me.grid4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
-        Me.grid4.Location = New System.Drawing.Point(948, 182)
+        Me.grid4.Location = New System.Drawing.Point(632, 118)
+        Me.grid4.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid4.Name = "grid4"
         Me.grid4.ReadOnly = True
         Me.grid4.RowTemplate.Height = 28
-        Me.grid4.Size = New System.Drawing.Size(684, 366)
+        Me.grid4.Size = New System.Drawing.Size(456, 238)
         Me.grid4.TabIndex = 2
         '
         'DataGridViewTextBoxColumn1
@@ -397,11 +392,12 @@ Partial Class TrabajoPractico1
         Me.grid2.AllowUserToDeleteRows = False
         Me.grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.k, Me.fo, Me.fe, Me.chiCuadrado})
-        Me.grid2.Location = New System.Drawing.Point(34, 182)
+        Me.grid2.Location = New System.Drawing.Point(23, 118)
+        Me.grid2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid2.Name = "grid2"
         Me.grid2.ReadOnly = True
         Me.grid2.RowTemplate.Height = 28
-        Me.grid2.Size = New System.Drawing.Size(684, 366)
+        Me.grid2.Size = New System.Drawing.Size(456, 238)
         Me.grid2.TabIndex = 2
         '
         'k
@@ -430,76 +426,84 @@ Partial Class TrabajoPractico1
         '
         'txt_chiTab
         '
-        Me.txt_chiTab.Location = New System.Drawing.Point(1107, 77)
+        Me.txt_chiTab.Location = New System.Drawing.Point(738, 50)
+        Me.txt_chiTab.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txt_chiTab.Name = "txt_chiTab"
-        Me.txt_chiTab.Size = New System.Drawing.Size(100, 26)
+        Me.txt_chiTab.Size = New System.Drawing.Size(68, 20)
         Me.txt_chiTab.TabIndex = 1
         '
         'txt_chiCal
         '
-        Me.txt_chiCal.Location = New System.Drawing.Point(1107, 45)
+        Me.txt_chiCal.Location = New System.Drawing.Point(738, 29)
+        Me.txt_chiCal.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txt_chiCal.Name = "txt_chiCal"
-        Me.txt_chiCal.Size = New System.Drawing.Size(100, 26)
+        Me.txt_chiCal.Size = New System.Drawing.Size(68, 20)
         Me.txt_chiCal.TabIndex = 1
         '
         'txt_cantidadNros
         '
-        Me.txt_cantidadNros.Location = New System.Drawing.Point(230, 45)
+        Me.txt_cantidadNros.Location = New System.Drawing.Point(153, 29)
+        Me.txt_cantidadNros.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txt_cantidadNros.Name = "txt_cantidadNros"
-        Me.txt_cantidadNros.Size = New System.Drawing.Size(100, 26)
+        Me.txt_cantidadNros.Size = New System.Drawing.Size(68, 20)
         Me.txt_cantidadNros.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(30, 112)
+        Me.Label1.Location = New System.Drawing.Point(20, 73)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(148, 40)
+        Me.Label1.Size = New System.Drawing.Size(100, 26)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Ingrese la cantidad " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "intervalos: "
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(907, 83)
+        Me.Label4.Location = New System.Drawing.Point(605, 54)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(173, 20)
+        Me.Label4.Size = New System.Drawing.Size(115, 13)
         Me.Label4.TabIndex = 0
         Me.Label4.Text = "Chi-Cuadrado tabulado"
         '
         'lbl_resultado
         '
         Me.lbl_resultado.AutoSize = True
-        Me.lbl_resultado.Location = New System.Drawing.Point(731, 64)
+        Me.lbl_resultado.Location = New System.Drawing.Point(487, 42)
+        Me.lbl_resultado.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lbl_resultado.Name = "lbl_resultado"
-        Me.lbl_resultado.Size = New System.Drawing.Size(14, 20)
+        Me.lbl_resultado.Size = New System.Drawing.Size(10, 13)
         Me.lbl_resultado.TabIndex = 0
         Me.lbl_resultado.Text = "-"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(907, 48)
+        Me.Label2.Location = New System.Drawing.Point(605, 31)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(178, 20)
+        Me.Label2.Size = New System.Drawing.Size(120, 13)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "Chi-Cuadrado calculado"
         '
         'lbl_nrosAleatorios
         '
         Me.lbl_nrosAleatorios.AutoSize = True
-        Me.lbl_nrosAleatorios.Location = New System.Drawing.Point(30, 31)
+        Me.lbl_nrosAleatorios.Location = New System.Drawing.Point(20, 20)
+        Me.lbl_nrosAleatorios.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lbl_nrosAleatorios.Name = "lbl_nrosAleatorios"
-        Me.lbl_nrosAleatorios.Size = New System.Drawing.Size(170, 40)
+        Me.lbl_nrosAleatorios.Size = New System.Drawing.Size(115, 26)
         Me.lbl_nrosAleatorios.TabIndex = 0
         Me.lbl_nrosAleatorios.Text = "Ingrese la cantidad de " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "numeros aleatorios: "
         '
         'TabPage3
         '
-        Me.TabPage3.Controls.Add(Me.TextBox2)
-        Me.TabPage3.Controls.Add(Me.TextBox3)
+        Me.TabPage3.Controls.Add(Me.txt_chiTabC)
+        Me.TabPage3.Controls.Add(Me.txt_chiCalcC)
         Me.TabPage3.Controls.Add(Me.Label10)
-        Me.TabPage3.Controls.Add(Me.Label11)
+        Me.TabPage3.Controls.Add(Me.lbl_resultadoC)
         Me.TabPage3.Controls.Add(Me.Label12)
         Me.TabPage3.Controls.Add(Me.grid3C)
         Me.TabPage3.Controls.Add(Me.Chart2)
@@ -518,52 +522,58 @@ Partial Class TrabajoPractico1
         Me.TabPage3.Controls.Add(Me.Label7)
         Me.TabPage3.Controls.Add(Me.txt_cC)
         Me.TabPage3.Controls.Add(Me.txt_aC)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1665, 987)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage3.Size = New System.Drawing.Size(1107, 637)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Punto c"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'TextBox2
+        'txt_chiTabC
         '
-        Me.TextBox2.Location = New System.Drawing.Point(1308, 92)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(100, 26)
-        Me.TextBox2.TabIndex = 24
+        Me.txt_chiTabC.Location = New System.Drawing.Point(872, 60)
+        Me.txt_chiTabC.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txt_chiTabC.Name = "txt_chiTabC"
+        Me.txt_chiTabC.Size = New System.Drawing.Size(68, 20)
+        Me.txt_chiTabC.TabIndex = 24
         '
-        'TextBox3
+        'txt_chiCalcC
         '
-        Me.TextBox3.Location = New System.Drawing.Point(1308, 60)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(100, 26)
-        Me.TextBox3.TabIndex = 25
+        Me.txt_chiCalcC.Location = New System.Drawing.Point(872, 39)
+        Me.txt_chiCalcC.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txt_chiCalcC.Name = "txt_chiCalcC"
+        Me.txt_chiCalcC.Size = New System.Drawing.Size(68, 20)
+        Me.txt_chiCalcC.TabIndex = 25
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(1108, 98)
+        Me.Label10.Location = New System.Drawing.Point(739, 64)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(173, 20)
+        Me.Label10.Size = New System.Drawing.Size(115, 13)
         Me.Label10.TabIndex = 21
         Me.Label10.Text = "Chi-Cuadrado tabulado"
         '
-        'Label11
+        'lbl_resultadoC
         '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(932, 79)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(14, 20)
-        Me.Label11.TabIndex = 22
-        Me.Label11.Text = "-"
+        Me.lbl_resultadoC.AutoSize = True
+        Me.lbl_resultadoC.Location = New System.Drawing.Point(621, 51)
+        Me.lbl_resultadoC.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.lbl_resultadoC.Name = "lbl_resultadoC"
+        Me.lbl_resultadoC.Size = New System.Drawing.Size(10, 13)
+        Me.lbl_resultadoC.TabIndex = 22
+        Me.lbl_resultadoC.Text = "-"
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(1108, 63)
+        Me.Label12.Location = New System.Drawing.Point(739, 41)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(178, 20)
+        Me.Label12.Size = New System.Drawing.Size(120, 13)
         Me.Label12.TabIndex = 23
         Me.Label12.Text = "Chi-Cuadrado calculado"
         '
@@ -573,11 +583,12 @@ Partial Class TrabajoPractico1
         Me.grid3C.AllowUserToDeleteRows = False
         Me.grid3C.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid3C.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12, Me.DataGridViewTextBoxColumn13})
-        Me.grid3C.Location = New System.Drawing.Point(966, 213)
+        Me.grid3C.Location = New System.Drawing.Point(644, 138)
+        Me.grid3C.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid3C.Name = "grid3C"
         Me.grid3C.ReadOnly = True
         Me.grid3C.RowTemplate.Height = 28
-        Me.grid3C.Size = New System.Drawing.Size(684, 366)
+        Me.grid3C.Size = New System.Drawing.Size(456, 238)
         Me.grid3C.TabIndex = 20
         '
         'DataGridViewTextBoxColumn10
@@ -606,29 +617,28 @@ Partial Class TrabajoPractico1
         '
         'Chart2
         '
-        ChartArea3.Area3DStyle.WallWidth = 0
-        ChartArea3.Name = "ChartArea1"
-        Me.Chart2.ChartAreas.Add(ChartArea3)
-        Legend3.Name = "Legend1"
-        Me.Chart2.Legends.Add(Legend3)
-        Me.Chart2.Location = New System.Drawing.Point(35, 623)
-        Me.Chart2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        ChartArea2.Area3DStyle.WallWidth = 0
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart2.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart2.Legends.Add(Legend2)
+        Me.Chart2.Location = New System.Drawing.Point(23, 405)
         Me.Chart2.Name = "Chart2"
-        Series5.ChartArea = "ChartArea1"
-        Series5.CustomProperties = "DrawSideBySide=True, EmptyPointValue=Zero, LabelStyle=Right"
-        Series5.IsXValueIndexed = True
-        Series5.Legend = "Legend1"
-        Series5.Name = "fo"
-        Series6.BorderWidth = 3
-        Series6.ChartArea = "ChartArea1"
-        Series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series6.Color = System.Drawing.Color.Red
-        Series6.IsXValueIndexed = True
-        Series6.Legend = "Legend1"
-        Series6.Name = "fe"
-        Me.Chart2.Series.Add(Series5)
-        Me.Chart2.Series.Add(Series6)
-        Me.Chart2.Size = New System.Drawing.Size(1140, 326)
+        Series3.ChartArea = "ChartArea1"
+        Series3.CustomProperties = "DrawSideBySide=True, EmptyPointValue=Zero, LabelStyle=Right"
+        Series3.IsXValueIndexed = True
+        Series3.Legend = "Legend1"
+        Series3.Name = "fo"
+        Series4.BorderWidth = 3
+        Series4.ChartArea = "ChartArea1"
+        Series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series4.Color = System.Drawing.Color.Red
+        Series4.IsXValueIndexed = True
+        Series4.Legend = "Legend1"
+        Series4.Name = "fe"
+        Me.Chart2.Series.Add(Series3)
+        Me.Chart2.Series.Add(Series4)
+        Me.Chart2.Size = New System.Drawing.Size(760, 212)
         Me.Chart2.TabIndex = 19
         Me.Chart2.Text = "Chart2"
         '
@@ -638,11 +648,12 @@ Partial Class TrabajoPractico1
         Me.grid2C.AllowUserToDeleteRows = False
         Me.grid2C.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid2C.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn9})
-        Me.grid2C.Location = New System.Drawing.Point(764, 213)
+        Me.grid2C.Location = New System.Drawing.Point(509, 138)
+        Me.grid2C.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid2C.Name = "grid2C"
         Me.grid2C.ReadOnly = True
         Me.grid2C.RowTemplate.Height = 28
-        Me.grid2C.Size = New System.Drawing.Size(160, 366)
+        Me.grid2C.Size = New System.Drawing.Size(107, 238)
         Me.grid2C.TabIndex = 18
         '
         'DataGridViewTextBoxColumn9
@@ -655,9 +666,10 @@ Partial Class TrabajoPractico1
         '
         Me.cmb_cantIntC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_cantIntC.FormattingEnabled = True
-        Me.cmb_cantIntC.Location = New System.Drawing.Point(231, 103)
+        Me.cmb_cantIntC.Location = New System.Drawing.Point(154, 67)
+        Me.cmb_cantIntC.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.cmb_cantIntC.Name = "cmb_cantIntC"
-        Me.cmb_cantIntC.Size = New System.Drawing.Size(121, 28)
+        Me.cmb_cantIntC.Size = New System.Drawing.Size(82, 21)
         Me.cmb_cantIntC.TabIndex = 17
         '
         'grid1C
@@ -666,11 +678,12 @@ Partial Class TrabajoPractico1
         Me.grid1C.AllowUserToDeleteRows = False
         Me.grid1C.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid1C.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.DataGridViewTextBoxColumn8})
-        Me.grid1C.Location = New System.Drawing.Point(35, 213)
+        Me.grid1C.Location = New System.Drawing.Point(23, 138)
+        Me.grid1C.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.grid1C.Name = "grid1C"
         Me.grid1C.ReadOnly = True
         Me.grid1C.RowTemplate.Height = 28
-        Me.grid1C.Size = New System.Drawing.Size(684, 366)
+        Me.grid1C.Size = New System.Drawing.Size(456, 238)
         Me.grid1C.TabIndex = 16
         '
         'DataGridViewTextBoxColumn5
@@ -699,53 +712,53 @@ Partial Class TrabajoPractico1
         '
         'txt_cantNrosC
         '
-        Me.txt_cantNrosC.Location = New System.Drawing.Point(231, 43)
+        Me.txt_cantNrosC.Location = New System.Drawing.Point(154, 28)
+        Me.txt_cantNrosC.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txt_cantNrosC.Name = "txt_cantNrosC"
-        Me.txt_cantNrosC.Size = New System.Drawing.Size(121, 26)
+        Me.txt_cantNrosC.Size = New System.Drawing.Size(82, 20)
         Me.txt_cantNrosC.TabIndex = 15
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(31, 90)
+        Me.Label8.Location = New System.Drawing.Point(21, 58)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(148, 40)
+        Me.Label8.Size = New System.Drawing.Size(100, 26)
         Me.Label8.TabIndex = 13
         Me.Label8.Text = "Ingrese la cantidad " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "intervalos: "
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(31, 29)
+        Me.Label9.Location = New System.Drawing.Point(21, 19)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(170, 40)
+        Me.Label9.Size = New System.Drawing.Size(115, 26)
         Me.Label9.TabIndex = 14
         Me.Label9.Text = "Ingrese la cantidad de " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "numeros aleatorios: "
         '
         'txt_seedC
         '
-        Me.txt_seedC.Location = New System.Drawing.Point(468, 26)
-        Me.txt_seedC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_seedC.Location = New System.Drawing.Point(312, 17)
         Me.txt_seedC.Name = "txt_seedC"
-        Me.txt_seedC.Size = New System.Drawing.Size(148, 26)
+        Me.txt_seedC.Size = New System.Drawing.Size(100, 20)
         Me.txt_seedC.TabIndex = 8
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(438, 73)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Location = New System.Drawing.Point(292, 47)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(18, 20)
+        Me.Label3.Size = New System.Drawing.Size(13, 13)
         Me.Label3.TabIndex = 4
         Me.Label3.Text = "a"
         '
         'cmd_generarC
         '
-        Me.cmd_generarC.Location = New System.Drawing.Point(764, 83)
-        Me.cmd_generarC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_generarC.Location = New System.Drawing.Point(509, 54)
         Me.cmd_generarC.Name = "cmd_generarC"
-        Me.cmd_generarC.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_generarC.Size = New System.Drawing.Size(75, 23)
         Me.cmd_generarC.TabIndex = 12
         Me.cmd_generarC.Text = "Generar"
         Me.cmd_generarC.UseVisualStyleBackColor = True
@@ -753,64 +766,57 @@ Partial Class TrabajoPractico1
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(438, 110)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Location = New System.Drawing.Point(292, 71)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(17, 20)
+        Me.Label5.Size = New System.Drawing.Size(13, 13)
         Me.Label5.TabIndex = 5
         Me.Label5.Text = "c"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(412, 36)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label6.Location = New System.Drawing.Point(275, 23)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(47, 20)
+        Me.Label6.Size = New System.Drawing.Size(32, 13)
         Me.Label6.TabIndex = 6
         Me.Label6.Text = "Seed"
         '
         'txt_mC
         '
-        Me.txt_mC.Location = New System.Drawing.Point(468, 133)
-        Me.txt_mC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_mC.Location = New System.Drawing.Point(312, 86)
         Me.txt_mC.Name = "txt_mC"
-        Me.txt_mC.Size = New System.Drawing.Size(148, 26)
+        Me.txt_mC.Size = New System.Drawing.Size(100, 20)
         Me.txt_mC.TabIndex = 9
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(438, 146)
-        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Location = New System.Drawing.Point(292, 95)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(22, 20)
+        Me.Label7.Size = New System.Drawing.Size(15, 13)
         Me.Label7.TabIndex = 7
         Me.Label7.Text = "m"
         '
         'txt_cC
         '
-        Me.txt_cC.Location = New System.Drawing.Point(468, 100)
-        Me.txt_cC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_cC.Location = New System.Drawing.Point(312, 65)
         Me.txt_cC.Name = "txt_cC"
-        Me.txt_cC.Size = New System.Drawing.Size(148, 26)
+        Me.txt_cC.Size = New System.Drawing.Size(100, 20)
         Me.txt_cC.TabIndex = 10
         '
         'txt_aC
         '
-        Me.txt_aC.Location = New System.Drawing.Point(468, 63)
-        Me.txt_aC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_aC.Location = New System.Drawing.Point(312, 41)
         Me.txt_aC.Name = "txt_aC"
-        Me.txt_aC.Size = New System.Drawing.Size(148, 26)
+        Me.txt_aC.Size = New System.Drawing.Size(100, 20)
         Me.txt_aC.TabIndex = 11
         '
         'TrabajoPractico1
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1688, 1025)
+        Me.ClientSize = New System.Drawing.Size(913, 487)
         Me.Controls.Add(Me.TabControl1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "TrabajoPractico1"
         Me.Text = "Form1"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
@@ -892,10 +898,10 @@ Partial Class TrabajoPractico1
     Friend WithEvents Label7 As Label
     Friend WithEvents txt_cC As TextBox
     Friend WithEvents txt_aC As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents txt_chiTabC As TextBox
+    Friend WithEvents txt_chiCalcC As TextBox
     Friend WithEvents Label10 As Label
-    Friend WithEvents Label11 As Label
+    Friend WithEvents lbl_resultadoC As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents grid3C As DataGridView
     Friend WithEvents DataGridViewTextBoxColumn10 As DataGridViewTextBoxColumn

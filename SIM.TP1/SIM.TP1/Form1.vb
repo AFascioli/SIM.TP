@@ -1,8 +1,13 @@
 ﻿Public Class TrabajoPractico1
-
+    Enum NroPunto
+        b
+        c
+    End Enum
     Dim a, c, m, seed As Double
     Dim contador As Integer = 0
     Dim numerosChi(), contadorChi()
+    Dim numerosChiC()
+    Dim contadorChiC As Integer()
 
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -10,9 +15,11 @@
         cmb_intervalos.Items.Add("5")
         cmb_intervalos.Items.Add("10")
         cmb_intervalos.Items.Add("20")
+        cmb_intervalos.SelectedIndex = 0
         cmb_cantIntC.Items.Add("5")
         cmb_cantIntC.Items.Add("10")
         cmb_cantIntC.Items.Add("20")
+        cmb_cantIntC.SelectedIndex = 0
 
     End Sub
 
@@ -119,16 +126,16 @@
             contChi += Me.grid2.Rows(index).Cells(3).Value
         Next
         Me.txt_chiCal.Text = contChi
-        Me.compararChi()
-        If Me.grid2.Rows(0).Cells(2).Value < 5 Then
-            Me.cargarTabla3()
-        End If
+        'Me.compararChi(NroPunto.b)
+        'If Me.grid2.Rows(0).Cells(2).Value < 5 Then
+        Me.cargarTabla3()
+        'End If
     End Sub
 
     Private Sub cargarTabla3()
         Me.grid4.Rows.Clear()
 
-        Dim contadorSaltos = Me.obtenerIntervalos
+        Dim contadorSaltos = Me.obtenerIntervalos()
         Dim auxiliar = Integer.Parse(Me.cmb_intervalos.SelectedItem) / contadorSaltos 'cantidad de intervalos
         Dim contSaltos As Integer = 0
         Dim contChi As Double = 0
@@ -158,7 +165,7 @@
         Next
 
         Me.txt_chiCal.Text = contChi
-        Me.compararChi()
+        Me.compararChi(NroPunto.b)
 
     End Sub
 
@@ -178,10 +185,11 @@
 
     Private Sub cmd_generarC_Click(sender As Object, e As EventArgs) Handles cmd_generarC.Click
         Me.numerosPuntoC()
-
+        Me.cargarGrid1C()
+        Me.cargarGraficoC()
     End Sub
 
-    Private Sub compararChi()
+    Private Sub compararChi(punto As NroPunto)
         Dim v(28) As Double
 
         v(0) = 3.8415
@@ -214,14 +222,26 @@
         v(27) = 41.3372
         v(28) = 42.5569
 
-        Me.txt_chiTab.Text = v(Me.cmb_intervalos.SelectedItem - 1)
+        If punto = NroPunto.b Then
+            Me.txt_chiTab.Text = v(Me.cmb_intervalos.SelectedItem - 1)
 
-        If v(Me.cmb_intervalos.SelectedItem - 1) > Me.txt_chiCal.Text Then
+            If v(Me.cmb_intervalos.SelectedItem - 1) > Me.txt_chiCal.Text Then
 
-            Me.lbl_resultado.Text = "Se acepta la hipótesis"
+                Me.lbl_resultado.Text = "Se acepta la hipótesis"
+            Else
+                Me.lbl_resultado.Text = "Se rechaza la hipótesis"
+            End If
         Else
-            Me.lbl_resultado.Text = "Se rechaza la hipótesis"
+            Me.txt_chiTabC.Text = v(Me.cmb_cantIntC.SelectedItem - 1)
+
+            If v(Me.cmb_cantIntC.SelectedItem - 1) > Me.txt_chiCalcC.Text Then
+
+                Me.lbl_resultadoC.Text = "Se acepta la hipótesis"
+            Else
+                Me.lbl_resultadoC.Text = "Se rechaza la hipótesis"
+            End If
         End If
+
 
 
     End Sub
@@ -238,41 +258,69 @@
         Return contador
     End Function
 
+    Private Function obtenerIntervalosV2(contador As Integer())
+        Dim ret As New List(Of Integer())
+        Dim inicio As Integer
+        Dim acum As Integer
+        Dim i As Integer
+        Dim agregar As Boolean = True
+        While i < contador.Length
+            acum = 0
+            inicio = i
+            While acum < 5
+                If i >= (contador.Length - 1) Then
+                    'MessageBox.Show(ret(ret.Count - 1).ToString)
+                    agregar = False
+                    ret(ret.Count - 1)(1) = i
+                    ret(ret.Count - 1)(2) += acum + contador(i)
+                    i += 1
+                    Exit While
+                End If
+                acum += contador(i)
+                i += 1
+            End While
+            If agregar Then
+                ret.Add({inicio, i - 1, acum})
+            End If
+        End While
+
+        'Retorna una lista de vectores que contienen el inicio, el fin y la fo de cada intervalo
+        Return ret
+    End Function
+
     Private Sub cargarGrid1C()
         Me.grid1C.Rows.Clear()
 
         Dim contChi As Double = 0
-        For index = 0 To contadorChi.Length - 1
+        For index = 0 To contadorChiC.Length - 1
 
-            Dim y = contadorChi(index)
+            Dim y = contadorChiC(index)
             If IsNothing(y) Then
                 y = 0
             End If
 
-            Me.grid2.Rows.Add()
-            Me.grid2.Rows(index).Cells(0).Value = index + 1
-            Me.grid2.Rows(index).Cells(1).Value = y
-            Me.grid2.Rows(index).Cells(2).Value = numerosChi.Length / contadorChi.Length
-            Me.grid2.Rows(index).Cells(3).Value = ((contadorChi(index) - numerosChi.Length / contadorChi.Length) ^ 2) / (numerosChi.Length / contadorChi.Length)
-            contChi += Me.grid2.Rows(index).Cells(3).Value
+            Me.grid1C.Rows.Add()
+            Me.grid1C.Rows(index).Cells(0).Value = index + 1
+            Me.grid1C.Rows(index).Cells(1).Value = y
+            Me.grid1C.Rows(index).Cells(2).Value = numerosChiC.Length / contadorChiC.Length
+            Me.grid1C.Rows(index).Cells(3).Value = ((contadorChiC(index) - numerosChiC.Length / contadorChiC.Length) ^ 2) / (numerosChiC.Length / contadorChiC.Length)
+            contChi += Me.grid1C.Rows(index).Cells(3).Value
         Next
-        Me.txt_chiCal.Text = contChi
-        Me.compararChi()
-        If Me.grid2.Rows(0).Cells(2).Value < 5 Then
-            Me.cargarTabla3()
-        End If
+        Me.txt_chiCalcC.Text = contChi
+        Me.cargarTabla3C()
 
     End Sub
 
     Private Sub numerosPuntoC()
-        Dim numerosC(Me.txt_cantNrosC.Text) As Double
-        Dim contadorInterC(Integer.Parse(Me.cmb_cantIntC.SelectedItem) - 1)
+        Dim numerosC(Me.txt_cantNrosC.Text)
+        Dim contadorInterC(Integer.Parse(Me.cmb_cantIntC.SelectedItem) - 1) As Integer
         Dim anchoInt = 1 / contadorInterC.Length
         Dim cantEnInt As Integer
         Dim seedParcial As Integer = Me.txt_seedC.Text
         Dim randomC As Double = 0
         Dim vecAux(1) As Double
 
+        Me.grid2C.Rows.Clear()
         For index = 0 To numerosC.Length - 1
             vecAux = Me.congruencialMixto(Me.txt_aC.Text, Me.txt_cC.Text, Me.txt_mC.Text, seedParcial)
             randomC = vecAux(0)
@@ -286,5 +334,53 @@
             Me.grid2C.Rows(index).Cells(0).Value = numerosC(index)
         Next
 
+        numerosChiC = numerosC
+        contadorChiC = contadorInterC
+
     End Sub
+
+    Private Sub cargarGraficoC()
+        Me.Chart2.Series("fe").Points.Clear()
+        Me.Chart2.Series("fo").Points.Clear()
+        Dim anchoInt = 1 / contadorChiC.Length
+        Dim aux As Double = 0
+        For i = 0 To contadorChiC.Length - 1
+            aux += anchoInt
+            Me.Chart2.Series("fe").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(2).Value)
+            Me.Chart2.Series("fo").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(1).Value)
+        Next
+    End Sub
+
+    Private Sub cargarTabla3C()
+        Me.grid3C.Rows.Clear()
+
+        Dim intervalos As List(Of Integer()) = Me.obtenerIntervalosV2(Me.contadorChiC)
+        Dim fe = Me.grid1C.Rows(0).Cells(2).Value
+        Dim contChi As Integer = 0
+
+        For i = 0 To intervalos.Count - 1
+            Dim inicio As Integer = intervalos(i)(0)
+            Dim fin As Integer = intervalos(i)(1)
+            Dim foAcum As Integer = intervalos(i)(2)
+            Me.grid3C.Rows.Add()
+            If inicio <> fin Then
+                Me.grid3C.Rows(i).Cells(0).Value = (inicio + 1) & " - " & (fin + 1)
+            Else
+                Me.grid3C.Rows(i).Cells(0).Value = inicio + 1
+            End If
+
+            Me.grid3C.Rows(i).Cells(1).Value = foAcum
+            Me.grid3C.Rows(i).Cells(2).Value = fe * (fin - inicio + 1)
+
+            Me.grid3C.Rows(i).Cells(3).Value = ((Me.grid3C.Rows(i).Cells(1).Value - Me.grid3C.Rows(i).Cells(2).Value) ^ 2) / Me.grid3C.Rows(i).Cells(2).Value
+            contChi += Me.grid3C.Rows(i).Cells(3).Value
+        Next
+
+
+        Me.txt_chiCalcC.Text = contChi
+        Me.compararChi(NroPunto.c)
+
+    End Sub
+
+
 End Class

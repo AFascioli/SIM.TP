@@ -322,7 +322,7 @@
     End Sub
 
     Private Sub numerosPuntoC()
-        Dim numerosC(Me.txt_cantNrosC.Text)
+        Dim numerosC(Integer.Parse(Me.txt_cantNrosC.Text) - 1)
         Dim contadorInterC(Integer.Parse(Me.cmb_cantIntC.SelectedItem) - 1) As Integer
         Dim anchoInt = 1 / contadorInterC.Length
         Dim cantEnInt As Integer
@@ -366,7 +366,7 @@
 
         Dim fe = Me.grid1C.Rows(0).Cells(2).Value
         Dim intervalos As List(Of Integer()) = Me.obtenerIntervalosV2(fe, Me.contadorChiC)
-        Dim contChi As Integer = 0
+        Dim contChi As Double = 0
 
         For i = 0 To intervalos.Count - 1
             Dim inicio As Integer = intervalos(i)(0)

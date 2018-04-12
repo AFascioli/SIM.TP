@@ -9,7 +9,6 @@
     Dim numerosChiC() As Double
     Dim contadorChiC() As Double
 
-
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         cmb_intervalosB.Items.Add("5")
@@ -39,6 +38,73 @@
 
     End Function
 
+    Private Sub compararChi(punto As NroPunto)
+        Dim v(28) As Double
+
+        v(0) = 3.8415
+        v(1) = 5.9915
+        v(2) = 7.8147
+        v(3) = 9.4877
+        v(4) = 11.0705
+        v(5) = 12.5916
+        v(6) = 14.0671
+        v(7) = 15.5073
+        v(8) = 16.919
+        v(9) = 18.307
+        v(10) = 19.6752
+        v(11) = 21.0261
+        v(12) = 22.362
+        v(13) = 23.6848
+        v(14) = 24.9958
+        v(15) = 26.2962
+        v(16) = 27.5871
+        v(17) = 28.8693
+        v(18) = 30.1435
+        v(19) = 31.4104
+        v(20) = 32.6706
+        v(21) = 33.9245
+        v(22) = 35.1725
+        v(23) = 36.415
+        v(24) = 37.6525
+        v(25) = 38.8851
+        v(26) = 40.1133
+        v(27) = 41.3372
+        v(28) = 42.5569
+
+        If punto = NroPunto.b Then
+            Me.txt_chiTabB.Text = v(Me.cmb_intervalosB.SelectedItem - 1)
+
+            If v(Me.cmb_intervalosB.SelectedItem - 1) > Me.txt_chiCalB.Text Then
+
+                Me.lbl_resultadoB.Text = "Se acepta la hipótesis"
+            Else
+                Me.lbl_resultadoB.Text = "Se rechaza la hipótesis"
+            End If
+        Else
+            Me.txt_chiTabC.Text = v(Me.cmb_cantIntC.SelectedItem - 1)
+
+            If v(Me.cmb_cantIntC.SelectedItem - 1) > Me.txt_chiCalcC.Text Then
+
+                Me.lbl_resultadoC.Text = "Se acepta la hipótesis"
+            Else
+                Me.lbl_resultadoC.Text = "Se rechaza la hipótesis"
+            End If
+        End If
+
+    End Sub
+
+    Private Function obtenerIntervalos(numeros() As Double, contadorChi() As Double) 'devuelve cuanto agrupar para cumplir con la restriccion de fe
+        Dim aux As Double = 0
+        Dim contador As Integer = 0
+
+        While aux < 5
+            aux += numeros.Length / contadorChi.Length
+            contador += 1
+        End While
+
+        Return contador
+    End Function
+
     Private Sub cargarGrid1A()
         Dim vector(2) As Double
         Dim r As Double = Me.seed
@@ -52,12 +118,6 @@
         Next
         Me.seed = r
         Me.contador = 20
-    End Sub
-
-    Private Sub cmd_generarB_Click(sender As Object, e As EventArgs) Handles cmd_generarB.Click
-        Me.generadorRandom()
-        Me.cargarGrid1B()
-        Me.cargarGraficoB()
     End Sub
 
     Private Sub cmd_generarA_Click(sender As Object, e As EventArgs) Handles cmd_generarA.Click
@@ -82,6 +142,12 @@
         Me.contador += 1
         Me.seed = vector(1)
 
+    End Sub
+
+    Private Sub cmd_generarB_Click(sender As Object, e As EventArgs) Handles cmd_generarB.Click
+        Me.generadorRandom()
+        Me.cargarGrid1B()
+        Me.cargarGraficoB()
     End Sub
 
     Private Sub generadorRandom()
@@ -192,105 +258,6 @@
         Me.cargarGraficoC()
     End Sub
 
-    Private Sub compararChi(punto As NroPunto)
-        Dim v(28) As Double
-
-        v(0) = 3.8415
-        v(1) = 5.9915
-        v(2) = 7.8147
-        v(3) = 9.4877
-        v(4) = 11.0705
-        v(5) = 12.5916
-        v(6) = 14.0671
-        v(7) = 15.5073
-        v(8) = 16.919
-        v(9) = 18.307
-        v(10) = 19.6752
-        v(11) = 21.0261
-        v(12) = 22.362
-        v(13) = 23.6848
-        v(14) = 24.9958
-        v(15) = 26.2962
-        v(16) = 27.5871
-        v(17) = 28.8693
-        v(18) = 30.1435
-        v(19) = 31.4104
-        v(20) = 32.6706
-        v(21) = 33.9245
-        v(22) = 35.1725
-        v(23) = 36.415
-        v(24) = 37.6525
-        v(25) = 38.8851
-        v(26) = 40.1133
-        v(27) = 41.3372
-        v(28) = 42.5569
-
-        If punto = NroPunto.b Then
-            Me.txt_chiTabB.Text = v(Me.cmb_intervalosB.SelectedItem - 1)
-
-            If v(Me.cmb_intervalosB.SelectedItem - 1) > Me.txt_chiCalB.Text Then
-
-                Me.lbl_resultadoB.Text = "Se acepta la hipótesis"
-            Else
-                Me.lbl_resultadoB.Text = "Se rechaza la hipótesis"
-            End If
-        Else
-            Me.txt_chiTabC.Text = v(Me.cmb_cantIntC.SelectedItem - 1)
-
-            If v(Me.cmb_cantIntC.SelectedItem - 1) > Me.txt_chiCalcC.Text Then
-
-                Me.lbl_resultadoC.Text = "Se acepta la hipótesis"
-            Else
-                Me.lbl_resultadoC.Text = "Se rechaza la hipótesis"
-            End If
-        End If
-
-    End Sub
-
-    Private Function obtenerIntervalos(numeros() As Double, contadorChi() As Double) 'devuelve cuanto agrupar para cumplir con la restriccion de fe
-        Dim aux As Double = 0
-        Dim contador As Integer = 0
-
-        While aux < 5
-            aux += numeros.Length / contadorChi.Length
-            contador += 1
-        End While
-
-        Return contador
-    End Function
-
-    Private Function obtenerIntervalosV2(fe As Double, contador As Integer())
-        Dim ret As New List(Of Integer())
-        Dim inicio As Integer
-        Dim acumFo As Integer
-        Dim acumFe
-        Dim i As Integer
-        Dim agregar As Boolean = True
-        While i < contador.Length
-            acumFo = 0
-            acumFe = 0
-            inicio = i
-            While acumFe < 5
-                If i >= (contador.Length - 1) Then
-                    agregar = False
-                    ret(ret.Count - 1)(1) = i
-                    ret(ret.Count - 1)(2) += acumFo + contador(i)
-                    i += 1
-                    Exit While
-                End If
-                acumFo += contador(i)
-                acumFe += fe
-                i += 1
-            End While
-            If agregar Then
-                ret.Add({inicio, i - 1, acumFo})
-            End If
-        End While
-
-        'Retorna una lista de vectores que contienen el inicio, el fin y la fo de cada intervalo
-        Return ret
-    End Function
-
     Private Sub cargarGrid1C()
         Me.grid1C.Rows.Clear()
 
@@ -317,6 +284,42 @@
             Me.compararChi(NroPunto.c)
         End If
 
+    End Sub
+
+    Private Sub cargarGrid3C()
+        Me.grid3C.Rows.Clear()
+
+        Dim contadorSaltos = Me.obtenerIntervalos(Me.numerosChiC, Me.contadorChiC)
+        Dim auxiliar = Integer.Parse(Me.cmb_cantIntC.SelectedItem) / contadorSaltos 'cantidad de intervalos
+        Dim contSaltos As Integer = 0
+        Dim contChi As Double = 0
+        Dim extra As Integer
+
+        For index = 0 To auxiliar - 1
+
+            Me.grid3C.Rows.Add()
+            Me.grid3C.Rows(index).Cells(0).Value = index + 1
+
+            If index = 0 Then 'solo se hace una vez en la primera vuelta para evitar problemas
+                extra = Me.cmb_cantIntC.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
+            End If
+
+            For index2 = 1 To contadorSaltos + extra 'los elementos que sobran, los ponemos en el primer grupo y de ahi nos queda siempre una cantidad justa para agrupar
+
+                Me.grid3C.Rows(index).Cells(1).Value += Me.grid1C.Rows(contSaltos).Cells(1).Value
+                Me.grid3C.Rows(index).Cells(2).Value += Me.grid1C.Rows(contSaltos).Cells(2).Value
+                contSaltos += 1
+            Next
+
+            extra = 0 'extra a partir de ahora no sirve entonces vale 0
+
+            Me.grid3C.Rows(index).Cells(3).Value = ((Me.grid3C.Rows(index).Cells(1).Value - Me.grid3C.Rows(index).Cells(2).Value) ^ 2) / Me.grid3C.Rows(index).Cells(2).Value
+            contChi += Me.grid1C.Rows(index).Cells(3).Value
+
+        Next
+
+        Me.txt_chiCalcC.Text = contChi
+        Me.compararChi(NroPunto.c)
     End Sub
 
     Private Sub numerosPuntoC()
@@ -358,42 +361,5 @@
             Me.Chart1C.Series("fo").Points.AddXY(aux, Me.grid1C.Rows(i).Cells(1).Value)
         Next
     End Sub
-
-    Private Sub cargarGrid3C()
-        Me.grid3C.Rows.Clear()
-
-        Dim contadorSaltos = Me.obtenerIntervalos(Me.numerosChiC, Me.contadorChiC)
-        Dim auxiliar = Integer.Parse(Me.cmb_cantIntC.SelectedItem) / contadorSaltos 'cantidad de intervalos
-        Dim contSaltos As Integer = 0
-        Dim contChi As Double = 0
-        Dim extra As Integer
-
-        For index = 0 To auxiliar - 1
-
-            Me.grid3C.Rows.Add()
-            Me.grid3C.Rows(index).Cells(0).Value = index + 1
-
-            If index = 0 Then 'solo se hace una vez en la primera vuelta para evitar problemas
-                extra = Me.cmb_cantIntC.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
-            End If
-
-            For index2 = 1 To contadorSaltos + extra 'los elementos que sobran, los ponemos en el primer grupo y de ahi nos queda siempre una cantidad justa para agrupar
-
-                Me.grid3C.Rows(index).Cells(1).Value += Me.grid1C.Rows(contSaltos).Cells(1).Value
-                Me.grid3C.Rows(index).Cells(2).Value += Me.grid1C.Rows(contSaltos).Cells(2).Value
-                contSaltos += 1
-            Next
-
-            extra = 0 'extra a partir de ahora no sirve entonces vale 0
-
-            Me.grid3C.Rows(index).Cells(3).Value = ((Me.grid3C.Rows(index).Cells(1).Value - Me.grid3C.Rows(index).Cells(2).Value) ^ 2) / Me.grid3C.Rows(index).Cells(2).Value
-            contChi += Me.grid1C.Rows(index).Cells(3).Value
-
-        Next
-
-        Me.txt_chiCalcC.Text = contChi
-        Me.compararChi(NroPunto.c)
-    End Sub
-
 
 End Class

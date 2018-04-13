@@ -8,6 +8,7 @@
     Dim numerosChiB(), contadorChiB() As Double
     Dim numerosChiC() As Double
     Dim contadorChiC() As Double
+    Dim bandera As Boolean = False
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
@@ -38,7 +39,7 @@
 
     End Function
 
-    Private Sub compararChi(punto As NroPunto)
+    Private Sub compararChi(punto As NroPunto, glibertad As Integer)
         Dim v(28) As Double
 
         v(0) = 3.8415
@@ -72,25 +73,25 @@
         v(28) = 42.5569
 
         If punto = NroPunto.b Then
-            Me.txt_chiTabB.Text = v(Me.cmb_intervalosB.SelectedItem - 1)
+            Me.txt_chiTabB.Text = v(glibertad - 1)
 
-            If v(Me.cmb_intervalosB.SelectedItem - 1) > Me.txt_chiCalB.Text Then
+            If v(glibertad - 1) > Me.txt_chiCalB.Text Then
 
                 Me.lbl_resultadoB.Text = "Se acepta la hipótesis"
             Else
                 Me.lbl_resultadoB.Text = "Se rechaza la hipótesis"
             End If
         Else
-            Me.txt_chiTabC.Text = v(Me.cmb_cantIntC.SelectedItem - 1)
+            Me.txt_chiTabC.Text = v(glibertad - 1)
 
-            If v(Me.cmb_cantIntC.SelectedItem - 1) > Me.txt_chiCalcC.Text Then
+            If v(glibertad - 1) > Me.txt_chiCalcC.Text Then
 
                 Me.lbl_resultadoC.Text = "Se acepta la hipótesis"
             Else
                 Me.lbl_resultadoC.Text = "Se rechaza la hipótesis"
             End If
         End If
-
+        Me.bandera = False
     End Sub
 
     Private Function obtenerIntervalos(numeros() As Double, contadorChi() As Double) 'devuelve cuanto agrupar para cumplir con la restriccion de fe
@@ -194,10 +195,11 @@
 
 
         If Me.grid1B.Rows(0).Cells(2).Value < 5 Then
+            Me.bandera = True 'bandera para comparar con el chi de la tabla agrupada
             Me.cargarGrid3B()
         Else
             Me.txt_chiCalB.Text = contChi
-            Me.compararChi(NroPunto.b)
+            Me.compararChi(NroPunto.b, Me.cmb_intervalosB.SelectedItem)
         End If
     End Sub
 
@@ -229,12 +231,12 @@
             extra = 0 'extra a partir de ahora no sirve entonces vale 0
 
             Me.grid3B.Rows(index).Cells(3).Value = ((Me.grid3B.Rows(index).Cells(1).Value - Me.grid3B.Rows(index).Cells(2).Value) ^ 2) / Me.grid3B.Rows(index).Cells(2).Value
-            contChi += Me.grid1B.Rows(index).Cells(3).Value
+            contChi += Me.grid3B.Rows(index).Cells(3).Value
 
         Next
 
         Me.txt_chiCalB.Text = contChi
-        Me.compararChi(NroPunto.b)
+        Me.compararChi(NroPunto.b, Me.grid3B.Rows.Count)
 
     End Sub
 
@@ -278,10 +280,11 @@
         Next
 
         If numerosChiC.Length / contadorChiC.Length < 5 Then
+            Me.bandera = True 'bandera para comparar con el chi de la tabla agrupada
             Me.cargarGrid3C()
         Else
             Me.txt_chiCalcC.Text = contChi
-            Me.compararChi(NroPunto.c)
+            Me.compararChi(NroPunto.c, Me.cmb_intervalosB.SelectedItem)
         End If
 
     End Sub
@@ -314,12 +317,12 @@
             extra = 0 'extra a partir de ahora no sirve entonces vale 0
 
             Me.grid3C.Rows(index).Cells(3).Value = ((Me.grid3C.Rows(index).Cells(1).Value - Me.grid3C.Rows(index).Cells(2).Value) ^ 2) / Me.grid3C.Rows(index).Cells(2).Value
-            contChi += Me.grid1C.Rows(index).Cells(3).Value
+            contChi += Me.grid3C.Rows(index).Cells(3).Value
 
         Next
 
         Me.txt_chiCalcC.Text = contChi
-        Me.compararChi(NroPunto.c)
+        Me.compararChi(NroPunto.c, Me.grid3C.Rows.Count)
     End Sub
 
     Private Sub numerosPuntoC()

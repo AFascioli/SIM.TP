@@ -9,3 +9,6 @@ C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\Trabajos Practicos\SIM.TP
 C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\Trabajos Practicos\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.exe
 C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\Trabajos Practicos\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.xml
 C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\Trabajos Practicos\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.pdb
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.exe
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.xml
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.pdb

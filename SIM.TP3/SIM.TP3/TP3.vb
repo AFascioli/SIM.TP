@@ -40,6 +40,17 @@
         Return X
     End Function
 
+    Private Sub cargarGrid1(v As Double())
+        Me.Grid1.Rows.Clear()
+
+        For index = 0 To v.Length - 1
+            Me.Grid1.Rows.Add()
+            Me.Grid1.Rows(index).Cells(0).Value = index + 1
+            Me.Grid1.Rows(index).Cells(1).Value = v(index)
+        Next
+
+    End Sub
+
     Private Function generarRND1()
 
         Dim v(Me.txt_muestra1.Text - 1) As Double
@@ -51,16 +62,7 @@
         Return v
     End Function
 
-    Private Sub cargarGrid1(v As Double())
-        Me.Grid1.Rows.Clear()
 
-        For index = 0 To v.Length - 1
-            Me.Grid1.Rows.Add()
-            Me.Grid1.Rows(index).Cells(0).Value = index + 1
-            Me.Grid1.Rows(index).Cells(1).Value = v(index)
-        Next
-
-    End Sub
 
     Private Function generarRND2()
 

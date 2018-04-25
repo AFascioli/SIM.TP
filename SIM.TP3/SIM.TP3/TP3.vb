@@ -1,6 +1,8 @@
 ﻿Public Class TP3
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        cmb_intervalos.Items.Add("5")
+        cmb_intervalos.Items.Add("10")
+        cmb_intervalos.Items.Add("20")
     End Sub
 
     Private Function distUniforme(A As Double, B As Double)
@@ -9,7 +11,9 @@
         res = A + Rnd() * (B - A)
         Return res
     End Function
+
     'Exponencial y Poisson no tienen que generar negativos.
+
     Private Function distExponencial(lambda As Double)
         Dim res As Double
 
@@ -40,42 +44,39 @@
         Return X
     End Function
 
-    Private Sub cargarGrid1(v As Double())
-        Me.Grid1.Rows.Clear()
+    Private Sub agregarFilaGrid(index As Integer, rnd As Double)
 
-        For index = 0 To v.Length - 1
-            Me.Grid1.Rows.Add()
-            Me.Grid1.Rows(index).Cells(0).Value = index + 1
-            Me.Grid1.Rows(index).Cells(1).Value = v(index)
+        Me.Grid1.Rows.Add()
+        Me.Grid1.Rows(index).Cells(0).Value = index + 1
+        Me.Grid1.Rows(index).Cells(1).Value = rnd
+
+    End Sub
+
+
+    Private Sub generarRND1()
+
+        For index = 0 To Integer.Parse(Me.txt_muestra1.Text) - 1
+
+
+            Me.agregarFilaGrid(index, Me.distUniforme(Me.txt_A.Text, Me.txt_B.Text))
+
         Next
 
     End Sub
 
-    Private Function generarRND1()
+    Private Sub generarRND2()
 
-        Dim v(Me.txt_muestra1.Text - 1) As Double
-
-        For index = 0 To Integer.Parse(txt_muestra1.Text) - 1
-            v(index) = Me.distUniforme(Me.txt_A.Text, Me.txt_B.Text)
-        Next
-
-        Return v
-    End Function
-
-
-
-    Private Function generarRND2()
-
-        Dim v(Me.txt_muestra2.Text - 1) As Double
+        If Me.txt_lambda2.Text = "" Then    'Ver de hacerlo bien 
+            Me.txt_lambda2.Text = 1 / (Me.txt_media2.Text)
+        End If
 
         For index = 0 To Integer.Parse(txt_muestra2.Text) - 1
-            v(index) = Me.distExponencial(Me.txt_lambda2.Text)
+            Me.agregarFilaGrid(index, Me.distExponencial(Me.txt_lambda2.Text))
         Next
 
-        Return v
-    End Function
+    End Sub
 
-    Private Function generarRND3()
+    Private Sub generarRND3()
 
         Dim v(Me.txt_muestra3.Text - 1) As Double
         Dim vaux(1) As Double
@@ -84,47 +85,58 @@
 
         For index = 0 To cantidad - 1
             vaux = Me.distNormal(Me.txt_media3.Text, Me.txt_desviacion3.Text)
-            v(contador) = vaux(0)
+            Me.agregarFilaGrid(contador, vaux(0))
             contador += 1
 
             If contador = Me.txt_muestra3.Text Then
                 Exit For
             End If
 
-            v(contador) = vaux(1)
+            Me.agregarFilaGrid(contador, vaux(1))
             contador += 1
         Next
 
-        Return v
-    End Function
+    End Sub
 
-    Private Function generarRND4()
+    Private Sub generarRND4()
 
-        Dim v(Me.txt_muestra4.Text - 1) As Double
 
         For index = 0 To Integer.Parse(txt_muestra4.Text) - 1
-            v(index) = Me.distPoisson(Me.txt_lambda4.Text)
+            Me.agregarFilaGrid(index, Me.distPoisson(Me.txt_lambda4.Text))
         Next
 
-        Return v
-    End Function
+    End Sub
 
     Private Sub cmd_generar1_Click(sender As Object, e As EventArgs) Handles cmd_generar1.Click
-        Me.cargarGrid1(Me.generarRND1())
+        Me.Grid1.Rows.Clear()
+        Me.generarRND1()
 
         'Me.graficar(1)
         'Me.compararChi(1)
     End Sub
 
+    Private Sub cargarGrid21()
+
+        Dim tamIntervalo As Double = (Me.txt_muestra1.Text) / Me.cmb_intervalos.SelectedValue
+
+        For index = 0 To Me.cmb_intervalos.SelectedValue - 1
+
+        Next
+
+    End Sub
+
     Private Sub cmd_generar2_Click(sender As Object, e As EventArgs) Handles cmd_generar2.Click
-        Me.cargarGrid1(Me.generarRND2())
+        Me.Grid1.Rows.Clear()
+        Me.generarRND2()
     End Sub
 
     Private Sub cmd_generar3_Click(sender As Object, e As EventArgs) Handles cmd_generar3.Click
-        Me.cargarGrid1(Me.generarRND3())
+        Me.Grid1.Rows.Clear()
+        Me.generarRND3()
     End Sub
 
     Private Sub cmd_generar4_Click(sender As Object, e As EventArgs) Handles cmd_generar4.Click
-        Me.cargarGrid1(Me.generarRND4())
+        Me.Grid1.Rows.Clear()
+        Me.generarRND4()
     End Sub
 End Class

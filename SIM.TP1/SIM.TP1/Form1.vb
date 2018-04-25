@@ -177,10 +177,13 @@
 
     Private Sub cargarGrid1B()
         Me.grid1B.Rows.Clear()
+
         Dim contChi As Double = 0
+
         For index = 0 To contadorChiB.Length - 1
 
             Dim y = contadorChiB(index)
+
             If IsNothing(y) Then
                 y = 0
             End If
@@ -190,6 +193,7 @@
             Me.grid1B.Rows(index).Cells(1).Value = y
             Me.grid1B.Rows(index).Cells(2).Value = numerosChiB.Length / contadorChiB.Length
             Me.grid1B.Rows(index).Cells(3).Value = ((contadorChiB(index) - numerosChiB.Length / contadorChiB.Length) ^ 2) / (numerosChiB.Length / contadorChiB.Length)
+
             contChi += Me.grid1B.Rows(index).Cells(3).Value
         Next
 

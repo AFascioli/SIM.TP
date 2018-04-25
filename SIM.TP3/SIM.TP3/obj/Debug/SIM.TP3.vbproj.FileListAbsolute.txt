@@ -12,3 +12,12 @@ C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\Trabajos Practicos\SIM.TP
 C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.exe
 C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.xml
 C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.pdb
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\bin\Debug\SIM.TP3.exe.config
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\bin\Debug\SIM.TP3.exe
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\bin\Debug\SIM.TP3.pdb
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\bin\Debug\SIM.TP3.xml
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.vbprojResolveAssemblyReference.cache
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.TP3.resources
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.Resources.resources
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.vbproj.GenerateResource.cache
+C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP3\SIM.TP3\obj\Debug\SIM.TP3.vbproj.CoreCompileInputs.cache

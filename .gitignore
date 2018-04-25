@@ -7,3 +7,5 @@ SIM.TP1/*/bin
 SIM.TP1/*/obj
 SIM.TP1/SIM.TP1/obj/Debug/CoreCompileInputs.cache
 SIM.TP1/SIM.TP1/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.cache
+*.config

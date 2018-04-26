@@ -61,13 +61,12 @@
     Private Sub agregarFilaGrid(index As Integer, rnd As Double)
 
         If index = 0 Then
-            maximo = Math.Ceiling(rnd)
+            maximo = Math.Ceiling(rnd) + 1
             minimo = Math.Floor(rnd)
         End If
 
         If rnd > maximo Then
-            maximo = Math.Ceiling(rnd)
-
+            maximo = Math.Ceiling(rnd) + 1
         End If
 
         If rnd < minimo Then
@@ -137,7 +136,8 @@
 
         Dim tamIntervalo As Double = (maximo - minimo) / Me.cmb_intervalos.SelectedItem
         Dim v(Me.cmb_intervalos.SelectedItem - 1) As Integer 'Vector contador de frecuencias por intervalo
-        Dim fe As Double
+        Dim fe, marcaClase As Double
+
 
 
         For index = 0 To tamMuestra - 1
@@ -147,22 +147,31 @@
         Next
 
         For index = 0 To Me.cmb_intervalos.SelectedItem - 1
-
+            Dim inicioIntervalo = minimo + tamIntervalo * index
+            Dim finIntervalo = minimo + tamIntervalo * (index + 1)
             Select Case dist
                 Case distribucion.uniforme
                     fe = tamMuestra / Me.cmb_intervalos.SelectedItem
                 Case distribucion.exponencial
                     fe = ((1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * (index + 1)))) - (1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * index)))) * Me.txt_muestra2.Text 'Probabilidad acumulada del intervalo superior menos la del inferior por tamaño de muestra
                 Case distribucion.normal
-                    fe = 1
+                    marcaClase = minimo + tamIntervalo * (index + 0.5)
+                    Dim desvEstandar As Double = Me.txt_desviacion3.Text
+                    Dim media As Double = Me.txt_media3.Text
+                    Dim fmc As Double = Math.Exp((-0.5) * ((marcaClase - media) / desvEstandar) ^ 2) / (desvEstandar * Math.Sqrt(Math.PI * 2))
+
+                    fe = fmc * tamIntervalo * tamMuestra
                 Case distribucion.poisson
-                    fe = 1
+                    Dim lambda As Double = Me.txt_lambda4.Text
+                    ' Esto se lo copié a Carena, el sumó los dos valores
+                    Dim p As Double = (lambda ^ inicioIntervalo * Math.Exp(-lambda) / factorial(inicioIntervalo)) + (lambda ^ finIntervalo * Math.Exp(-lambda) / factorial(finIntervalo))
+                    fe = Math.Round(p * tamMuestra)
             End Select
 
             acumChi += ((v(index) - fe) ^ 2) / fe 'Para comparar con chi tabulado
 
             Me.grid2.Rows.Add()
-            Me.grid2.Rows(index).Cells(0).Value = "[" & (minimo + tamIntervalo * index) & " ; " & minimo + tamIntervalo * (index + 1) & "]"
+            Me.grid2.Rows(index).Cells(0).Value = "[" & inicioIntervalo & " ; " & finIntervalo & "]"
             Me.grid2.Rows(index).Cells(1).Value = v(index)
             Me.grid2.Rows(index).Cells(2).Value = fe
             Me.grid2.Rows(index).Cells(3).Value = ((v(index) - fe) ^ 2) / fe
@@ -308,4 +317,13 @@
         Me.cargarGrid2(Me.txt_muestra4.Text, distribucion.poisson)
 
     End Sub
+
+    Private Function factorial(n As Integer) As Integer
+        Dim ret As Integer = 1
+        While n > 1
+            ret *= n
+            n -= 1
+        End While
+        Return ret
+    End Function
 End Class

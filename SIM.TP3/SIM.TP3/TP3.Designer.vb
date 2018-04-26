@@ -22,9 +22,10 @@ Partial Class TP3
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea4 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend4 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.cmd_generar1 = New System.Windows.Forms.Button()
@@ -68,6 +69,11 @@ Partial Class TP3
         Me.fo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.fe = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.calculo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txt_chiCal = New System.Windows.Forms.TextBox()
+        Me.txt_chiTab = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.lbl_resp = New System.Windows.Forms.Label()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -422,17 +428,24 @@ Partial Class TP3
         '
         'Chart1
         '
-        ChartArea4.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea4)
-        Legend4.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend4)
-        Me.Chart1.Location = New System.Drawing.Point(516, 354)
+        ChartArea1.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea1)
+        Legend1.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend1)
+        Me.Chart1.Location = New System.Drawing.Point(484, 445)
         Me.Chart1.Name = "Chart1"
-        Series4.ChartArea = "ChartArea1"
-        Series4.Legend = "Legend1"
-        Series4.Name = "Series1"
-        Me.Chart1.Series.Add(Series4)
-        Me.Chart1.Size = New System.Drawing.Size(903, 372)
+        Me.Chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel
+        Series1.BorderWidth = 5
+        Series1.ChartArea = "ChartArea1"
+        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series1.Legend = "Legend1"
+        Series1.Name = "fe"
+        Series2.ChartArea = "ChartArea1"
+        Series2.Legend = "Legend1"
+        Series2.Name = "fo"
+        Me.Chart1.Series.Add(Series1)
+        Me.Chart1.Series.Add(Series2)
+        Me.Chart1.Size = New System.Drawing.Size(935, 281)
         Me.Chart1.TabIndex = 2
         Me.Chart1.Text = "Chart1"
         '
@@ -440,7 +453,7 @@ Partial Class TP3
         '
         Me.cmb_intervalos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_intervalos.FormattingEnabled = True
-        Me.cmb_intervalos.Location = New System.Drawing.Point(849, 38)
+        Me.cmb_intervalos.Location = New System.Drawing.Point(832, 150)
         Me.cmb_intervalos.Name = "cmb_intervalos"
         Me.cmb_intervalos.Size = New System.Drawing.Size(179, 28)
         Me.cmb_intervalos.TabIndex = 3
@@ -448,7 +461,7 @@ Partial Class TP3
         'lbl_intervalos
         '
         Me.lbl_intervalos.AutoSize = True
-        Me.lbl_intervalos.Location = New System.Drawing.Point(657, 41)
+        Me.lbl_intervalos.Location = New System.Drawing.Point(640, 153)
         Me.lbl_intervalos.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbl_intervalos.Name = "lbl_intervalos"
         Me.lbl_intervalos.Size = New System.Drawing.Size(166, 20)
@@ -459,7 +472,7 @@ Partial Class TP3
         '
         Me.grid2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.grid2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.intervalos, Me.fo, Me.fe, Me.calculo})
-        Me.grid2.Location = New System.Drawing.Point(644, 109)
+        Me.grid2.Location = New System.Drawing.Point(644, 207)
         Me.grid2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.grid2.Name = "grid2"
         Me.grid2.Size = New System.Drawing.Size(775, 230)
@@ -485,6 +498,52 @@ Partial Class TP3
         Me.calculo.HeaderText = "((Fo-Fe)^2)/Fe"
         Me.calculo.Name = "calculo"
         '
+        'txt_chiCal
+        '
+        Me.txt_chiCal.Location = New System.Drawing.Point(1206, 35)
+        Me.txt_chiCal.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_chiCal.Name = "txt_chiCal"
+        Me.txt_chiCal.Size = New System.Drawing.Size(148, 26)
+        Me.txt_chiCal.TabIndex = 7
+        '
+        'txt_chiTab
+        '
+        Me.txt_chiTab.Location = New System.Drawing.Point(1206, 80)
+        Me.txt_chiTab.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_chiTab.Name = "txt_chiTab"
+        Me.txt_chiTab.Size = New System.Drawing.Size(148, 26)
+        Me.txt_chiTab.TabIndex = 6
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(1018, 35)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(106, 20)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Chi Calculado"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(1018, 86)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(102, 20)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "Chi Tabulado"
+        '
+        'lbl_resp
+        '
+        Me.lbl_resp.AutoSize = True
+        Me.lbl_resp.Location = New System.Drawing.Point(1162, 133)
+        Me.lbl_resp.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_resp.Name = "lbl_resp"
+        Me.lbl_resp.Size = New System.Drawing.Size(15, 20)
+        Me.lbl_resp.TabIndex = 0
+        Me.lbl_resp.Text = "*"
+        '
         'TP3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -492,9 +551,14 @@ Partial Class TP3
         Me.ClientSize = New System.Drawing.Size(1443, 745)
         Me.Controls.Add(Me.cmb_intervalos)
         Me.Controls.Add(Me.Chart1)
+        Me.Controls.Add(Me.txt_chiTab)
         Me.Controls.Add(Me.grid2)
+        Me.Controls.Add(Me.txt_chiCal)
         Me.Controls.Add(Me.Grid1)
         Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.lbl_resp)
+        Me.Controls.Add(Me.Label2)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lbl_intervalos)
         Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.Name = "TP3"
@@ -559,4 +623,9 @@ Partial Class TP3
     Friend WithEvents fo As DataGridViewTextBoxColumn
     Friend WithEvents fe As DataGridViewTextBoxColumn
     Friend WithEvents calculo As DataGridViewTextBoxColumn
+    Friend WithEvents txt_chiCal As TextBox
+    Friend WithEvents txt_chiTab As TextBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents lbl_resp As Label
 End Class

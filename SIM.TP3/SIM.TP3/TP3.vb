@@ -1,7 +1,7 @@
 ﻿Public Class TP3
     Dim maximo, minimo As Double
 
-    Dim acumChi As Double
+    Dim acumChi As Double 'Variable que acumula chi de la grilla
 
     Enum distribucion
         uniforme
@@ -136,8 +136,9 @@
     Private Sub cargarGrid2(tamMuestra As Integer, dist As distribucion)
 
         Dim tamIntervalo As Double = (maximo - minimo) / Me.cmb_intervalos.SelectedItem
-        Dim v(Me.cmb_intervalos.SelectedItem - 1) As Integer
+        Dim v(Me.cmb_intervalos.SelectedItem - 1) As Integer 'Vector contador de frecuencias por intervalo
         Dim fe As Double
+
 
         For index = 0 To tamMuestra - 1
 
@@ -151,12 +152,11 @@
                 Case distribucion.uniforme
                     fe = tamMuestra / Me.cmb_intervalos.SelectedItem
                 Case distribucion.exponencial
-                    fe = ((1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * (index + 1)))) - (1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * index)))) * Me.txt_muestra2.Text 'Probabilidad acumulada del intervalo superior menos la del inferior
-
+                    fe = ((1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * (index + 1)))) - (1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * index)))) * Me.txt_muestra2.Text 'Probabilidad acumulada del intervalo superior menos la del inferior por tamaño de muestra
                 Case distribucion.normal
-                    fe = 0
+                    fe = 1
                 Case distribucion.poisson
-                    fe = 0
+                    fe = 1
             End Select
 
             acumChi += ((v(index) - fe) ^ 2) / fe 'Para comparar con chi tabulado
@@ -205,6 +205,7 @@
 
         Me.txt_chiTab.Text = v(glibertad)
         Me.txt_chiCal.Text = acumChi
+
         If v(glibertad) > acumChi Then
 
             Me.lbl_resp.Text = "Se acepta la hipótesis"
@@ -286,6 +287,7 @@
         Me.txt_chiCal.Clear()
         Me.txt_chiTab.Clear()
         acumChi = 0
+        'los metodos de aca arriba deberian estar en uno solo que sea para limpiar el formulario
         Me.generarRND2()
         Me.cargarGrid2(Me.txt_muestra2.Text, distribucion.exponencial)
         Me.compararChi(Me.cmb_intervalos.SelectedItem() - 2)
@@ -296,14 +298,14 @@
         Me.Grid1.Rows.Clear()
         Me.grid2.Rows.Clear()
         Me.generarRND3()
-        'Me.cargarGrid2(Me.txt_muestra3.Text, distribucion.normal)
+        Me.cargarGrid2(Me.txt_muestra3.Text, distribucion.normal)
     End Sub
 
     Private Sub cmd_generar4_Click(sender As Object, e As EventArgs) Handles cmd_generar4.Click
         Me.Grid1.Rows.Clear()
         Me.grid2.Rows.Clear()
         Me.generarRND4()
-        'Me.cargarGrid2(Me.txt_muestra4.Text, distribucion.poisson)
+        Me.cargarGrid2(Me.txt_muestra4.Text, distribucion.poisson)
 
     End Sub
 End Class

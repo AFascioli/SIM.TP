@@ -190,11 +190,17 @@
         Dim indexB As Integer = 0
         Dim fe As Double
         Dim lastre(3) As Double 'Actualizar cuando estemos seguro a un lastre de 3
+        Dim inicioIntFinal As Double = 0
 
         For index = 0 To Me.cmb_intervalos.SelectedItem - 1
 
             Dim inicioIntervalo = minimo + tamIntervalo * index
             Dim finIntervalo = minimo + tamIntervalo * (index + 1)
+
+            If lastre(0) = 0 Then
+                lastre(0) = inicioIntervalo
+            End If
+
 
             fe = Me.Grid2.Rows(index).Cells(2).Value + lastre(3)
 
@@ -207,8 +213,9 @@
                 Me.Grid3.Rows(indexB).Cells(2).Value = fe
                 Me.Grid3.Rows(indexB).Cells(3).Value = ((Me.Grid3.Rows(indexB).Cells(1).Value - Me.Grid3.Rows(indexB).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB).Cells(2).Value
                 indexB += 1
-
+                inicioIntFinal = lastre(0)
                 lastre(0) = 0
+
                 lastre(1) = 0
                 lastre(2) = 0
                 lastre(3) = 0
@@ -216,15 +223,16 @@
             Else 'Es fe < 5
                 'Si es la ultima fila de la grilla sin agrupar perderiamos el lastre por eso lo sumamos al anterior.
 
-                If lastre(0) = 0 Then
-                    lastre(0) = inicioIntervalo
-                End If
+                'If lastre(0) = 0 Then
+                '    lastre(0) = inicioIntervalo
+                'End If
+
 
                 lastre(2) += Me.Grid2.Rows(index).Cells(1).Value
                 lastre(3) += Me.Grid2.Rows(index).Cells(2).Value
 
                 If index = Me.cmb_intervalos.SelectedItem - 1 Then
-                    Me.Grid3.Rows(indexB - 1).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]"
+                    Me.Grid3.Rows(indexB - 1).Cells(0).Value = "[" & inicioIntFinal & " ; " & finIntervalo & "]"
                     Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid3.Rows(indexB - 1).Cells(1).Value + lastre(2)
                     Me.Grid3.Rows(indexB - 1).Cells(2).Value += fe
                     Me.Grid3.Rows(indexB - 1).Cells(3).Value = ((Me.Grid3.Rows(indexB - 1).Cells(1).Value - Me.Grid3.Rows(indexB - 1).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB - 1).Cells(2).Value

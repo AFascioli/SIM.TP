@@ -202,7 +202,7 @@
 
             If fe > 5 Then
                 Me.Grid3.Rows.Add()
-                Me.Grid3.Rows(indexB).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]"
+                Me.Grid3.Rows(indexB).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]" 'aca puede que este mal los intervalos
                 Me.Grid3.Rows(indexB).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value + lastre(2)
                 Me.Grid3.Rows(indexB).Cells(2).Value = fe
                 Me.Grid3.Rows(indexB).Cells(3).Value = ((Me.Grid3.Rows(indexB).Cells(1).Value - Me.Grid3.Rows(indexB).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB).Cells(2).Value
@@ -220,15 +220,16 @@
                     lastre(0) = inicioIntervalo
                 End If
 
-                lastre(2) += Me.Grid2.Rows(index).Cells(2).Value
-                lastre(3) += Me.Grid2.Rows(index).Cells(3).Value
+                lastre(2) += Me.Grid2.Rows(index).Cells(1).Value
+                lastre(3) += Me.Grid2.Rows(index).Cells(2).Value
 
                 If index = Me.cmb_intervalos.SelectedItem - 1 Then
                     Me.Grid3.Rows(indexB - 1).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]"
-                    Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value + lastre(2)
-                    Me.Grid3.Rows(indexB - 1).Cells(2).Value = fe
+                    Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid3.Rows(indexB - 1).Cells(1).Value + lastre(2)
+                    Me.Grid3.Rows(indexB - 1).Cells(2).Value += fe
                     Me.Grid3.Rows(indexB - 1).Cells(3).Value = ((Me.Grid3.Rows(indexB - 1).Cells(1).Value - Me.Grid3.Rows(indexB - 1).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB - 1).Cells(2).Value
                 End If
+
 
             End If
 

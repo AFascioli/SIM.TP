@@ -1,7 +1,7 @@
 ﻿Public Class TP3
     Dim maximo, minimo As Double
-
     Dim acumChi As Double 'Variable que acumula chi de la grilla
+    Dim tamIntervalo As Double
 
     Enum distribucion
         uniforme
@@ -125,7 +125,6 @@
 
     Private Sub generarRND4()
 
-
         For index = 0 To Integer.Parse(txt_muestra4.Text) - 1
             Me.agregarFilaGrid(index, Me.distPoisson(Me.txt_lambda4.Text))
         Next
@@ -134,26 +133,27 @@
 
     Private Sub cargarGrid2(tamMuestra As Integer, dist As distribucion)
 
-        Dim tamIntervalo As Double = (maximo - minimo) / Me.cmb_intervalos.SelectedItem
+        tamIntervalo = (maximo - minimo) / Me.cmb_intervalos.SelectedItem
+        'TamIntervalo ahora es var global
         Dim v(Me.cmb_intervalos.SelectedItem - 1) As Integer 'Vector contador de frecuencias por intervalo
         Dim fe, marcaClase As Double
-
-
+        Dim hayQueAgrupar As Boolean = False
 
         For index = 0 To tamMuestra - 1
-
+            'Solucionar problema de que se sale del largo del vector.
             v(Math.Truncate((Me.Grid1.Rows(index).Cells(1).Value - minimo) / tamIntervalo)) += 1
-
         Next
 
         For index = 0 To Me.cmb_intervalos.SelectedItem - 1
             Dim inicioIntervalo = minimo + tamIntervalo * index
             Dim finIntervalo = minimo + tamIntervalo * (index + 1)
+
             Select Case dist
                 Case distribucion.uniforme
                     fe = tamMuestra / Me.cmb_intervalos.SelectedItem
                 Case distribucion.exponencial
-                    fe = ((1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * (index + 1)))) - (1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * index)))) * Me.txt_muestra2.Text 'Probabilidad acumulada del intervalo superior menos la del inferior por tamaño de muestra
+                    'Probabilidad acumulada del intervalo superior menos la del inferior por tamaño de muestra
+                    fe = ((1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * (index + 1)))) - (1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * index)))) * Me.txt_muestra2.Text
                 Case distribucion.normal
                     marcaClase = minimo + tamIntervalo * (index + 0.5)
                     Dim desvEstandar As Double = Me.txt_desviacion3.Text
@@ -169,15 +169,126 @@
             End Select
 
             acumChi += ((v(index) - fe) ^ 2) / fe 'Para comparar con chi tabulado
+            If fe < 5 Then
+                hayQueAgrupar = True
+            End If
 
-            Me.grid2.Rows.Add()
-            Me.grid2.Rows(index).Cells(0).Value = "[" & inicioIntervalo & " ; " & finIntervalo & "]"
-            Me.grid2.Rows(index).Cells(1).Value = v(index)
-            Me.grid2.Rows(index).Cells(2).Value = fe
-            Me.grid2.Rows(index).Cells(3).Value = ((v(index) - fe) ^ 2) / fe
+            Me.Grid2.Rows.Add()
+            Me.Grid2.Rows(index).Cells(0).Value = "[" & inicioIntervalo & " ; " & finIntervalo & "]"
+            Me.Grid2.Rows(index).Cells(1).Value = v(index)
+            Me.Grid2.Rows(index).Cells(2).Value = fe
+            Me.Grid2.Rows(index).Cells(3).Value = ((v(index) - fe) ^ 2) / fe
+        Next
+
+        If hayQueAgrupar Then
+            Me.agruparGrid()
+        End If
+
+    End Sub
+
+    Private Sub agruparGrid()
+        Dim indexB As Integer = 0
+        Dim fe As Double
+        Dim lastre(3) As Double 'Actualizar cuando estemos seguro a un lastre de 3
+
+        For index = 0 To Me.cmb_intervalos.SelectedItem - 1
+
+            Dim inicioIntervalo = minimo + tamIntervalo * index
+            Dim finIntervalo = minimo + tamIntervalo * (index + 1)
+
+            fe = Me.Grid2.Rows(index).Cells(2).Value + lastre(3)
+
+            'validar si el indice se esta por salir de la grilla
+
+            If fe > 5 Then
+                Me.Grid3.Rows.Add()
+                Me.Grid3.Rows(indexB).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]"
+                Me.Grid3.Rows(indexB).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value + lastre(2)
+                Me.Grid3.Rows(indexB).Cells(2).Value = fe
+                Me.Grid3.Rows(indexB).Cells(3).Value = ((Me.Grid3.Rows(indexB).Cells(1).Value - Me.Grid3.Rows(indexB).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB).Cells(2).Value
+                indexB += 1
+
+                lastre(0) = 0
+                lastre(1) = 0
+                lastre(2) = 0
+                lastre(3) = 0
+
+            Else 'Es fe < 5
+                'Si es la ultima fila de la grilla sin agrupar perderiamos el lastre por eso lo sumamos al anterior.
+
+                If lastre(0) = 0 Then
+                    lastre(0) = inicioIntervalo
+                End If
+
+                lastre(2) += Me.Grid2.Rows(index).Cells(2).Value
+                lastre(3) += Me.Grid2.Rows(index).Cells(3).Value
+
+                If index = Me.cmb_intervalos.SelectedItem - 1 Then
+                    Me.Grid3.Rows(indexB - 1).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]"
+                    Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value + lastre(2)
+                    Me.Grid3.Rows(indexB - 1).Cells(2).Value = fe
+                    Me.Grid3.Rows(indexB - 1).Cells(3).Value = ((Me.Grid3.Rows(indexB - 1).Cells(1).Value - Me.Grid3.Rows(indexB - 1).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB - 1).Cells(2).Value
+                End If
+
+            End If
+
         Next
 
     End Sub
+
+    'Private Sub agruparGrid()
+    '    Dim indexB As Integer = 0
+    '    Dim fe As Double
+    '    Dim forzarAgrupar As Boolean = False 'En falso el primer grupo no llega a <5
+
+    '    For index = 0 To Me.cmb_intervalos.SelectedItem - 1
+
+    '        Dim inicioIntervalo = minimo + tamIntervalo * index
+    '        Dim finIntervalo = minimo + tamIntervalo * (index + 1)
+
+    '        fe = Me.Grid2.Rows(index).Cells(2).Value
+
+    '        'Primera vez pasa al else de una
+    '        'Segunda vez tiene que agrupar si o si y si la segunda a agrupar es fe>5 listo
+    '        'Si la segunda es fe<5 tiene que seguir agrupando hasta que se cumpla la condicion de arriba
+
+    '        If (fe < 5 And indexB > 0) Or forzarAgrupar Then
+    '            'Tenemos que agrupar, se agrupa con la fila anterior a la que resulto <5
+    '            'Ver el -1 cuando es index=0, por eso, el primer grupo nunca entra en esta rama
+    '            Me.Grid3.Rows(indexB - 1).Cells(0).Value = "[" & inicioIntervalo - tamIntervalo & " ; " & finIntervalo & "]" 'Inicio de intervalo de mal so agrupa mas de una vez
+    '            Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid3.Rows(indexB - 1).Cells(1).Value + Me.Grid2.Rows(index).Cells(1).Value
+    '            Me.Grid3.Rows(indexB - 1).Cells(2).Value = fe + Me.Grid3.Rows(indexB - 1).Cells(2).Value
+    '            Me.Grid3.Rows(indexB - 1).Cells(3).Value = ((Me.Grid3.Rows(indexB - 1).Cells(1).Value - Me.Grid3.Rows(indexB - 1).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB - 1).Cells(2).Value
+
+    '            If Me.Grid3.Rows(indexB - 1).Cells(2).Value > 5 Then
+    '                forzarAgrupar = False
+
+    '            End If
+
+    '        Else
+    '            'If cuando pasas la primera fila de la grilla 2 directamente a la grilla 3
+    '            If indexB = 0 And fe < 5 Then
+    '                forzarAgrupar = True
+    '            ElseIf indexB = 0 And fe > 5 Then
+    '                forzarAgrupar = False
+    '            End If
+
+    '            'Al no hacer falta el cambio pasamos la fila de la grilla 2 directamente a la 3
+    '            Me.Grid3.Rows.Add()
+    '            Me.Grid3.Rows(indexB).Cells(0).Value = Me.Grid2.Rows(index).Cells(0).Value
+    '            Me.Grid3.Rows(indexB).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value
+    '            Me.Grid3.Rows(indexB).Cells(2).Value = Me.Grid2.Rows(index).Cells(2).Value
+    '            Me.Grid3.Rows(indexB).Cells(3).Value = Me.Grid2.Rows(index).Cells(3).Value
+
+    '            indexB += 1
+
+    '        End If
+    '    Next
+
+    '    'Falta comparar Chi de vuelta
+
+
+    'End Sub
 
     Private Sub compararChi(glibertad As Integer)
         Dim v(28) As Double
@@ -267,19 +378,19 @@
         Me.Chart1.Series("fo").Points.Clear()
         'Dim anchoInt = 1 / cantidadFilasGrid3
         Dim aux As Double = 0
-        For i = 0 To Me.grid2.Rows.Count - 2
+        For i = 0 To Me.Grid2.Rows.Count - 2
             'aux += anchoInt
             'Me.Chart1.Series("fe").Points.AddXY(aux, Me.grid2.Rows(i).Cells(2).Value)
             'Me.Chart1.Series("fo").Points.AddXY(aux, Me.grid2.Rows(i).Cells(1).Value)
-            Me.Chart1.Series("fe").Points.AddXY(Me.grid2.Rows(i).Cells(0).Value, Me.grid2.Rows(i).Cells(2).Value)
-            Me.Chart1.Series("fo").Points.AddXY(Me.grid2.Rows(i).Cells(0).Value, Me.grid2.Rows(i).Cells(1).Value)
+            Me.Chart1.Series("fe").Points.AddXY(Me.Grid2.Rows(i).Cells(0).Value, Me.Grid2.Rows(i).Cells(2).Value)
+            Me.Chart1.Series("fo").Points.AddXY(Me.Grid2.Rows(i).Cells(0).Value, Me.Grid2.Rows(i).Cells(1).Value)
         Next
 
     End Sub
 
     Private Sub cmd_generar1_Click(sender As Object, e As EventArgs) Handles cmd_generar1.Click
         Me.Grid1.Rows.Clear()
-        Me.grid2.Rows.Clear()
+        Me.Grid2.Rows.Clear()
         Me.txt_chiCal.Clear()
         Me.txt_chiTab.Clear()
         acumChi = 0
@@ -287,12 +398,12 @@
         Me.cargarGrid2(Me.txt_muestra1.Text, distribucion.uniforme)
         Me.compararChi(Me.cmb_intervalos.SelectedItem() - 1)
         Me.cargarGraficoB()
-        'Me.graficar(1)
+
     End Sub
 
     Private Sub cmd_generar2_Click(sender As Object, e As EventArgs) Handles cmd_generar2.Click
         Me.Grid1.Rows.Clear()
-        Me.grid2.Rows.Clear()
+        Me.Grid2.Rows.Clear()
         Me.txt_chiCal.Clear()
         Me.txt_chiTab.Clear()
         acumChi = 0
@@ -305,17 +416,20 @@
 
     Private Sub cmd_generar3_Click(sender As Object, e As EventArgs) Handles cmd_generar3.Click
         Me.Grid1.Rows.Clear()
-        Me.grid2.Rows.Clear()
+        Me.Grid2.Rows.Clear()
         Me.generarRND3()
         Me.cargarGrid2(Me.txt_muestra3.Text, distribucion.normal)
+        Me.cargarGraficoB()
+        Me.compararChi(Me.cmb_intervalos.SelectedItem() - 3)
     End Sub
 
     Private Sub cmd_generar4_Click(sender As Object, e As EventArgs) Handles cmd_generar4.Click
         Me.Grid1.Rows.Clear()
-        Me.grid2.Rows.Clear()
+        Me.Grid2.Rows.Clear()
         Me.generarRND4()
         Me.cargarGrid2(Me.txt_muestra4.Text, distribucion.poisson)
-
+        Me.cargarGraficoB()
+        Me.compararChi(Me.cmb_intervalos.SelectedItem() - 2)
     End Sub
 
     Private Function factorial(n As Integer) As Integer

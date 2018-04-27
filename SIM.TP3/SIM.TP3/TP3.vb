@@ -169,6 +169,7 @@
             End Select
 
             acumChi += ((v(index) - fe) ^ 2) / fe 'Para comparar con chi tabulado
+
             If fe < 5 Then
                 hayQueAgrupar = True
             End If
@@ -189,8 +190,11 @@
     Private Sub agruparGrid()
         Dim indexB As Integer = 0
         Dim fe As Double
-        Dim lastre(3) As Double 'Actualizar cuando estemos seguro a un lastre de 3
+        Dim lastre(3) As Double
         Dim inicioIntFinal As Double = 0
+
+        'Limpio la acumulacion de los valores de Chi calculados para sumar de vuelta
+        acumChi = 0
 
         For index = 0 To Me.cmb_intervalos.SelectedItem - 1
 
@@ -201,17 +205,15 @@
                 lastre(0) = inicioIntervalo
             End If
 
-
             fe = Me.Grid2.Rows(index).Cells(2).Value + lastre(3)
-
-            'validar si el indice se esta por salir de la grilla
 
             If fe > 5 Then
                 Me.Grid3.Rows.Add()
-                Me.Grid3.Rows(indexB).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]" 'aca puede que este mal los intervalos
+                Me.Grid3.Rows(indexB).Cells(0).Value = "[" & lastre(0) & " ; " & finIntervalo & "]"
                 Me.Grid3.Rows(indexB).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value + lastre(2)
                 Me.Grid3.Rows(indexB).Cells(2).Value = fe
                 Me.Grid3.Rows(indexB).Cells(3).Value = ((Me.Grid3.Rows(indexB).Cells(1).Value - Me.Grid3.Rows(indexB).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB).Cells(2).Value
+                acumChi += Me.Grid3.Rows(indexB).Cells(3).Value
                 indexB += 1
                 inicioIntFinal = lastre(0)
                 lastre(0) = 0
@@ -222,12 +224,6 @@
 
             Else 'Es fe < 5
                 'Si es la ultima fila de la grilla sin agrupar perderiamos el lastre por eso lo sumamos al anterior.
-
-                'If lastre(0) = 0 Then
-                '    lastre(0) = inicioIntervalo
-                'End If
-
-
                 lastre(2) += Me.Grid2.Rows(index).Cells(1).Value
                 lastre(3) += Me.Grid2.Rows(index).Cells(2).Value
 
@@ -236,68 +232,17 @@
                     Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid3.Rows(indexB - 1).Cells(1).Value + lastre(2)
                     Me.Grid3.Rows(indexB - 1).Cells(2).Value += fe
                     Me.Grid3.Rows(indexB - 1).Cells(3).Value = ((Me.Grid3.Rows(indexB - 1).Cells(1).Value - Me.Grid3.Rows(indexB - 1).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB - 1).Cells(2).Value
+
+                    'Esto soluciona que al sumar el ultimo item al penultimo se arruina la suma de acumChi, directamente leemos la columna y sumamos.
+                    acumChi = 0
+                    For indexx = 0 To Me.Grid3.Rows.Count() - 1
+                        acumChi += Me.Grid3.Rows(indexx).Cells(3).Value
+                    Next
+
                 End If
-
-
             End If
-
         Next
-
     End Sub
-
-    'Private Sub agruparGrid()
-    '    Dim indexB As Integer = 0
-    '    Dim fe As Double
-    '    Dim forzarAgrupar As Boolean = False 'En falso el primer grupo no llega a <5
-
-    '    For index = 0 To Me.cmb_intervalos.SelectedItem - 1
-
-    '        Dim inicioIntervalo = minimo + tamIntervalo * index
-    '        Dim finIntervalo = minimo + tamIntervalo * (index + 1)
-
-    '        fe = Me.Grid2.Rows(index).Cells(2).Value
-
-    '        'Primera vez pasa al else de una
-    '        'Segunda vez tiene que agrupar si o si y si la segunda a agrupar es fe>5 listo
-    '        'Si la segunda es fe<5 tiene que seguir agrupando hasta que se cumpla la condicion de arriba
-
-    '        If (fe < 5 And indexB > 0) Or forzarAgrupar Then
-    '            'Tenemos que agrupar, se agrupa con la fila anterior a la que resulto <5
-    '            'Ver el -1 cuando es index=0, por eso, el primer grupo nunca entra en esta rama
-    '            Me.Grid3.Rows(indexB - 1).Cells(0).Value = "[" & inicioIntervalo - tamIntervalo & " ; " & finIntervalo & "]" 'Inicio de intervalo de mal so agrupa mas de una vez
-    '            Me.Grid3.Rows(indexB - 1).Cells(1).Value = Me.Grid3.Rows(indexB - 1).Cells(1).Value + Me.Grid2.Rows(index).Cells(1).Value
-    '            Me.Grid3.Rows(indexB - 1).Cells(2).Value = fe + Me.Grid3.Rows(indexB - 1).Cells(2).Value
-    '            Me.Grid3.Rows(indexB - 1).Cells(3).Value = ((Me.Grid3.Rows(indexB - 1).Cells(1).Value - Me.Grid3.Rows(indexB - 1).Cells(2).Value) ^ 2) / Me.Grid3.Rows(indexB - 1).Cells(2).Value
-
-    '            If Me.Grid3.Rows(indexB - 1).Cells(2).Value > 5 Then
-    '                forzarAgrupar = False
-
-    '            End If
-
-    '        Else
-    '            'If cuando pasas la primera fila de la grilla 2 directamente a la grilla 3
-    '            If indexB = 0 And fe < 5 Then
-    '                forzarAgrupar = True
-    '            ElseIf indexB = 0 And fe > 5 Then
-    '                forzarAgrupar = False
-    '            End If
-
-    '            'Al no hacer falta el cambio pasamos la fila de la grilla 2 directamente a la 3
-    '            Me.Grid3.Rows.Add()
-    '            Me.Grid3.Rows(indexB).Cells(0).Value = Me.Grid2.Rows(index).Cells(0).Value
-    '            Me.Grid3.Rows(indexB).Cells(1).Value = Me.Grid2.Rows(index).Cells(1).Value
-    '            Me.Grid3.Rows(indexB).Cells(2).Value = Me.Grid2.Rows(index).Cells(2).Value
-    '            Me.Grid3.Rows(indexB).Cells(3).Value = Me.Grid2.Rows(index).Cells(3).Value
-
-    '            indexB += 1
-
-    '        End If
-    '    Next
-
-    '    'Falta comparar Chi de vuelta
-
-
-    'End Sub
 
     Private Sub compararChi(glibertad As Integer)
         Dim v(28) As Double
@@ -344,53 +289,12 @@
 
     End Sub
 
-    Private Sub cargarGrid3B() 'Para reagrupar y mandar a la grilla
-        'Me.grid3B.Rows.Clear()
-
-        'Dim contadorSaltos = Me.obtenerIntervalos(Me.numerosChiB, Me.contadorChiB)
-        'Dim auxiliar = Integer.Parse(Me.cmb_intervalosB.SelectedItem) / contadorSaltos 'cantidad de intervalos
-        'Dim contSaltos As Integer = 0
-        'Dim contChi As Double = 0
-        'Dim extra As Integer
-
-        'For index = 0 To auxiliar - 1
-
-        '    Me.grid3B.Rows.Add()
-        '    Me.grid3B.Rows(index).Cells(0).Value = index + 1
-
-        '    If index = 0 Then 'solo se hace una vez en la primera vuelta para evitar problemas
-        '        extra = Me.cmb_intervalosB.SelectedItem Mod contadorSaltos 'extra son los elementos que sobrarian luego de reagrupar
-        '    End If
-
-        '    For index2 = 1 To contadorSaltos + extra 'los elementos que sobran, los ponemos en el primer grupo y de ahi nos queda siempre una cantidad justa para agrupar
-
-        '        Me.grid3B.Rows(index).Cells(1).Value += Me.grid1B.Rows(contSaltos).Cells(1).Value
-        '        Me.grid3B.Rows(index).Cells(2).Value += Me.grid1B.Rows(contSaltos).Cells(2).Value
-        '        contSaltos += 1
-        '    Next
-
-        '    extra = 0 'extra a partir de ahora no sirve entonces vale 0
-
-        '    Me.grid3B.Rows(index).Cells(3).Value = ((Me.grid3B.Rows(index).Cells(1).Value - Me.grid3B.Rows(index).Cells(2).Value) ^ 2) / Me.grid3B.Rows(index).Cells(2).Value
-        '    contChi += Me.grid3B.Rows(index).Cells(3).Value
-
-        'Next
-
-        'Me.txt_chiCalB.Text = contChi
-        'Me.compararChi(NroPunto.b, Me.grid3B.Rows.Count)
-
-    End Sub
-
     Private Sub cargarGraficoB()
         'El estilo del gráfico se edita en Propiedades, Series en la pestaña de diseño del form
         Me.Chart1.Series("fe").Points.Clear()
         Me.Chart1.Series("fo").Points.Clear()
-        'Dim anchoInt = 1 / cantidadFilasGrid3
         Dim aux As Double = 0
         For i = 0 To Me.Grid2.Rows.Count - 2
-            'aux += anchoInt
-            'Me.Chart1.Series("fe").Points.AddXY(aux, Me.grid2.Rows(i).Cells(2).Value)
-            'Me.Chart1.Series("fo").Points.AddXY(aux, Me.grid2.Rows(i).Cells(1).Value)
             Me.Chart1.Series("fe").Points.AddXY(Me.Grid2.Rows(i).Cells(0).Value, Me.Grid2.Rows(i).Cells(2).Value)
             Me.Chart1.Series("fo").Points.AddXY(Me.Grid2.Rows(i).Cells(0).Value, Me.Grid2.Rows(i).Cells(1).Value)
         Next

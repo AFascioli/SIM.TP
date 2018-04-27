@@ -61,12 +61,12 @@
     Private Sub agregarFilaGrid(index As Integer, rnd As Double)
 
         If index = 0 Then
-            maximo = Math.Ceiling(rnd) + 1
+            maximo = Math.Ceiling(rnd) ' + 1 'Comento el +1 por problemas con uniforme
             minimo = Math.Floor(rnd)
         End If
 
         If rnd >= maximo Then
-            maximo = Math.Ceiling(rnd) + 1
+            maximo = Math.Ceiling(rnd) ' + 1
         End If
 
         If rnd < minimo Then
@@ -140,8 +140,14 @@
         Dim hayQueAgrupar As Boolean = False
 
         For index = 0 To tamMuestra - 1
+
             'Solucionar problema de que se sale del largo del vector.
-            v(Math.Truncate((Me.Grid1.Rows(index).Cells(1).Value - minimo) / tamIntervalo)) += 1
+            If Math.Truncate((Me.Grid1.Rows(index).Cells(1).Value - minimo) / tamIntervalo) >= Me.cmb_intervalos.SelectedItem Then
+                v(Me.cmb_intervalos.SelectedItem - 1) += 1
+            Else
+                v(Math.Truncate((Me.Grid1.Rows(index).Cells(1).Value - minimo) / tamIntervalo)) += 1
+            End If
+
         Next
 
         For index = 0 To Me.cmb_intervalos.SelectedItem - 1
@@ -151,9 +157,11 @@
             Select Case dist
                 Case distribucion.uniforme
                     fe = tamMuestra / Me.cmb_intervalos.SelectedItem
+
                 Case distribucion.exponencial
                     'Probabilidad acumulada del intervalo superior menos la del inferior por tamaño de muestra
                     fe = ((1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * (index + 1)))) - (1 - Math.Exp(-Me.txt_lambda2.Text * (minimo + tamIntervalo * index)))) * Me.txt_muestra2.Text
+
                 Case distribucion.normal
                     marcaClase = minimo + tamIntervalo * (index + 0.5)
                     Dim desvEstandar As Double = Me.txt_desviacion3.Text
@@ -161,9 +169,10 @@
                     Dim fmc As Double = Math.Exp((-0.5) * ((marcaClase - media) / desvEstandar) ^ 2) / (desvEstandar * Math.Sqrt(Math.PI * 2))
 
                     fe = fmc * tamIntervalo * tamMuestra
+
                 Case distribucion.poisson
                     Dim lambda As Double = Me.txt_lambda4.Text
-                    ' Esto se lo copié a Carena, el sumó los dos valores
+                    'Carena, sumó los dos valores
                     Dim p As Double = (lambda ^ inicioIntervalo * Math.Exp(-lambda) / factorial(inicioIntervalo)) + (lambda ^ finIntervalo * Math.Exp(-lambda) / factorial(finIntervalo))
                     fe = Math.Round(p * tamMuestra)
             End Select

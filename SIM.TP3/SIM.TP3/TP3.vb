@@ -22,7 +22,7 @@
     Private Function distUniforme(A As Double, B As Double)
         Dim res As Double
 
-        res = A + Rnd() * (B - A)
+        res = A + localRnd() * (B - A)
         Return res
     End Function
 
@@ -31,14 +31,14 @@
     Private Function distExponencial(lambda As Double)
         Dim res As Double
 
-        res = (-1 / lambda) * Math.Log(1 - Rnd())
+        res = (-1 / lambda) * Math.Log(1 - localRnd())
         Return res
     End Function
 
     Private Function distNormal(media As Double, desviacion As Double)
         Dim res(1) As Double
-        Dim rnd1 As Double = Rnd()
-        Dim rnd2 As Double = Rnd()
+        Dim rnd1 As Double = localRnd()
+        Dim rnd2 As Double = localRnd()
 
         res(0) = (Math.Sqrt(-2 * Math.Log(rnd1)) * Math.Cos(2 * Math.PI * rnd2)) * desviacion + media
         res(1) = (Math.Sqrt(-2 * Math.Log(rnd1)) * Math.Sin(2 * Math.PI * rnd2)) * desviacion + media
@@ -51,7 +51,7 @@
         Dim A As Double = Math.Exp(-lambda)
 
         Do
-            P = P * Rnd()
+            P = P * localRnd()
             X += 1
         Loop While (P >= A)
 
@@ -65,7 +65,7 @@
             minimo = Math.Floor(rnd)
         End If
 
-        If rnd > maximo Then
+        If rnd >= maximo Then
             maximo = Math.Ceiling(rnd) + 1
         End If
 
@@ -398,55 +398,73 @@
     End Sub
 
     Private Sub cmd_generar1_Click(sender As Object, e As EventArgs) Handles cmd_generar1.Click
-        Me.Grid1.Rows.Clear()
-        Me.Grid2.Rows.Clear()
-        Me.txt_chiCal.Clear()
-        Me.txt_chiTab.Clear()
-        acumChi = 0
+        Me.cmd_generar1.Enabled = False
+        Me.limpiarForm()
+
         Me.generarRND1()
         Me.cargarGrid2(Me.txt_muestra1.Text, distribucion.uniforme)
         Me.compararChi(Me.cmb_intervalos.SelectedItem() - 1)
         Me.cargarGraficoB()
 
+        Me.cmd_generar1.Enabled = True
     End Sub
 
     Private Sub cmd_generar2_Click(sender As Object, e As EventArgs) Handles cmd_generar2.Click
-        Me.Grid1.Rows.Clear()
-        Me.Grid2.Rows.Clear()
-        Me.txt_chiCal.Clear()
-        Me.txt_chiTab.Clear()
-        acumChi = 0
-        'los metodos de aca arriba deberian estar en uno solo que sea para limpiar el formulario
+        Me.cmd_generar2.Enabled = False
+        Me.limpiarForm()
+
         Me.generarRND2()
         Me.cargarGrid2(Me.txt_muestra2.Text, distribucion.exponencial)
         Me.compararChi(Me.cmb_intervalos.SelectedItem() - 2)
         Me.cargarGraficoB()
+        Me.cmd_generar2.Enabled = True
     End Sub
 
     Private Sub cmd_generar3_Click(sender As Object, e As EventArgs) Handles cmd_generar3.Click
-        Me.Grid1.Rows.Clear()
-        Me.Grid2.Rows.Clear()
+        Me.cmd_generar3.Enabled = False
+        Me.limpiarForm()
+
         Me.generarRND3()
         Me.cargarGrid2(Me.txt_muestra3.Text, distribucion.normal)
         Me.cargarGraficoB()
         Me.compararChi(Me.cmb_intervalos.SelectedItem() - 3)
+        Me.cmd_generar3.Enabled = True
     End Sub
 
     Private Sub cmd_generar4_Click(sender As Object, e As EventArgs) Handles cmd_generar4.Click
-        Me.Grid1.Rows.Clear()
-        Me.Grid2.Rows.Clear()
+        Me.cmd_generar4.Enabled = False
+        Me.limpiarForm()
+
         Me.generarRND4()
         Me.cargarGrid2(Me.txt_muestra4.Text, distribucion.poisson)
         Me.cargarGraficoB()
         Me.compararChi(Me.cmb_intervalos.SelectedItem() - 2)
+        Me.cmd_generar4.Enabled = True
     End Sub
 
-    Private Function factorial(n As Integer) As Integer
-        Dim ret As Integer = 1
+    Private Function factorial(n As Integer) As ULong
+        Dim ret As ULong = 1
         While n > 1
             ret *= n
             n -= 1
         End While
         Return ret
     End Function
+
+    Private Function localRnd() As Double
+        Dim ret As Double = Rnd()
+        Me.lst_rnd.Items.Add(ret)
+        Return ret
+    End Function
+
+    Private Sub limpiarForm()
+        Me.Grid1.Rows.Clear()
+        Me.Grid2.Rows.Clear()
+        Me.Grid3.Rows.Clear()
+        Me.lst_rnd.Items.Clear()
+        Me.txt_chiCal.Clear()
+        Me.txt_chiTab.Clear()
+        acumChi = 0
+    End Sub
+
 End Class

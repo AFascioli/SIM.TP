@@ -22,10 +22,10 @@ Partial Class TP3
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim ChartArea1 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
-        Dim Legend1 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
-        Dim Series1 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
-        Dim Series2 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim ChartArea2 As System.Windows.Forms.DataVisualization.Charting.ChartArea = New System.Windows.Forms.DataVisualization.Charting.ChartArea()
+        Dim Legend2 As System.Windows.Forms.DataVisualization.Charting.Legend = New System.Windows.Forms.DataVisualization.Charting.Legend()
+        Dim Series3 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
+        Dim Series4 As System.Windows.Forms.DataVisualization.Charting.Series = New System.Windows.Forms.DataVisualization.Charting.Series()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.cmd_generar1 = New System.Windows.Forms.Button()
@@ -79,6 +79,8 @@ Partial Class TP3
         Me.foAG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.feAG = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.calculoAG = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.lst_rnd = New System.Windows.Forms.ListBox()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
@@ -88,6 +90,7 @@ Partial Class TP3
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Grid3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -113,7 +116,7 @@ Partial Class TP3
         Me.TabPage1.Controls.Add(Me.lbl_muestra)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(359, 107)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Uniforme"
@@ -187,7 +190,7 @@ Partial Class TP3
         Me.TabPage2.Controls.Add(Me.Label3)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(359, 107)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Exponencial negativa"
@@ -261,7 +264,7 @@ Partial Class TP3
         Me.TabPage3.Controls.Add(Me.lbl_muestra3)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(359, 107)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Normal"
@@ -333,7 +336,7 @@ Partial Class TP3
         Me.TabPage4.Controls.Add(Me.lbl_muestra4)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage4.Size = New System.Drawing.Size(359, 107)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Poisson"
@@ -402,24 +405,24 @@ Partial Class TP3
         '
         'Chart1
         '
-        ChartArea1.Name = "ChartArea1"
-        Me.Chart1.ChartAreas.Add(ChartArea1)
-        Legend1.Name = "Legend1"
-        Me.Chart1.Legends.Add(Legend1)
+        ChartArea2.Name = "ChartArea1"
+        Me.Chart1.ChartAreas.Add(ChartArea2)
+        Legend2.Name = "Legend1"
+        Me.Chart1.Legends.Add(Legend2)
         Me.Chart1.Location = New System.Drawing.Point(689, 151)
-        Me.Chart1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Chart1.Margin = New System.Windows.Forms.Padding(2)
         Me.Chart1.Name = "Chart1"
         Me.Chart1.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Excel
-        Series1.BorderWidth = 5
-        Series1.ChartArea = "ChartArea1"
-        Series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
-        Series1.Legend = "Legend1"
-        Series1.Name = "fe"
-        Series2.ChartArea = "ChartArea1"
-        Series2.Legend = "Legend1"
-        Series2.Name = "fo"
-        Me.Chart1.Series.Add(Series1)
-        Me.Chart1.Series.Add(Series2)
+        Series3.BorderWidth = 5
+        Series3.ChartArea = "ChartArea1"
+        Series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line
+        Series3.Legend = "Legend1"
+        Series3.Name = "fe"
+        Series4.ChartArea = "ChartArea1"
+        Series4.Legend = "Legend1"
+        Series4.Name = "fo"
+        Me.Chart1.Series.Add(Series3)
+        Me.Chart1.Series.Add(Series4)
         Me.Chart1.Size = New System.Drawing.Size(580, 403)
         Me.Chart1.TabIndex = 2
         Me.Chart1.Text = "Chart1"
@@ -429,7 +432,7 @@ Partial Class TP3
         Me.cmb_intervalos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmb_intervalos.FormattingEnabled = True
         Me.cmb_intervalos.Location = New System.Drawing.Point(523, 32)
-        Me.cmb_intervalos.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.cmb_intervalos.Margin = New System.Windows.Forms.Padding(2)
         Me.cmb_intervalos.Name = "cmb_intervalos"
         Me.cmb_intervalos.Size = New System.Drawing.Size(121, 21)
         Me.cmb_intervalos.TabIndex = 3
@@ -507,7 +510,7 @@ Partial Class TP3
         'lbl_resp
         '
         Me.lbl_resp.AutoSize = True
-        Me.lbl_resp.Location = New System.Drawing.Point(845, 88)
+        Me.lbl_resp.Location = New System.Drawing.Point(670, 97)
         Me.lbl_resp.Name = "lbl_resp"
         Me.lbl_resp.Size = New System.Drawing.Size(11, 13)
         Me.lbl_resp.TabIndex = 0
@@ -542,11 +545,30 @@ Partial Class TP3
         Me.calculoAG.HeaderText = "((Fo-Fe)^2)/Fe"
         Me.calculoAG.Name = "calculoAG"
         '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.lst_rnd)
+        Me.GroupBox1.Location = New System.Drawing.Point(885, 12)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(263, 111)
+        Me.GroupBox1.TabIndex = 9
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "RND"
+        '
+        'lst_rnd
+        '
+        Me.lst_rnd.FormattingEnabled = True
+        Me.lst_rnd.Location = New System.Drawing.Point(6, 16)
+        Me.lst_rnd.Name = "lst_rnd"
+        Me.lst_rnd.Size = New System.Drawing.Size(251, 82)
+        Me.lst_rnd.TabIndex = 0
+        '
         'TP3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1280, 566)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.Grid3)
         Me.Controls.Add(Me.cmb_intervalos)
         Me.Controls.Add(Me.Chart1)
@@ -574,6 +596,7 @@ Partial Class TP3
         CType(Me.Chart1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Grid2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Grid3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -632,4 +655,6 @@ Partial Class TP3
     Friend WithEvents foAG As DataGridViewTextBoxColumn
     Friend WithEvents feAG As DataGridViewTextBoxColumn
     Friend WithEvents calculoAG As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents lst_rnd As ListBox
 End Class

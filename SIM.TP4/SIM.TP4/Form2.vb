@@ -5,7 +5,7 @@
 
     'Vectores anterior y actual
     ' experimento(0) |stock inicial(1)|rnd tiempo(2)    |soleado?(3)    |rnd demanda(4) |cant. demanda(5)  |
-    ' cuanto vende(6)|reembolso(7)    |costo faltante(8)|sum ingreso(9)|sum costo(10)  | sum beneficio(11)|
+    ' cuanto vende(6)| Merc. faltante (7)  |reembolso(8)    |costo faltante(9)|sum ingreso(10)|sum costo(11)  | sum beneficio(12)|
     Dim anterior(12) As Double
     Dim actual(12) As Double
 
@@ -15,7 +15,6 @@
         cmb_cantidadDocenas.Items.Add("9")
         cmb_cantidadDocenas.SelectedIndex = 0
     End Sub
-
 
     Public Function diaSoleado(rnd As Double) 'Toma un random y devuelte la demanda para un dia soleado
         Dim demanda As Integer
@@ -98,11 +97,16 @@
         actual(4) = rnd2
         actual(5) = demanda
         actual(6) = venta
-        actual(7) = (actual(1) - actual(6)) * 1.2   'reembolso
-        ' actual(8) costo faltante
-        actual(9) = actual(7) + actual(6) * 12    'sumatoria de ingreso
-        actual(10) = actual(1) * 8 'sumatoria de costo
-        actual(11) = actual(9) - actual(10)
+
+        If demanda - stockInicial < 1 Then 'Calculo de la mercaderia faltante
+            actual(7) = stockInicial - demanda
+        End If
+
+        actual(8) = (actual(1) - actual(6)) * 1.2   'reembolso
+        ' actual(9) costo faltante
+        actual(10) = actual(8) + actual(6) * 12    'sumatoria de ingreso
+        actual(11) = actual(1) * 8 'sumatoria de costo
+        actual(12) = actual(10) - actual(11)
 
     End Sub
 
@@ -111,7 +115,12 @@
         anterior = actual
 
         actual(0) = anterior(0) + 1
-        actual(1) = anterior(1) ' En el punto c) hay que poner que sea la demanda del dia anterior anterior(5)
+        If Me.cbx_demandaAnterior.Checked Then
+            actual(1) = anterior(5) ' En el punto c) la demanda del dia anterior anterior(5)
+        Else
+            actual(1) = anterior(1)
+        End If
+
         actual(2) = VBMath.Rnd() 'RND de tiempo
         actual(3) = Me.climaDia(actual(2))
         actual(4) = VBMath.Rnd() 'RND de demanda
@@ -127,11 +136,11 @@
         Else
             actual(6) = actual(5)
         End If
-        actual(7) = (actual(1) - actual(6)) * 1.2   'Reembolso
-        ' actual(8) costo faltante
-        actual(9) = anterior(9) + (actual(7) + actual(6) * 12)    'Sumatoria de ingreso
-        actual(10) = anterior(10) + (actual(1) * 8) 'Sumatoria de costo
-        actual(11) = anterior(11) + (actual(9) - actual(10)) 'Sumatoria de beneficio
+        actual(8) = (actual(1) - actual(6)) * 1.2   'Reembolso
+        ' actual(9) costo faltante
+        actual(10) = anterior(10) + (actual(8) + actual(6) * 12)    'Sumatoria de ingreso
+        actual(11) = anterior(11) + (actual(1) * 8) 'Sumatoria de costo
+        actual(12) = anterior(12) + (actual(10) - actual(11)) 'Sumatoria de beneficio
 
     End Sub
 
@@ -143,16 +152,36 @@
         Me.GrillaA.Rows(actual(0) - 1).Cells(0).Value = actual(0)
         Me.GrillaA.Rows(actual(0) - 1).Cells(1).Value = actual(1)
         Me.GrillaA.Rows(actual(0) - 1).Cells(2).Value = actual(2)
-        Me.GrillaA.Rows(actual(0) - 1).Cells(3).Value = actual(3) 'pasarlo a string
+
+        If actual(3) = 1 Then 'En valor 1 corresponde dia soleado, si no es dia nublado
+            Me.GrillaA.Rows(actual(0) - 1).Cells(3).Value = "Si"
+        Else
+            Me.GrillaA.Rows(actual(0) - 1).Cells(3).Value = "No"
+        End If
+
         Me.GrillaA.Rows(actual(0) - 1).Cells(4).Value = actual(4)
         Me.GrillaA.Rows(actual(0) - 1).Cells(5).Value = actual(5)
         Me.GrillaA.Rows(actual(0) - 1).Cells(6).Value = actual(6)
-        Me.GrillaA.Rows(actual(0) - 1).Cells(7).Value = actual(7)
-        Me.GrillaA.Rows(actual(0) - 1).Cells(8).Value = actual(8) ' varia si va o no
-        Me.GrillaA.Rows(actual(0) - 1).Cells(9).Value = actual(9)
-        Me.GrillaA.Rows(actual(0) - 1).Cells(10).Value = actual(10)
-        Me.GrillaA.Rows(actual(0) - 1).Cells(11).Value = actual(11)
+        Me.GrillaA.Rows(actual(0) - 1).Cells(7).Value = actual(8) 'No van actual(9)=costo faltante, ni actual(7) merc. faltante
+        Me.GrillaA.Rows(actual(0) - 1).Cells(8).Value = actual(10) ' varia si va o no
+        Me.GrillaA.Rows(actual(0) - 1).Cells(9).Value = actual(11)
+        Me.GrillaA.Rows(actual(0) - 1).Cells(10).Value = actual(12)
 
     End Sub
 
+    Public Sub cargarTabla()
+
+        Me.cargarPrimeraFila()
+        Me.cargarFila()
+
+        For index = 1 To Integer.Parse(Me.txt_cantidadDias.Text) - 1
+            Me.siguienteVector()
+            Me.cargarFila()
+        Next
+
+    End Sub
+
+    Private Sub cmd_generarA_Click(sender As Object, e As EventArgs) Handles cmd_generarA.Click
+        Me.cargarTabla()
+    End Sub
 End Class

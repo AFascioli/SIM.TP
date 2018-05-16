@@ -1,0 +1,11 @@
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbprojResolveAssemblyReference.cache
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.Form2.resources
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.Resources.resources
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbproj.GenerateResource.Cache
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.exe.config
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.exe
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.pdb
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.xml
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.exe
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.xml
+C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.pdb

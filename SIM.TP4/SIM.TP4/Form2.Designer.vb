@@ -22,9 +22,10 @@ Partial Class Form2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.form = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.cmd_generarA = New System.Windows.Forms.Button()
+        Me.txt_respA = New System.Windows.Forms.TextBox()
         Me.txt_cantidadDias = New System.Windows.Forms.TextBox()
         Me.GrillaA = New System.Windows.Forms.DataGridView()
         Me.experimento = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,14 +45,9 @@ Partial Class Form2
         Me.cmb_cantidadDocenas = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.cmd_generarB = New System.Windows.Forms.Button()
+        Me.txt_respB = New System.Windows.Forms.TextBox()
         Me.txt_cantidadDiasB = New System.Windows.Forms.TextBox()
         Me.GrillaB = New System.Windows.Forms.DataGridView()
-        Me.cbx_demandaAnteriorB = New System.Windows.Forms.CheckBox()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cmb_cantidadDocenasB = New System.Windows.Forms.ComboBox()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.GrillaC = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,6 +60,19 @@ Partial Class Form2
         Me.DataGridViewTextBoxColumn10 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn11 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn12 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.cbx_demandaAnteriorB = New System.Windows.Forms.CheckBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmb_cantidadDocenasB = New System.Windows.Forms.ComboBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.cmd_generarC = New System.Windows.Forms.Button()
+        Me.txt_respC = New System.Windows.Forms.TextBox()
+        Me.txt_cantidadDiasC = New System.Windows.Forms.TextBox()
+        Me.cbx_demandaAnteriorC = New System.Windows.Forms.CheckBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmb_cantidadDocenasC = New System.Windows.Forms.ComboBox()
+        Me.GrillaC = New System.Windows.Forms.DataGridView()
         Me.DataGridViewTextBoxColumn13 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn14 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn15 = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -76,16 +85,16 @@ Partial Class Form2
         Me.DataGridViewTextBoxColumn23 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn24 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DataGridViewTextBoxColumn25 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.cmd_generarC = New System.Windows.Forms.Button()
-        Me.txt_cantidadDiasC = New System.Windows.Forms.TextBox()
-        Me.cbx_demandaAnteriorC = New System.Windows.Forms.CheckBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cmb_cantidadDocenasC = New System.Windows.Forms.ComboBox()
-        Me.txt_respC = New System.Windows.Forms.TextBox()
-        Me.txt_respB = New System.Windows.Forms.TextBox()
-        Me.txt_respA = New System.Windows.Forms.TextBox()
-        Me.TabControl1.SuspendLayout()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txt_simulacionesA = New System.Windows.Forms.TextBox()
+        Me.txt_simulacionesB = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.txt_simulacionesC = New System.Windows.Forms.TextBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.form.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.GrillaA, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
@@ -94,63 +103,68 @@ Partial Class Form2
         CType(Me.GrillaC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'TabControl1
+        'form
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Location = New System.Drawing.Point(18, 18)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1760, 729)
-        Me.TabControl1.TabIndex = 0
+        Me.form.Controls.Add(Me.TabPage1)
+        Me.form.Controls.Add(Me.TabPage2)
+        Me.form.Controls.Add(Me.TabPage3)
+        Me.form.Location = New System.Drawing.Point(12, 12)
+        Me.form.Name = "form"
+        Me.form.SelectedIndex = 0
+        Me.form.Size = New System.Drawing.Size(1173, 474)
+        Me.form.TabIndex = 0
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Label8)
         Me.TabPage1.Controls.Add(Me.cmd_generarA)
         Me.TabPage1.Controls.Add(Me.txt_respA)
+        Me.TabPage1.Controls.Add(Me.txt_simulacionesA)
         Me.TabPage1.Controls.Add(Me.txt_cantidadDias)
         Me.TabPage1.Controls.Add(Me.GrillaA)
+        Me.TabPage1.Controls.Add(Me.Label9)
         Me.TabPage1.Controls.Add(Me.cbx_demandaAnterior)
         Me.TabPage1.Controls.Add(Me.Label1)
         Me.TabPage1.Controls.Add(Me.lbl_cantidadDocenas)
         Me.TabPage1.Controls.Add(Me.cmb_cantidadDocenas)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TabPage1.Size = New System.Drawing.Size(1752, 696)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Size = New System.Drawing.Size(1165, 448)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.Text = "Puntos A-C"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'cmd_generarA
         '
-        Me.cmd_generarA.Location = New System.Drawing.Point(498, 140)
-        Me.cmd_generarA.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_generarA.Location = New System.Drawing.Point(332, 91)
         Me.cmd_generarA.Name = "cmd_generarA"
-        Me.cmd_generarA.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_generarA.Size = New System.Drawing.Size(75, 23)
         Me.cmd_generarA.TabIndex = 5
         Me.cmd_generarA.Text = "Generar"
         Me.cmd_generarA.UseVisualStyleBackColor = True
         '
+        'txt_respA
+        '
+        Me.txt_respA.Location = New System.Drawing.Point(616, 64)
+        Me.txt_respA.Name = "txt_respA"
+        Me.txt_respA.Size = New System.Drawing.Size(169, 20)
+        Me.txt_respA.TabIndex = 4
+        '
         'txt_cantidadDias
         '
-        Me.txt_cantidadDias.Location = New System.Drawing.Point(236, 98)
-        Me.txt_cantidadDias.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_cantidadDias.Location = New System.Drawing.Point(157, 64)
         Me.txt_cantidadDias.Name = "txt_cantidadDias"
-        Me.txt_cantidadDias.Size = New System.Drawing.Size(252, 26)
+        Me.txt_cantidadDias.Size = New System.Drawing.Size(169, 20)
         Me.txt_cantidadDias.TabIndex = 4
         '
         'GrillaA
         '
         Me.GrillaA.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GrillaA.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.experimento, Me.stockInicial, Me.rndTiempo, Me.soleado, Me.rndDemanda, Me.cantDemanda, Me.venta, Me.reembolso, Me.sumIngreso, Me.sumCosto, Me.sumBeneficio})
-        Me.GrillaA.Location = New System.Drawing.Point(38, 252)
-        Me.GrillaA.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GrillaA.Location = New System.Drawing.Point(25, 164)
         Me.GrillaA.Name = "GrillaA"
-        Me.GrillaA.Size = New System.Drawing.Size(1431, 428)
+        Me.GrillaA.Size = New System.Drawing.Size(954, 278)
         Me.GrillaA.TabIndex = 3
         '
         'experimento
@@ -219,10 +233,9 @@ Partial Class Form2
         'cbx_demandaAnterior
         '
         Me.cbx_demandaAnterior.AutoSize = True
-        Me.cbx_demandaAnterior.Location = New System.Drawing.Point(236, 185)
-        Me.cbx_demandaAnterior.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cbx_demandaAnterior.Location = New System.Drawing.Point(157, 120)
         Me.cbx_demandaAnterior.Name = "cbx_demandaAnterior"
-        Me.cbx_demandaAnterior.Size = New System.Drawing.Size(248, 24)
+        Me.cbx_demandaAnterior.Size = New System.Drawing.Size(169, 17)
         Me.cbx_demandaAnterior.TabIndex = 2
         Me.cbx_demandaAnterior.Text = "Usar demanda del día anterior"
         Me.cbx_demandaAnterior.UseVisualStyleBackColor = True
@@ -230,34 +243,34 @@ Partial Class Form2
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(33, 103)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Location = New System.Drawing.Point(22, 67)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(128, 20)
+        Me.Label1.Size = New System.Drawing.Size(88, 13)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Cantidad de días"
         '
         'lbl_cantidadDocenas
         '
         Me.lbl_cantidadDocenas.AutoSize = True
-        Me.lbl_cantidadDocenas.Location = New System.Drawing.Point(33, 148)
-        Me.lbl_cantidadDocenas.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbl_cantidadDocenas.Location = New System.Drawing.Point(22, 96)
         Me.lbl_cantidadDocenas.Name = "lbl_cantidadDocenas"
-        Me.lbl_cantidadDocenas.Size = New System.Drawing.Size(160, 20)
+        Me.lbl_cantidadDocenas.Size = New System.Drawing.Size(108, 13)
         Me.lbl_cantidadDocenas.TabIndex = 1
         Me.lbl_cantidadDocenas.Text = "Cantidad de docenas"
         '
         'cmb_cantidadDocenas
         '
         Me.cmb_cantidadDocenas.FormattingEnabled = True
-        Me.cmb_cantidadDocenas.Location = New System.Drawing.Point(236, 143)
-        Me.cmb_cantidadDocenas.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmb_cantidadDocenas.Location = New System.Drawing.Point(157, 93)
         Me.cmb_cantidadDocenas.Name = "cmb_cantidadDocenas"
-        Me.cmb_cantidadDocenas.Size = New System.Drawing.Size(252, 28)
+        Me.cmb_cantidadDocenas.Size = New System.Drawing.Size(169, 21)
         Me.cmb_cantidadDocenas.TabIndex = 0
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.txt_simulacionesB)
+        Me.TabPage2.Controls.Add(Me.Label10)
+        Me.TabPage2.Controls.Add(Me.Label7)
         Me.TabPage2.Controls.Add(Me.cmd_generarB)
         Me.TabPage2.Controls.Add(Me.txt_respB)
         Me.TabPage2.Controls.Add(Me.txt_cantidadDiasB)
@@ -266,110 +279,45 @@ Partial Class Form2
         Me.TabPage2.Controls.Add(Me.Label2)
         Me.TabPage2.Controls.Add(Me.Label3)
         Me.TabPage2.Controls.Add(Me.cmb_cantidadDocenasB)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.TabPage2.Size = New System.Drawing.Size(1752, 696)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Size = New System.Drawing.Size(1165, 448)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.Text = "Punto D"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'cmd_generarB
         '
-        Me.cmd_generarB.Location = New System.Drawing.Point(483, 140)
-        Me.cmd_generarB.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cmd_generarB.Location = New System.Drawing.Point(327, 81)
         Me.cmd_generarB.Name = "cmd_generarB"
-        Me.cmd_generarB.Size = New System.Drawing.Size(112, 35)
+        Me.cmd_generarB.Size = New System.Drawing.Size(75, 23)
         Me.cmd_generarB.TabIndex = 12
         Me.cmd_generarB.Text = "Generar"
         Me.cmd_generarB.UseVisualStyleBackColor = True
         '
+        'txt_respB
+        '
+        Me.txt_respB.Location = New System.Drawing.Point(612, 54)
+        Me.txt_respB.Name = "txt_respB"
+        Me.txt_respB.Size = New System.Drawing.Size(169, 20)
+        Me.txt_respB.TabIndex = 11
+        '
         'txt_cantidadDiasB
         '
-        Me.txt_cantidadDiasB.Location = New System.Drawing.Point(220, 98)
-        Me.txt_cantidadDiasB.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.txt_cantidadDiasB.Location = New System.Drawing.Point(152, 54)
         Me.txt_cantidadDiasB.Name = "txt_cantidadDiasB"
-        Me.txt_cantidadDiasB.Size = New System.Drawing.Size(252, 26)
+        Me.txt_cantidadDiasB.Size = New System.Drawing.Size(169, 20)
         Me.txt_cantidadDiasB.TabIndex = 11
         '
         'GrillaB
         '
         Me.GrillaB.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GrillaB.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4, Me.DataGridViewTextBoxColumn5, Me.DataGridViewTextBoxColumn6, Me.DataGridViewTextBoxColumn7, Me.mercFaltante, Me.DataGridViewTextBoxColumn8, Me.DataGridViewTextBoxColumn10, Me.DataGridViewTextBoxColumn11, Me.DataGridViewTextBoxColumn12})
-        Me.GrillaB.Location = New System.Drawing.Point(22, 252)
-        Me.GrillaB.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.GrillaB.Location = New System.Drawing.Point(20, 154)
         Me.GrillaB.Name = "GrillaB"
-        Me.GrillaB.Size = New System.Drawing.Size(1431, 428)
+        Me.GrillaB.Size = New System.Drawing.Size(954, 278)
         Me.GrillaB.TabIndex = 10
-        '
-        'cbx_demandaAnteriorB
-        '
-        Me.cbx_demandaAnteriorB.AutoSize = True
-        Me.cbx_demandaAnteriorB.Location = New System.Drawing.Point(220, 185)
-        Me.cbx_demandaAnteriorB.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cbx_demandaAnteriorB.Name = "cbx_demandaAnteriorB"
-        Me.cbx_demandaAnteriorB.Size = New System.Drawing.Size(248, 24)
-        Me.cbx_demandaAnteriorB.TabIndex = 9
-        Me.cbx_demandaAnteriorB.Text = "Usar demanda del día anterior"
-        Me.cbx_demandaAnteriorB.UseVisualStyleBackColor = True
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(18, 103)
-        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(128, 20)
-        Me.Label2.TabIndex = 7
-        Me.Label2.Text = "Cantidad de días"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(18, 148)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(160, 20)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Cantidad de docenas"
-        '
-        'cmb_cantidadDocenasB
-        '
-        Me.cmb_cantidadDocenasB.FormattingEnabled = True
-        Me.cmb_cantidadDocenasB.Location = New System.Drawing.Point(220, 143)
-        Me.cmb_cantidadDocenasB.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cmb_cantidadDocenasB.Name = "cmb_cantidadDocenasB"
-        Me.cmb_cantidadDocenasB.Size = New System.Drawing.Size(252, 28)
-        Me.cmb_cantidadDocenasB.TabIndex = 6
-        '
-        'TabPage3
-        '
-        Me.TabPage3.Controls.Add(Me.cmd_generarC)
-        Me.TabPage3.Controls.Add(Me.txt_respC)
-        Me.TabPage3.Controls.Add(Me.txt_cantidadDiasC)
-        Me.TabPage3.Controls.Add(Me.cbx_demandaAnteriorC)
-        Me.TabPage3.Controls.Add(Me.Label4)
-        Me.TabPage3.Controls.Add(Me.Label5)
-        Me.TabPage3.Controls.Add(Me.cmb_cantidadDocenasC)
-        Me.TabPage3.Controls.Add(Me.GrillaC)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1752, 696)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "TabPage3"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'GrillaC
-        '
-        Me.GrillaC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GrillaC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17, Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25})
-        Me.GrillaC.Location = New System.Drawing.Point(27, 202)
-        Me.GrillaC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.GrillaC.Name = "GrillaC"
-        Me.GrillaC.Size = New System.Drawing.Size(1431, 428)
-        Me.GrillaC.TabIndex = 11
         '
         'DataGridViewTextBoxColumn1
         '
@@ -440,6 +388,132 @@ Partial Class Form2
         Me.DataGridViewTextBoxColumn12.HeaderText = "Sum. Beneficio"
         Me.DataGridViewTextBoxColumn12.Name = "DataGridViewTextBoxColumn12"
         '
+        'cbx_demandaAnteriorB
+        '
+        Me.cbx_demandaAnteriorB.AutoSize = True
+        Me.cbx_demandaAnteriorB.Location = New System.Drawing.Point(152, 110)
+        Me.cbx_demandaAnteriorB.Name = "cbx_demandaAnteriorB"
+        Me.cbx_demandaAnteriorB.Size = New System.Drawing.Size(169, 17)
+        Me.cbx_demandaAnteriorB.TabIndex = 9
+        Me.cbx_demandaAnteriorB.Text = "Usar demanda del día anterior"
+        Me.cbx_demandaAnteriorB.UseVisualStyleBackColor = True
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(17, 57)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(88, 13)
+        Me.Label2.TabIndex = 7
+        Me.Label2.Text = "Cantidad de días"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(17, 86)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(108, 13)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Cantidad de docenas"
+        '
+        'cmb_cantidadDocenasB
+        '
+        Me.cmb_cantidadDocenasB.FormattingEnabled = True
+        Me.cmb_cantidadDocenasB.Location = New System.Drawing.Point(152, 83)
+        Me.cmb_cantidadDocenasB.Name = "cmb_cantidadDocenasB"
+        Me.cmb_cantidadDocenasB.Size = New System.Drawing.Size(169, 21)
+        Me.cmb_cantidadDocenasB.TabIndex = 6
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.txt_simulacionesC)
+        Me.TabPage3.Controls.Add(Me.Label11)
+        Me.TabPage3.Controls.Add(Me.cmd_generarC)
+        Me.TabPage3.Controls.Add(Me.txt_respC)
+        Me.TabPage3.Controls.Add(Me.txt_cantidadDiasC)
+        Me.TabPage3.Controls.Add(Me.cbx_demandaAnteriorC)
+        Me.TabPage3.Controls.Add(Me.Label6)
+        Me.TabPage3.Controls.Add(Me.Label4)
+        Me.TabPage3.Controls.Add(Me.Label5)
+        Me.TabPage3.Controls.Add(Me.cmb_cantidadDocenasC)
+        Me.TabPage3.Controls.Add(Me.GrillaC)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage3.Size = New System.Drawing.Size(1165, 448)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Punto F"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'cmd_generarC
+        '
+        Me.cmd_generarC.Location = New System.Drawing.Point(332, 84)
+        Me.cmd_generarC.Name = "cmd_generarC"
+        Me.cmd_generarC.Size = New System.Drawing.Size(75, 23)
+        Me.cmd_generarC.TabIndex = 18
+        Me.cmd_generarC.Text = "Generar"
+        Me.cmd_generarC.UseVisualStyleBackColor = True
+        '
+        'txt_respC
+        '
+        Me.txt_respC.Location = New System.Drawing.Point(597, 57)
+        Me.txt_respC.Name = "txt_respC"
+        Me.txt_respC.Size = New System.Drawing.Size(169, 20)
+        Me.txt_respC.TabIndex = 17
+        '
+        'txt_cantidadDiasC
+        '
+        Me.txt_cantidadDiasC.Location = New System.Drawing.Point(157, 57)
+        Me.txt_cantidadDiasC.Name = "txt_cantidadDiasC"
+        Me.txt_cantidadDiasC.Size = New System.Drawing.Size(169, 20)
+        Me.txt_cantidadDiasC.TabIndex = 17
+        '
+        'cbx_demandaAnteriorC
+        '
+        Me.cbx_demandaAnteriorC.AutoSize = True
+        Me.cbx_demandaAnteriorC.Location = New System.Drawing.Point(157, 113)
+        Me.cbx_demandaAnteriorC.Name = "cbx_demandaAnteriorC"
+        Me.cbx_demandaAnteriorC.Size = New System.Drawing.Size(169, 17)
+        Me.cbx_demandaAnteriorC.TabIndex = 16
+        Me.cbx_demandaAnteriorC.Text = "Usar demanda del día anterior"
+        Me.cbx_demandaAnteriorC.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(22, 60)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(88, 13)
+        Me.Label4.TabIndex = 14
+        Me.Label4.Text = "Cantidad de días"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(22, 89)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(108, 13)
+        Me.Label5.TabIndex = 15
+        Me.Label5.Text = "Cantidad de docenas"
+        '
+        'cmb_cantidadDocenasC
+        '
+        Me.cmb_cantidadDocenasC.FormattingEnabled = True
+        Me.cmb_cantidadDocenasC.Location = New System.Drawing.Point(157, 86)
+        Me.cmb_cantidadDocenasC.Name = "cmb_cantidadDocenasC"
+        Me.cmb_cantidadDocenasC.Size = New System.Drawing.Size(169, 21)
+        Me.cmb_cantidadDocenasC.TabIndex = 13
+        '
+        'GrillaC
+        '
+        Me.GrillaC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GrillaC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn13, Me.DataGridViewTextBoxColumn14, Me.DataGridViewTextBoxColumn15, Me.DataGridViewTextBoxColumn16, Me.DataGridViewTextBoxColumn17, Me.DataGridViewTextBoxColumn18, Me.DataGridViewTextBoxColumn19, Me.DataGridViewTextBoxColumn20, Me.DataGridViewTextBoxColumn22, Me.DataGridViewTextBoxColumn23, Me.DataGridViewTextBoxColumn24, Me.DataGridViewTextBoxColumn25})
+        Me.GrillaC.Location = New System.Drawing.Point(17, 156)
+        Me.GrillaC.Name = "GrillaC"
+        Me.GrillaC.Size = New System.Drawing.Size(954, 278)
+        Me.GrillaC.TabIndex = 11
+        '
         'DataGridViewTextBoxColumn13
         '
         Me.DataGridViewTextBoxColumn13.HeaderText = "Exp."
@@ -508,98 +582,90 @@ Partial Class Form2
         Me.DataGridViewTextBoxColumn25.HeaderText = "Sum. Beneficio"
         Me.DataGridViewTextBoxColumn25.Name = "DataGridViewTextBoxColumn25"
         '
-        'cmd_generarC
+        'Label6
         '
-        Me.cmd_generarC.Location = New System.Drawing.Point(500, 91)
-        Me.cmd_generarC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cmd_generarC.Name = "cmd_generarC"
-        Me.cmd_generarC.Size = New System.Drawing.Size(112, 35)
-        Me.cmd_generarC.TabIndex = 18
-        Me.cmd_generarC.Text = "Generar"
-        Me.cmd_generarC.UseVisualStyleBackColor = True
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(442, 60)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(127, 13)
+        Me.Label6.TabIndex = 14
+        Me.Label6.Text = "Ganancia promedio diaria"
         '
-        'txt_cantidadDiasC
+        'Label7
         '
-        Me.txt_cantidadDiasC.Location = New System.Drawing.Point(237, 49)
-        Me.txt_cantidadDiasC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_cantidadDiasC.Name = "txt_cantidadDiasC"
-        Me.txt_cantidadDiasC.Size = New System.Drawing.Size(252, 26)
-        Me.txt_cantidadDiasC.TabIndex = 17
+        Me.Label7.AutoSize = True
+        Me.Label7.Location = New System.Drawing.Point(445, 57)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(127, 13)
+        Me.Label7.TabIndex = 18
+        Me.Label7.Text = "Ganancia promedio diaria"
         '
-        'cbx_demandaAnteriorC
+        'Label8
         '
-        Me.cbx_demandaAnteriorC.AutoSize = True
-        Me.cbx_demandaAnteriorC.Location = New System.Drawing.Point(237, 136)
-        Me.cbx_demandaAnteriorC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cbx_demandaAnteriorC.Name = "cbx_demandaAnteriorC"
-        Me.cbx_demandaAnteriorC.Size = New System.Drawing.Size(248, 24)
-        Me.cbx_demandaAnteriorC.TabIndex = 16
-        Me.cbx_demandaAnteriorC.Text = "Usar demanda del día anterior"
-        Me.cbx_demandaAnteriorC.UseVisualStyleBackColor = True
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(448, 67)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(127, 13)
+        Me.Label8.TabIndex = 19
+        Me.Label8.Text = "Ganancia promedio diaria"
         '
-        'Label4
+        'Label9
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(35, 54)
-        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(128, 20)
-        Me.Label4.TabIndex = 14
-        Me.Label4.Text = "Cantidad de días"
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(22, 41)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(127, 13)
+        Me.Label9.TabIndex = 1
+        Me.Label9.Text = "Cantidad de simulaciones"
         '
-        'Label5
+        'txt_simulacionesA
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(35, 99)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(160, 20)
-        Me.Label5.TabIndex = 15
-        Me.Label5.Text = "Cantidad de docenas"
+        Me.txt_simulacionesA.Location = New System.Drawing.Point(157, 38)
+        Me.txt_simulacionesA.Name = "txt_simulacionesA"
+        Me.txt_simulacionesA.Size = New System.Drawing.Size(169, 20)
+        Me.txt_simulacionesA.TabIndex = 4
         '
-        'cmb_cantidadDocenasC
+        'txt_simulacionesB
         '
-        Me.cmb_cantidadDocenasC.FormattingEnabled = True
-        Me.cmb_cantidadDocenasC.Location = New System.Drawing.Point(237, 94)
-        Me.cmb_cantidadDocenasC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cmb_cantidadDocenasC.Name = "cmb_cantidadDocenasC"
-        Me.cmb_cantidadDocenasC.Size = New System.Drawing.Size(252, 28)
-        Me.cmb_cantidadDocenasC.TabIndex = 13
+        Me.txt_simulacionesB.Location = New System.Drawing.Point(152, 28)
+        Me.txt_simulacionesB.Name = "txt_simulacionesB"
+        Me.txt_simulacionesB.Size = New System.Drawing.Size(169, 20)
+        Me.txt_simulacionesB.TabIndex = 20
         '
-        'txt_respC
+        'Label10
         '
-        Me.txt_respC.Location = New System.Drawing.Point(824, 48)
-        Me.txt_respC.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_respC.Name = "txt_respC"
-        Me.txt_respC.Size = New System.Drawing.Size(252, 26)
-        Me.txt_respC.TabIndex = 17
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(17, 31)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(127, 13)
+        Me.Label10.TabIndex = 19
+        Me.Label10.Text = "Cantidad de simulaciones"
         '
-        'txt_respB
+        'txt_simulacionesC
         '
-        Me.txt_respB.Location = New System.Drawing.Point(831, 97)
-        Me.txt_respB.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_respB.Name = "txt_respB"
-        Me.txt_respB.Size = New System.Drawing.Size(252, 26)
-        Me.txt_respB.TabIndex = 11
+        Me.txt_simulacionesC.Location = New System.Drawing.Point(157, 31)
+        Me.txt_simulacionesC.Name = "txt_simulacionesC"
+        Me.txt_simulacionesC.Size = New System.Drawing.Size(169, 20)
+        Me.txt_simulacionesC.TabIndex = 20
         '
-        'txt_respA
+        'Label11
         '
-        Me.txt_respA.Location = New System.Drawing.Point(887, 103)
-        Me.txt_respA.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.txt_respA.Name = "txt_respA"
-        Me.txt_respA.Size = New System.Drawing.Size(252, 26)
-        Me.txt_respA.TabIndex = 4
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(22, 34)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(127, 13)
+        Me.Label11.TabIndex = 19
+        Me.Label11.Text = "Cantidad de simulaciones"
         '
         'Form2
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1796, 751)
-        Me.Controls.Add(Me.TabControl1)
-        Me.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.ClientSize = New System.Drawing.Size(1107, 511)
+        Me.Controls.Add(Me.form)
         Me.Name = "Form2"
         Me.Text = "Form2"
-        Me.TabControl1.ResumeLayout(False)
+        Me.form.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         CType(Me.GrillaA, System.ComponentModel.ISupportInitialize).EndInit()
@@ -613,7 +679,7 @@ Partial Class Form2
 
     End Sub
 
-    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents form As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents cbx_demandaAnterior As CheckBox
     Friend WithEvents lbl_cantidadDocenas As Label
@@ -676,4 +742,13 @@ Partial Class Form2
     Friend WithEvents txt_respA As TextBox
     Friend WithEvents txt_respB As TextBox
     Friend WithEvents txt_respC As TextBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txt_simulacionesA As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents txt_simulacionesB As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents txt_simulacionesC As TextBox
+    Friend WithEvents Label11 As Label
 End Class

@@ -13,11 +13,15 @@
         cmb_cantidadDocenas.Items.Add("7")
         cmb_cantidadDocenas.Items.Add("8")
         cmb_cantidadDocenas.Items.Add("9")
-        cmb_cantidadDocenas.SelectedIndex = 0
+        cmb_cantidadDocenas.SelectedIndex = 1
         cmb_cantidadDocenasB.Items.Add("7")
         cmb_cantidadDocenasB.Items.Add("8")
         cmb_cantidadDocenasB.Items.Add("9")
-        cmb_cantidadDocenasB.SelectedIndex = 0
+        cmb_cantidadDocenasB.SelectedIndex = 1
+        cmb_cantidadDocenasC.Items.Add("7")
+        cmb_cantidadDocenasC.Items.Add("8")
+        cmb_cantidadDocenasC.Items.Add("9")
+        cmb_cantidadDocenasC.SelectedIndex = 1
     End Sub
 
     Public Function diaSoleado(rnd As Double) 'Toma un random y devuelte la demanda para un dia soleado
@@ -74,6 +78,7 @@
         Dim demanda As Integer
         Dim stockInicial As Integer
         Dim venta As Integer
+        Dim mercFaltante As Integer
 
         If clima = 1 Then
             demanda = diaSoleado(rnd2)
@@ -95,10 +100,12 @@
                     stockInicial = cmb_cantidadDocenasB.SelectedItem()
                 End If
             Else
-                'Punto C
+                If cbx_demandaAnteriorC.Checked() Then
+                    stockInicial = 8
+                Else
+                    stockInicial = cmb_cantidadDocenasC.SelectedItem()
+                End If
             End If
-
-
         End If
 
 
@@ -125,24 +132,62 @@
             End If
         End If
 
+        If punto = "A" Or punto = "B" Then
+            actual(8) = (actual(1) - actual(6)) * 1.2   'Reembolso
+        Else
+            actual(8) = 0
+        End If
 
-        actual(8) = (actual(1) - actual(6)) * 1.2   'reembolso
-        ' actual(9) costo faltante
-        actual(10) = actual(8) + (actual(6) * 12) + actual(7) * 12    'sumatoria de ingreso
-        actual(11) = actual(1) * 8 + (actual(7) * 11) 'sumatoria de costo
+        If punto = "C" Then
+            If actual(7) <> 0 Then
+                actual(9) = actual(7) * 1.2  'Costo faltante
+            Else
+                actual(9) = 0
+            End If
+        Else
+            actual(9) = 0
+        End If
+
+        mercFaltante = actual(7) 'Agregamos esta variable porque en el punto F no se utiliza la mercaderia faltante en el calculo de costo
+        If punto = "C" Then
+            mercFaltante = 0
+
+        End If
+        actual(10) = actual(8) + (actual(6) * 12) + mercFaltante * 12    'sumatoria de ingreso
+
+        actual(11) = actual(1) * 8 + (mercFaltante * 11) + actual(9) 'sumatoria de costo
         actual(12) = actual(10) - actual(11)
 
     End Sub
 
     Public Sub siguienteVector(punto As String)
+        Dim mercFaltante As Integer
+
         'Carga anterior con actual y se encarga de valuar el vector actual con el proximo experimento
         anterior = actual
 
         actual(0) = anterior(0) + 1
-        If Me.cbx_demandaAnterior.Checked Then
-            actual(1) = anterior(5) ' En el punto c) la demanda del dia anterior anterior(5)
+
+        If punto = "A" Then                                     'Logica para cargar el sotck inicial
+            If cbx_demandaAnterior.Checked() Then
+                actual(1) = anterior(5)
+            Else
+                actual(1) = cmb_cantidadDocenas.SelectedItem()
+            End If
         Else
-            actual(1) = anterior(1)
+            If punto = "B" Then
+                If cbx_demandaAnteriorB.Checked() Then
+                    actual(1) = anterior(5)
+                Else
+                    actual(1) = cmb_cantidadDocenasB.SelectedItem()
+                End If
+            Else
+                If cbx_demandaAnteriorC.Checked() Then
+                    actual(1) = anterior(5)
+                Else
+                    actual(1) = cmb_cantidadDocenasC.SelectedItem()
+                End If
+            End If
         End If
 
         actual(2) = VBMath.Rnd() 'RND de tiempo
@@ -166,20 +211,37 @@
         End If
 
         If punto = "A" Then
-            actual(7) = 0
+            actual(7) = 0 'No se usa en el punto A
         Else
             If actual(1) - actual(5) < 1 Then 'Calculo de la mercaderia faltante
                 actual(7) = actual(5) - actual(1)
             End If
         End If
 
-        actual(8) = (actual(1) - actual(6)) * 1.2   'Reembolso
+        If punto = "A" Or punto = "B" Then
+            actual(8) = (actual(1) - actual(6)) * 1.2   'Reembolso
+        Else
+            actual(8) = 0
+        End If
 
-        ' actual(9) costo faltante
+        If punto = "C" Then
+            If actual(7) <> 0 Then
+                actual(9) = actual(7) * 1.2  'Costo faltante
+            Else
+                actual(9) = 0
+            End If
+        Else
+            actual(9) = 0       'Solo se usa en el punto C
+        End If
 
-        actual(10) = anterior(10) + (actual(8) + actual(6) * 12) + (actual(7) * 12) 'Sumatoria de ingreso
+        mercFaltante = actual(7) 'Agregamos esta variable porque en el punto F no se utiliza la mercaderia faltante en el calculo de costo
+        If punto = "C" Then
+            mercFaltante = 0
 
-        actual(11) = anterior(11) + (actual(1) * 8) + (actual(7) * 11) 'Sumatoria de costo
+        End If
+        actual(10) = anterior(10) + (actual(8) + actual(6) * 12) + (mercFaltante * 12) 'Sumatoria de ingreso
+
+        actual(11) = anterior(11) + (actual(1) * 8) + (mercFaltante * 11) + actual(9) 'Sumatoria de costo
 
         actual(12) = (actual(10) - actual(11)) 'Sumatoria de beneficio
 
@@ -223,8 +285,13 @@
     End Sub
 
     Private Sub cmd_generarA_Click(sender As Object, e As EventArgs) Handles cmd_generarA.Click
-        Me.GrillaA.Rows.Clear()
-        Me.cargarTablaA()
+        Dim ganancia As Double
+        For index = 1 To 100
+            Me.GrillaA.Rows.Clear()
+            Me.cargarTablaA()
+            ganancia += Me.obtenerGananciaDiariaPromedio(Me.GrillaA, "A")
+        Next
+        Me.txt_respA.Text = ganancia / 100
     End Sub
 
     Public Sub cargarFilaB()
@@ -265,4 +332,61 @@
         Me.GrillaB.Rows.Clear()
         Me.cargarTablaB()
     End Sub
+
+    Public Sub cargarFilaC()
+        'Carga el vector actual a una proxima fila de la grilla
+
+        'Agregar que diferencie segun grillas
+        Me.GrillaC.Rows.Add()
+        Me.GrillaC.Rows(actual(0) - 1).Cells(0).Value = actual(0)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(1).Value = actual(1)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(2).Value = actual(2)
+
+        If actual(3) = 1 Then 'En valor 1 corresponde dia soleado, si no es dia nublado
+            Me.GrillaC.Rows(actual(0) - 1).Cells(3).Value = "Si"
+        Else
+            Me.GrillaC.Rows(actual(0) - 1).Cells(3).Value = "No"
+        End If
+
+        Me.GrillaC.Rows(actual(0) - 1).Cells(4).Value = actual(4)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(5).Value = actual(5)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(6).Value = actual(6)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(7).Value = actual(7) 'Merc. Faltante
+        Me.GrillaC.Rows(actual(0) - 1).Cells(8).Value = actual(9) 'Costo Faltante
+        Me.GrillaC.Rows(actual(0) - 1).Cells(9).Value = actual(10)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(10).Value = actual(11)
+        Me.GrillaC.Rows(actual(0) - 1).Cells(11).Value = actual(12)
+
+    End Sub
+
+    Public Sub cargarTablaC()
+
+        Me.cargarPrimeraFila("C")
+        Me.cargarFilaC()
+
+        For index = 1 To Integer.Parse(Me.txt_cantidadDiasC.Text) - 1
+            Me.siguienteVector("C")
+            Me.cargarFilaC()
+        Next
+
+    End Sub
+
+    Private Sub cmd_generarC_Click(sender As Object, e As EventArgs) Handles cmd_generarC.Click
+        Me.GrillaC.Rows.Clear()
+        Me.cargarTablaC()
+    End Sub
+
+    Public Function obtenerGananciaDiariaPromedio(grilla As DataGridView, punto As String)
+        Dim ganancia As Double
+
+        If punto = "A" Then
+            ganancia = grilla.Rows(grilla.Rows.Count - 1).Cells(10).Value
+        Else
+            ganancia = grilla.Rows(grilla.Rows.Count - 1).Cells(11).Value
+        End If
+
+
+        Return ganancia
+    End Function
+
 End Class

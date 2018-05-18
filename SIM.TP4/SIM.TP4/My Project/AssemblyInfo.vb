@@ -2,34 +2,34 @@
 Imports System.Reflection
 Imports System.Runtime.InteropServices
 
-' General Information about an assembly is controlled through the following
-' set of attributes. Change these attribute values to modify the information
-' associated with an assembly.
+' La información general de un ensamblado se controla mediante el siguiente 
+' conjunto de atributos. Cambie estos valores de atributo para modificar la información
+' asociada con un ensamblado.
 
-' Review the values of the assembly attributes
+' Revisar los valores de los atributos del ensamblado
 
-<Assembly: AssemblyTitle("SIM.TP4")>
+<Assembly: AssemblyTitle("TP4")>
 <Assembly: AssemblyDescription("")>
 <Assembly: AssemblyCompany("")>
-<Assembly: AssemblyProduct("SIM.TP4")>
+<Assembly: AssemblyProduct("TP4")>
 <Assembly: AssemblyCopyright("Copyright ©  2018")>
 <Assembly: AssemblyTrademark("")>
 
 <Assembly: ComVisible(False)>
 
-'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("25d43bbe-6ec6-47dc-8673-3ebc91228b42")>
+'El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
+<Assembly: Guid("be4e0311-45d3-47d1-bdc2-d4dbc46648f6")>
 
-' Version information for an assembly consists of the following four values:
+' La información de versión de un ensamblado consta de los cuatro valores siguientes:
 '
-'      Major Version
-'      Minor Version
-'      Build Number
-'      Revision
+'      Versión principal
+'      Versión secundaria 
+'      Número de compilación
+'      Revisión
 '
-' You can specify all the values or you can default the Build and Revision Numbers
-' by using the '*' as shown below:
-' <Assembly: AssemblyVersion("1.0.*")>
+' Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión 
+' mediante el carácter '*', como se muestra a continuación:
+' <Assembly: AssemblyVersion("1.0.*")> 
 
 <Assembly: AssemblyVersion("1.0.0.0")>
 <Assembly: AssemblyFileVersion("1.0.0.0")>

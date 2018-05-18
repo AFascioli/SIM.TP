@@ -1,23 +1,11 @@
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbprojResolveAssemblyReference.cache
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.Form2.resources
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.Resources.resources
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbproj.GenerateResource.Cache
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.exe.config
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.exe
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.pdb
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.xml
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.exe
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.xml
-C:\Users\Usuario\Google Drive\Facultad\Quinto año\SIM\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.pdb
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.exe.config
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.exe
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.pdb
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\bin\Debug\SIM.TP4.xml
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbprojResolveAssemblyReference.cache
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.Form2.resources
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.Resources.resources
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbproj.GenerateResource.cache
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.vbproj.CoreCompileInputs.cache
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.exe
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.xml
-C:\Users\Administrador\Downloads\Proyectos Git\SIM.TP\SIM.TP4\SIM.TP4\obj\Debug\SIM.TP4.pdb
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\bin\Debug\TP4.exe.config
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\bin\Debug\TP4.exe
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\bin\Debug\TP4.pdb
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\bin\Debug\TP4.xml
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\SIM.TP4.vbprojResolveAssemblyReference.cache
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\TP4.MainWindow.resources
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\TP4.Resources.resources
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\SIM.TP4.vbproj.GenerateResource.Cache
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\TP4.exe
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\TP4.xml
+D:\utn\sim\SIM.TP\SIM.TP4\TP4\obj\Debug\TP4.pdb

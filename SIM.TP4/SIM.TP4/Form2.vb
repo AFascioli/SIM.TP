@@ -13,15 +13,15 @@
         cmb_cantidadDocenas.Items.Add("7")
         cmb_cantidadDocenas.Items.Add("8")
         cmb_cantidadDocenas.Items.Add("9")
-        cmb_cantidadDocenas.SelectedIndex = 1
+        cmb_cantidadDocenas.SelectedIndex = 0
         cmb_cantidadDocenasB.Items.Add("7")
         cmb_cantidadDocenasB.Items.Add("8")
         cmb_cantidadDocenasB.Items.Add("9")
-        cmb_cantidadDocenasB.SelectedIndex = 1
+        cmb_cantidadDocenasB.SelectedIndex = 0
         cmb_cantidadDocenasC.Items.Add("7")
         cmb_cantidadDocenasC.Items.Add("8")
         cmb_cantidadDocenasC.Items.Add("9")
-        cmb_cantidadDocenasC.SelectedIndex = 1
+        cmb_cantidadDocenasC.SelectedIndex = 0
     End Sub
 
     Public Function diaSoleado(rnd As Double) 'Toma un random y devuelte la demanda para un dia soleado
@@ -284,16 +284,6 @@
 
     End Sub
 
-    Private Sub cmd_generarA_Click(sender As Object, e As EventArgs) Handles cmd_generarA.Click
-        Dim ganancia As Double
-        For index = 1 To 100
-            Me.GrillaA.Rows.Clear()
-            Me.cargarTablaA()
-            ganancia += Me.obtenerGananciaDiariaPromedio(Me.GrillaA, "A")
-        Next
-        Me.txt_respA.Text = ganancia / 100
-    End Sub
-
     Public Sub cargarFilaB()
         Me.GrillaB.Rows.Add()
         Me.GrillaB.Rows(actual(0) - 1).Cells(0).Value = actual(0)
@@ -326,11 +316,6 @@
             Me.cargarFilaB()
         Next
 
-    End Sub
-
-    Private Sub cmd_generarB_Click(sender As Object, e As EventArgs) Handles cmd_generarB.Click
-        Me.GrillaB.Rows.Clear()
-        Me.cargarTablaB()
     End Sub
 
     Public Sub cargarFilaC()
@@ -371,20 +356,51 @@
 
     End Sub
 
-    Private Sub cmd_generarC_Click(sender As Object, e As EventArgs) Handles cmd_generarC.Click
-        Me.GrillaC.Rows.Clear()
-        Me.cargarTablaC()
+    Private Sub cmd_generarA_Click(sender As Object, e As EventArgs) Handles cmd_generarA.Click
+        Dim ganancia As Double
+
+        For index = 1 To Integer.Parse(Me.txt_simulacionesA.Text)
+            Me.GrillaA.Rows.Clear()
+            Me.cargarTablaA()
+            ganancia += Me.calcularGananciaSimulacion(Me.GrillaA, "A") / Me.txt_cantidadDias.Text 'Dividimos para obtener la ganancia diaria promedio de esa simulacion 
+        Next
+
+        Me.txt_respA.Text = ganancia / Me.txt_simulacionesA.Text 'Dividimos las ganancias d. prom. de las simulaciones por la cant. de simulaciones para obtener ganancia d. p. de todo
     End Sub
 
-    Public Function obtenerGananciaDiariaPromedio(grilla As DataGridView, punto As String)
+    Private Sub cmd_generarB_Click(sender As Object, e As EventArgs) Handles cmd_generarB.Click
+        Dim ganancia As Double
+
+        For index = 1 To Integer.Parse(Me.txt_simulacionesB.Text)
+            Me.GrillaB.Rows.Clear()
+            Me.cargarTablaB()
+            ganancia += Me.calcularGananciaSimulacion(Me.GrillaB, "B") / Me.txt_cantidadDiasB.Text
+        Next
+
+        Me.txt_respB.Text = ganancia / Me.txt_simulacionesB.Text
+    End Sub
+
+    Private Sub cmd_generarC_Click(sender As Object, e As EventArgs) Handles cmd_generarC.Click
+        Dim ganancia As Double
+
+        For index = 1 To Integer.Parse(Me.txt_simulacionesC.Text)
+            Me.GrillaC.Rows.Clear()
+            Me.cargarTablaC()
+            ganancia += Me.calcularGananciaSimulacion(Me.GrillaC, "C") / Me.txt_cantidadDiasC.Text
+
+        Next
+
+        Me.txt_respC.Text = ganancia / Me.txt_simulacionesC.Text
+    End Sub
+
+    Public Function calcularGananciaSimulacion(grilla As DataGridView, punto As String)
         Dim ganancia As Double
 
         If punto = "A" Then
-            ganancia = grilla.Rows(grilla.Rows.Count - 1).Cells(10).Value
+            ganancia = grilla.Rows(grilla.Rows.Count - 2).Cells(10).Value
         Else
-            ganancia = grilla.Rows(grilla.Rows.Count - 1).Cells(11).Value
+            ganancia = grilla.Rows(grilla.Rows.Count - 2).Cells(11).Value
         End If
-
 
         Return ganancia
     End Function

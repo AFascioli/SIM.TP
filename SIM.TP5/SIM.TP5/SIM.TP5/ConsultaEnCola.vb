@@ -1,6 +1,6 @@
 ﻿Public Class ConsultaEnCola
-    Public llegada As Integer
-    Public Sub New(llegada As Integer)
+    Public llegada As Date
+    Public Sub New(llegada As Date)
         Me.llegada = llegada
     End Sub
 End Class

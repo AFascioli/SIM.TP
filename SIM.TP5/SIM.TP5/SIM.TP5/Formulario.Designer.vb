@@ -22,10 +22,10 @@ Partial Class Formulario
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.grid = New System.Windows.Forms.DataGridView()
         Me.evento = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.reloj = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,17 +54,17 @@ Partial Class Formulario
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.gridUrgencias = New System.Windows.Forms.DataGridView()
+        Me.PosicionU = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LlegadaU = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.gridConsultas = New System.Windows.Forms.DataGridView()
+        Me.Posicion = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Llegada = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txt_porcentaje = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txt_cant_filas = New System.Windows.Forms.TextBox()
         Me.txt_fila_inicial = New System.Windows.Forms.TextBox()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.Posicion = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Llegada = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PosicionU = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.LlegadaU = New System.Windows.Forms.DataGridViewTextBoxColumn()
         CType(Me.grid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridUrgencias, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.gridConsultas, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,7 +92,7 @@ Partial Class Formulario
         '
         Me.reloj.HeaderText = "Reloj"
         Me.reloj.Name = "reloj"
-        Me.reloj.Width = 40
+        Me.reloj.Width = 60
         '
         'rndLlegadaConsulta
         '
@@ -108,8 +108,8 @@ Partial Class Formulario
         '
         'tLlegadaConsulta
         '
-        DataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.tLlegadaConsulta.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.tLlegadaConsulta.DefaultCellStyle = DataGridViewCellStyle1
         Me.tLlegadaConsulta.HeaderText = "Tiempo llegada consulta"
         Me.tLlegadaConsulta.Name = "tLlegadaConsulta"
         Me.tLlegadaConsulta.Width = 60
@@ -128,8 +128,8 @@ Partial Class Formulario
         '
         'tLlegadaUrgencia
         '
-        DataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.tLlegadaUrgencia.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.tLlegadaUrgencia.DefaultCellStyle = DataGridViewCellStyle2
         Me.tLlegadaUrgencia.HeaderText = "Tiempo llegada urgencia"
         Me.tLlegadaUrgencia.Name = "tLlegadaUrgencia"
         Me.tLlegadaUrgencia.Width = 60
@@ -178,8 +178,8 @@ Partial Class Formulario
         '
         'tFinAtConsulta
         '
-        DataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.tFinAtConsulta.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.tFinAtConsulta.DefaultCellStyle = DataGridViewCellStyle3
         Me.tFinAtConsulta.HeaderText = "Tiempo fin at. consulta"
         Me.tFinAtConsulta.Name = "tFinAtConsulta"
         Me.tFinAtConsulta.Width = 60
@@ -198,8 +198,8 @@ Partial Class Formulario
         '
         'tFinAtUrgencia
         '
-        DataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.tFinAtUrgencia.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.tFinAtUrgencia.DefaultCellStyle = DataGridViewCellStyle4
         Me.tFinAtUrgencia.HeaderText = "Tiempo fin at. urgencia"
         Me.tFinAtUrgencia.Name = "tFinAtUrgencia"
         Me.tFinAtUrgencia.Width = 60
@@ -247,7 +247,7 @@ Partial Class Formulario
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(404, 37)
+        Me.Label1.Location = New System.Drawing.Point(803, 21)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(91, 13)
@@ -257,7 +257,7 @@ Partial Class Formulario
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(876, 37)
+        Me.Label2.Location = New System.Drawing.Point(1082, 18)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(92, 13)
@@ -268,19 +268,39 @@ Partial Class Formulario
         '
         Me.gridUrgencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridUrgencias.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PosicionU, Me.LlegadaU})
-        Me.gridUrgencias.Location = New System.Drawing.Point(879, 64)
+        Me.gridUrgencias.Location = New System.Drawing.Point(1085, 45)
         Me.gridUrgencias.Name = "gridUrgencias"
-        Me.gridUrgencias.Size = New System.Drawing.Size(466, 134)
+        Me.gridUrgencias.Size = New System.Drawing.Size(258, 153)
         Me.gridUrgencias.TabIndex = 4
+        '
+        'PosicionU
+        '
+        Me.PosicionU.HeaderText = "Posición"
+        Me.PosicionU.Name = "PosicionU"
+        '
+        'LlegadaU
+        '
+        Me.LlegadaU.HeaderText = "Momento de llegada"
+        Me.LlegadaU.Name = "LlegadaU"
         '
         'gridConsultas
         '
         Me.gridConsultas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.gridConsultas.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Posicion, Me.Llegada})
-        Me.gridConsultas.Location = New System.Drawing.Point(407, 64)
+        Me.gridConsultas.Location = New System.Drawing.Point(806, 45)
         Me.gridConsultas.Name = "gridConsultas"
-        Me.gridConsultas.Size = New System.Drawing.Size(466, 134)
+        Me.gridConsultas.Size = New System.Drawing.Size(258, 154)
         Me.gridConsultas.TabIndex = 4
+        '
+        'Posicion
+        '
+        Me.Posicion.HeaderText = "Posición"
+        Me.Posicion.Name = "Posicion"
+        '
+        'Llegada
+        '
+        Me.Llegada.HeaderText = "Momento de llegada"
+        Me.Llegada.Name = "Llegada"
         '
         'Label3
         '
@@ -335,26 +355,6 @@ Partial Class Formulario
         Me.Label5.TabIndex = 9
         Me.Label5.Text = "Mostrar desde la fila"
         '
-        'Posicion
-        '
-        Me.Posicion.HeaderText = "Posición"
-        Me.Posicion.Name = "Posicion"
-        '
-        'Llegada
-        '
-        Me.Llegada.HeaderText = "Momento de llegada"
-        Me.Llegada.Name = "Llegada"
-        '
-        'PosicionU
-        '
-        Me.PosicionU.HeaderText = "Posición"
-        Me.PosicionU.Name = "PosicionU"
-        '
-        'LlegadaU
-        '
-        Me.LlegadaU.HeaderText = "Momento de llegada"
-        Me.LlegadaU.Name = "LlegadaU"
-        '
         'Formulario
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -394,6 +394,16 @@ Partial Class Formulario
     Friend WithEvents Label2 As Label
     Friend WithEvents gridUrgencias As DataGridView
     Friend WithEvents gridConsultas As DataGridView
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txt_porcentaje As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txt_cant_filas As TextBox
+    Friend WithEvents txt_fila_inicial As TextBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents PosicionU As DataGridViewTextBoxColumn
+    Friend WithEvents LlegadaU As DataGridViewTextBoxColumn
+    Friend WithEvents Posicion As DataGridViewTextBoxColumn
+    Friend WithEvents Llegada As DataGridViewTextBoxColumn
     Friend WithEvents evento As DataGridViewTextBoxColumn
     Friend WithEvents reloj As DataGridViewTextBoxColumn
     Friend WithEvents rndLlegadaConsulta As DataGridViewTextBoxColumn
@@ -415,14 +425,4 @@ Partial Class Formulario
     Friend WithEvents tFinAtUrgencia As DataGridViewTextBoxColumn
     Friend WithEvents sumUrgencias As DataGridViewTextBoxColumn
     Friend WithEvents sumPacientes As DataGridViewTextBoxColumn
-    Friend WithEvents Label3 As Label
-    Friend WithEvents txt_porcentaje As TextBox
-    Friend WithEvents Label4 As Label
-    Friend WithEvents txt_cant_filas As TextBox
-    Friend WithEvents txt_fila_inicial As TextBox
-    Friend WithEvents Label5 As Label
-    Friend WithEvents PosicionU As DataGridViewTextBoxColumn
-    Friend WithEvents LlegadaU As DataGridViewTextBoxColumn
-    Friend WithEvents Posicion As DataGridViewTextBoxColumn
-    Friend WithEvents Llegada As DataGridViewTextBoxColumn
 End Class

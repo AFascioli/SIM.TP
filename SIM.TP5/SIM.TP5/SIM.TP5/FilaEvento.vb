@@ -9,13 +9,13 @@
         EstoNoTendriaQuePasar
     End Enum
     Public evento As eventos
-    Public reloj As Integer '#reloj
+    Public reloj As Date '#reloj
     Public rnd1 As Double
     Public tProxConsulta As Integer
-    Public tLlegConsulta As Integer '#reloj
+    Public tLlegConsulta As Date '#reloj
     Public rnd2 As Double
     Public tProxUrgencia As Integer
-    Public tLlegUrgencia As Integer '#reloj
+    Public tLlegUrgencia As Date '#reloj
     Public Enum estadosMedico
         Libre
         Atendiendo
@@ -27,30 +27,27 @@
     Public tFaltanteConsulta As Integer
     Public rnd3 As Double
     Public tAtencionConsulta As Integer
-    Public tFinAtencionConsulta As Integer '#reloj
+    Public tFinAtencionConsulta As Date '#reloj
     Public rnd4 As Double
     Public tAtencionUrgencia As Integer
-    Public tFinAtencionUrgencia As Integer '#reloj
+    Public tFinAtencionUrgencia As Date '#reloj
     Public sumUrgencias As Integer
     Public sumPacientes As Integer
 
     Private atendiendoUrgencia As Boolean
 
-    Public Sub New(reloj As Integer)
+    Public Sub New()
         'Constructor para la primera fila de la simulación
-        Me.reloj = reloj '#reloj
-        ' Me.reloj = DateAndTime.TimeOfDay
+        Me.reloj = DateAndTime.TimeOfDay
         Me.rnd1 = Rnd()
         Me.rnd2 = Rnd()
         Me.rnd3 = -1
         Me.rnd4 = -1
 
         Me.tProxConsulta = obtenerRNDExponencial(1 / 30, rnd1) 'lambda (1 cada 30 minutos)
-        Me.tLlegConsulta = Me.reloj + Me.tProxConsulta
-
+        Me.tLlegConsulta = Me.reloj.AddMinutes(Me.tProxConsulta)
         Me.tProxUrgencia = obtenerRNDExponencial(1 / 90, rnd2) 'lambda (2 cada 3 horas = 180 minutos)
-        Me.tLlegUrgencia = Me.reloj + Me.tProxUrgencia
-
+        Me.tLlegUrgencia = Me.reloj.AddMinutes(Me.tProxUrgencia)
 
         Me.estadoMedico = estadosMedico.Libre
 
@@ -58,18 +55,12 @@
         Me.colaUrgencia = New List(Of UrgenciaEnCola)
         Me.consultaEnEspera = False
         Me.tFaltanteConsulta = -1
-
         Me.tAtencionConsulta = -1
-
-        Me.tFinAtencionConsulta = -1
-
+        Me.tFinAtencionConsulta = Nothing
         Me.tAtencionUrgencia = -1
-
-        Me.tFinAtencionUrgencia = -1
-
+        Me.tFinAtencionUrgencia = Nothing
         Me.sumUrgencias = 0
         Me.sumPacientes = 0
-
         Me.atendiendoUrgencia = False
     End Sub
 
@@ -84,10 +75,8 @@
             Case eventos.LlegadaConsulta
                 completarLlegadaConsulta(filaAnterior)
 
-
             Case eventos.LlegadaUrgencia
                 completarLlegadaUrgencia(filaAnterior)
-                Me.rnd2 = Rnd()
 
             Case eventos.FinAtConsulta
                 completarFinAtConsulta(filaAnterior)
@@ -139,14 +128,14 @@
             Me.rnd4 = Rnd()
             Me.colaUrgencia.RemoveAt(0)
             Me.tAtencionUrgencia = obtenerRNDUniforme(15, 30, Me.rnd4)
-            Me.tFinAtencionUrgencia = Me.reloj + Me.tAtencionUrgencia
+            Me.tFinAtencionUrgencia = Me.reloj.AddMinutes(Me.tAtencionUrgencia)
 
         Else
             If filaAnterior.consultaEnEspera Then
                 ' Reanudar consulta
                 Me.consultaEnEspera = False
                 Me.tFaltanteConsulta = -1
-                Me.tFinAtencionConsulta = Me.reloj + filaAnterior.tFaltanteConsulta
+                Me.tFinAtencionConsulta = Me.reloj.AddMinutes(filaAnterior.tFaltanteConsulta)
                 Me.atendiendoUrgencia = False
 
             ElseIf Me.colaConsulta.Count > 0 Then
@@ -154,7 +143,7 @@
                 Me.colaConsulta.RemoveAt(0)
                 Me.rnd3 = Rnd()
                 Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
-                Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
+                Me.tFinAtencionConsulta = Me.reloj.AddMinutes(Me.tAtencionConsulta)
                 Me.atendiendoUrgencia = False
 
             Else
@@ -162,7 +151,7 @@
                 estadoMedico = estadosMedico.Libre
             End If
             Me.tAtencionUrgencia = -1
-            Me.tFinAtencionUrgencia = -1
+            Me.tFinAtencionUrgencia = Nothing
             Me.atendiendoUrgencia = False
         End If
 
@@ -176,11 +165,11 @@
             Me.colaConsulta.RemoveAt(0)
             Me.rnd3 = Rnd()
             Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
-            Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
+            Me.tFinAtencionConsulta = Me.reloj.AddMinutes(Me.tAtencionConsulta)
         Else
             estadoMedico = estadosMedico.Libre
             Me.tAtencionConsulta = -1
-            Me.tFinAtencionConsulta = -1
+            Me.tFinAtencionConsulta = Nothing
         End If
 
         Me.sumPacientes += 1
@@ -189,13 +178,13 @@
     Private Sub completarLlegadaUrgencia(filaAnterior As FilaEvento)
         Me.rnd2 = Rnd()
         Me.tProxUrgencia = obtenerRNDExponencial(1 / 90, rnd2) 'lambda (2 cada 3 horas = 180 minutos)
-        Me.tLlegUrgencia = Me.reloj + Me.tProxUrgencia
+        Me.tLlegUrgencia = Me.reloj.AddMinutes(Me.tProxUrgencia)
 
         If filaAnterior.estadoMedico = estadosMedico.Libre Then
             Me.atendiendoUrgencia = True
             Me.rnd4 = Rnd()
             Me.tAtencionUrgencia = obtenerRNDUniforme(15, 30, Me.rnd4)
-            Me.tFinAtencionUrgencia = Me.reloj + Me.tAtencionUrgencia
+            Me.tFinAtencionUrgencia = Me.reloj.AddMinutes(Me.tAtencionUrgencia)
             Me.estadoMedico = estadosMedico.Atendiendo
         Else
             If filaAnterior.atendiendoUrgencia Then
@@ -206,11 +195,11 @@
                 Me.atendiendoUrgencia = True
                 Me.rnd4 = Rnd()
                 Me.tAtencionUrgencia = obtenerRNDUniforme(15, 30, Me.rnd4)
-                Me.tFinAtencionUrgencia = Me.reloj + Me.tAtencionUrgencia
+                Me.tFinAtencionUrgencia = Me.reloj.AddMinutes(Me.tAtencionUrgencia)
 
                 Me.consultaEnEspera = True
-                Me.tFaltanteConsulta = filaAnterior.tFinAtencionConsulta - Me.reloj
-                Me.tFinAtencionConsulta = -1
+                Me.tFaltanteConsulta = filaAnterior.tFinAtencionConsulta.Subtract(Me.reloj).Minutes
+                Me.tFinAtencionConsulta = Nothing
             End If
         End If
     End Sub
@@ -218,7 +207,7 @@
     Private Sub completarLlegadaConsulta(filaAnterior As FilaEvento)
         Me.rnd1 = Rnd()
         Me.tProxConsulta = obtenerRNDExponencial(1 / 30, rnd1) 'lambda (1 cada 30 minutos)
-        Me.tLlegConsulta = Me.reloj + Me.tProxConsulta
+        Me.tLlegConsulta = Me.reloj.AddMinutes(Me.tProxConsulta)
         Me.tProxUrgencia = filaAnterior.tProxUrgencia
         Me.tLlegUrgencia = filaAnterior.tLlegUrgencia
 
@@ -226,7 +215,7 @@
             Me.estadoMedico = estadosMedico.Atendiendo
             Me.rnd3 = Rnd()
             Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
-            Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
+            Me.tFinAtencionConsulta = Me.reloj.AddMinutes(Me.tAtencionConsulta)
         Else
             ' Incrementar Cola
             Me.colaConsulta.Add(New ConsultaEnCola(Me.reloj))
@@ -239,14 +228,14 @@
         For i As Integer = 0 To colaConsulta.Count - 1
             Dim j As Integer = gridConsultas.Rows.Add()
             gridConsultas.Rows(j).Cells(0).Value = i + 1
-            gridConsultas.Rows(j).Cells(1).Value = colaConsulta(i).llegada
+            gridConsultas.Rows(j).Cells(1).Value = colaConsulta(i).llegada.TimeOfDay
         Next
 
         gridUrgencia.Rows.Clear()
         For i As Integer = 0 To colaUrgencia.Count - 1
             Dim j As Integer = gridUrgencia.Rows.Add()
             gridUrgencia.Rows(j).Cells(0).Value = i + 1
-            gridUrgencia.Rows(j).Cells(1).Value = colaUrgencia(i).llegada
+            gridUrgencia.Rows(j).Cells(1).Value = colaUrgencia(i).llegada.TimeOfDay
         Next
 
     End Sub
@@ -267,22 +256,28 @@
 
     Private Function proxEvento()
 
-        Dim lista As New List(Of Integer) From {
+        Dim lista As New List(Of Date) From {
             Me.tLlegConsulta,
             Me.tLlegUrgencia,
             Me.tFinAtencionConsulta,
             Me.tFinAtencionUrgencia
         }
 
-        Dim listaMin As New List(Of Integer)
+        Dim listaMin As New List(Of Date)
 
-        For Each elemento As Integer In lista
-            If (elemento >= 0) Then
+        For Each elemento As Date In lista
+            If Not elemento.Equals(Nothing) Then
                 listaMin.Add(elemento)
             End If
         Next
 
-        Dim menor = listaMin.Min()
+        Dim menor As Date = listaMin.First
+
+        For Each ddate As Date In listaMin
+            If DateTime.Compare(ddate, menor) < 0 Then
+                menor = ddate
+            End If
+        Next
         Dim index = lista.IndexOf(menor)
 
         Select Case index
@@ -300,22 +295,28 @@
     End Function
 
     Private Function proxReloj()
-        Dim lista As New List(Of Integer) From {
+        Dim lista As New List(Of Date) From {
             Me.tLlegConsulta,
             Me.tLlegUrgencia,
             Me.tFinAtencionConsulta,
             Me.tFinAtencionUrgencia
         }
 
-        Dim listaMin As New List(Of Integer)
+        Dim listaMin As New List(Of Date)
 
-        For Each elemento As Integer In lista
-            If (elemento >= 0) Then
+        For Each elemento As Date In lista
+            If Not elemento.Equals(Nothing) Then
                 listaMin.Add(elemento)
             End If
         Next
 
-        Dim menor = listaMin.Min()
+        Dim menor As Date = listaMin.First
+
+        For Each ddate As Date In listaMin
+            If DateTime.Compare(ddate, menor) < 0 Then
+                menor = ddate
+            End If
+        Next
 
         Return menor
 

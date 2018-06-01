@@ -9,13 +9,13 @@
         EstoNoTendriaQuePasar
     End Enum
     Public evento As eventos
-    Public reloj As Integer 'FIJARSE BIEN COMO IMPLEMENTAR TIPO DE ATRIBUTO
+    Public reloj As Integer '#reloj
     Public rnd1 As Double
     Public tProxConsulta As Integer
-    Public tLlegConsulta As Integer 'FIJARSE BIEN COMO IMPLEMENTAR TIPO DE ATRIBUTO
+    Public tLlegConsulta As Integer '#reloj
     Public rnd2 As Double
     Public tProxUrgencia As Integer
-    Public tLlegUrgencia As Integer 'FIJARSE BIEN COMO IMPLEMENTAR TIPO DE ATRIBUTO
+    Public tLlegUrgencia As Integer '#reloj
     Public Enum estadosMedico
         Libre
         Atendiendo
@@ -27,10 +27,10 @@
     Public tFaltanteConsulta As Integer
     Public rnd3 As Double
     Public tAtencionConsulta As Integer
-    Public tFinAtencionConsulta As Integer
+    Public tFinAtencionConsulta As Integer '#reloj
     Public rnd4 As Double
     Public tAtencionUrgencia As Integer
-    Public tFinAtencionUrgencia As Integer
+    Public tFinAtencionUrgencia As Integer '#reloj
     Public sumUrgencias As Integer
     Public sumPacientes As Integer
 
@@ -38,7 +38,8 @@
 
     Public Sub New(reloj As Integer)
         'Constructor para la primera fila de la simulación
-        Me.reloj = reloj
+        Me.reloj = reloj '#reloj
+        ' Me.reloj = DateAndTime.TimeOfDay
         Me.rnd1 = Rnd()
         Me.rnd2 = Rnd()
         Me.rnd3 = -1
@@ -248,9 +249,7 @@
             gridUrgencia.Rows(j).Cells(1).Value = colaUrgencia(i).llegada
         Next
 
-
     End Sub
-
 
     Public Function obtenerRNDExponencial(lambda As Double, rnd As Double)
         Dim res As Double
@@ -265,42 +264,6 @@
         res = A + rnd * (B - A)
         Return res
     End Function
-
-    Public Sub sumarColaConsultas()
-
-        Dim tiempoCol = "tLlegadaCola"
-        Dim posicionCol = "posicionCola"
-        Dim cantidadC = Formulario.gridConsultas.Columns.GetColumnCount(DataGridViewElementStates.Visible)
-
-        If cantidadC = 0 Then
-            Formulario.gridConsultas.Columns.Add(tiempoCol & "1", "T. llegada")
-            Formulario.gridConsultas.Columns.Add(posicionCol & "1", "Posicion en la cola")
-            Formulario.gridConsultas.Rows.Add()
-            Formulario.gridConsultas.Rows(0).Cells(0).Value = Me.reloj
-            Formulario.gridConsultas.Rows(0).Cells(1).Value = Me.colaConsulta
-        Else
-            If (Me.colaConsulta.Count * 2) > cantidadC Then
-
-                Dim col = (cantidadC / 2) + 1
-                Formulario.gridConsultas.Columns.Add(tiempoCol & col, "T. llegada")
-                Formulario.gridConsultas.Columns.Add(posicionCol & col, "Posicion en la cola")
-
-                Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Cells(cantidadC).Value = Me.reloj
-                Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Cells(cantidadC + 1).Value = Me.colaConsulta
-            End If
-        End If
-    End Sub
-
-    Private Shared Sub copiarUltimaFila()
-        Dim cantidadC = Formulario.gridConsultas.Columns.GetColumnCount(DataGridViewElementStates.Visible)
-
-        'Formulario.gridConsultas.Rows.Add(Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Clone)
-        Formulario.gridConsultas.Rows.Add()
-
-        For index = 0 To cantidadC - 1
-            Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Cells(index).Value = Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 2).Cells(index).Value
-        Next
-    End Sub
 
     Private Function proxEvento()
 
@@ -357,6 +320,5 @@
         Return menor
 
     End Function
-
 
 End Class

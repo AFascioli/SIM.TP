@@ -6,8 +6,6 @@
         Me.txt_cantSimulaciones.Text = 10
         Me.txt_cant_filas.Text = 10
         Me.txt_fila_inicial.Text = 1
-        Me.cargarTabla()
-
     End Sub
 
     Private Sub cargarFila(indice As Integer, filaEvento As FilaEvento)
@@ -67,25 +65,31 @@
     End Sub
 
     Private Sub cargarTabla()
-        Dim filaInicial As Integer = Integer.Parse(Me.txt_fila_inicial.Text) - 1
-        Dim cantFilas As Integer = Integer.Parse(Me.txt_cant_filas.Text)
+        Dim filaInicial As Integer = Integer.Parse(Me.txt_fila_inicial.Text)
+        Dim cantFilas As Integer = Integer.Parse(Me.txt_cant_filas.Text) - 1
         Dim cantTotalFilas As Integer = Integer.Parse(Me.txt_cantSimulaciones.Text)
         Dim j As Integer = 0
 
+        Dim cborrar As Integer = 0
+
         grid.Rows.Clear()
         filas = New FilaEvento(cantFilas) {}
-        filaAnterior = New FilaEvento(800)
-        cargarFila(0, filaAnterior)
-        If filaInicial = 0 Then
+        filaAnterior = New FilaEvento(800) '#reloj
+        If filaInicial = 1 Then
+            cborrar += 1
+            cargarFila(0, filaAnterior)
             filas(0) = filaAnterior
             j += 1
         End If
 
         For index = 1 To cantTotalFilas
             Dim filaActual = New FilaEvento(filaAnterior)
-            cargarFila(index, filaActual)
+            cborrar += 1
             filaAnterior = filaActual
-            If filaInicial <= index And j <= cantFilas Then
+            If filaInicial < index And j <= cantFilas Then
+
+                Console.WriteLine("Filas que mostramos " & cborrar)
+                cargarFila(j, filaActual)
                 filas(j) = filaAnterior
                 j += 1
             End If

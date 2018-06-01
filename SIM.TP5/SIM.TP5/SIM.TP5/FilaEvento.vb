@@ -101,6 +101,10 @@
             Me.estadoMedico = estadosMedico.Atendiendo
         End If
 
+        If Me.colaConsulta <> 0 Then
+            Me.copiarUltimaFila()
+        End If
+
     End Sub
 
     Private Sub completarFinAtUrgencia(filaAnterior As FilaEvento)
@@ -266,7 +270,8 @@
             Me.colaConsulta = filaAnterior.colaConsulta + 1
             Me.tAtencionConsulta = filaAnterior.tAtencionConsulta
             Me.tFinAtencionConsulta = filaAnterior.tFinAtencionConsulta
-            Me.rnd3 = 0 'AGREGAGOOOOOOOOOOOOOOOOOO
+            Me.rnd3 = 0
+            Me.sumarColaConsultas()
         End If
 
         Me.consultaEnEspera = filaAnterior.consultaEnEspera
@@ -294,6 +299,42 @@
         res = A + rnd * (B - A)
         Return res
     End Function
+
+    Public Sub sumarColaConsultas()
+
+        Dim tiempoCol = "tLlegadaCola"
+        Dim posicionCol = "posicionCola"
+        Dim cantidadC = Formulario.gridConsultas.Columns.GetColumnCount(DataGridViewElementStates.Visible)
+
+        If cantidadC = 0 Then
+            Formulario.gridConsultas.Columns.Add(tiempoCol & "1", "T. llegada")
+            Formulario.gridConsultas.Columns.Add(posicionCol & "1", "Posicion en la cola")
+            Formulario.gridConsultas.Rows.Add()
+            Formulario.gridConsultas.Rows(0).Cells(0).Value = Me.reloj
+            Formulario.gridConsultas.Rows(0).Cells(1).Value = Me.colaConsulta
+        Else
+            If (Me.colaConsulta * 2) > cantidadC Then
+
+                Dim col = (cantidadC / 2) + 1
+                Formulario.gridConsultas.Columns.Add(tiempoCol & col, "T. llegada")
+                Formulario.gridConsultas.Columns.Add(posicionCol & col, "Posicion en la cola")
+
+                Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Cells(cantidadC).Value = Me.reloj
+                Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Cells(cantidadC + 1).Value = Me.colaConsulta
+            End If
+        End If
+    End Sub
+
+    Private Shared Sub copiarUltimaFila()
+        Dim cantidadC = Formulario.gridConsultas.Columns.GetColumnCount(DataGridViewElementStates.Visible)
+
+        'Formulario.gridConsultas.Rows.Add(Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Clone)
+        Formulario.gridConsultas.Rows.Add()
+
+        For index = 0 To cantidadC - 1
+            Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 1).Cells(index).Value = Formulario.gridConsultas.Rows(Formulario.gridConsultas.Rows.Count() - 2).Cells(index).Value
+        Next
+    End Sub
 
     Private Function proxEvento()
 

@@ -6,6 +6,7 @@
         LlegadaUrgencia
         FinAtConsulta
         FinAtUrgencia
+        EstoNoTendriaQuePasar
     End Enum
     Public evento As eventos
     Public reloj As Integer 'FIJARSE BIEN COMO IMPLEMENTAR TIPO DE ATRIBUTO
@@ -20,8 +21,8 @@
         Atendiendo
     End Enum
     Public estadoMedico As estadosMedico
-    Public colaConsulta As Integer
-    Public colaUrgencia As Integer
+    Public colaConsulta As List(Of ConsultaEnCola)
+    Public colaUrgencia As List(Of UrgenciaEnCola)
     Public consultaEnEspera As Boolean
     Public tFaltanteConsulta As Integer
     Public rnd3 As Double
@@ -33,13 +34,15 @@
     Public sumUrgencias As Integer
     Public sumPacientes As Integer
 
-    Public Sub New(reloj As Integer, colaConsulta As Integer, colaUrgencia As Integer, sumUrgencias As Integer, sumPacientes As Integer)
+    Private atendiendoUrgencia As Boolean
+
+    Public Sub New(reloj As Integer)
         'Constructor para la primera fila de la simulación
         Me.reloj = reloj
         Me.rnd1 = Rnd()
         Me.rnd2 = Rnd()
-        Me.rnd3 = 0
-        Me.rnd4 = 0
+        Me.rnd3 = -1
+        Me.rnd4 = -1
 
         Me.tProxConsulta = obtenerRNDExponencial(1 / 30, rnd1) 'lambda (1 cada 30 minutos)
         Me.tLlegConsulta = Me.reloj + Me.tProxConsulta
@@ -50,40 +53,40 @@
 
         Me.estadoMedico = estadosMedico.Libre
 
-        Me.colaConsulta = colaConsulta
-        Me.colaUrgencia = colaUrgencia
+        Me.colaConsulta = New List(Of ConsultaEnCola)
+        Me.colaUrgencia = New List(Of UrgenciaEnCola)
         Me.consultaEnEspera = False
-        Me.tFaltanteConsulta = 0
+        Me.tFaltanteConsulta = -1
 
-        Me.tAtencionConsulta = 0
+        Me.tAtencionConsulta = -1
 
-        Me.tFinAtencionConsulta = 0
+        Me.tFinAtencionConsulta = -1
 
-        Me.tAtencionUrgencia = 0
+        Me.tAtencionUrgencia = -1
 
-        Me.tFinAtencionUrgencia = 0
+        Me.tFinAtencionUrgencia = -1
 
-        Me.sumUrgencias = sumUrgencias
-        Me.sumPacientes = sumPacientes
+        Me.sumUrgencias = 0
+        Me.sumPacientes = 0
 
+        Me.atendiendoUrgencia = False
     End Sub
 
     Public Sub New(filaAnterior As FilaEvento)
 
-        Me.evento = filaAnterior.proxEvento 'Determinado por el evento de la fila anterior que tiene el tiempo mas chico
-        Me.reloj = filaAnterior.proxReloj 'Determinado por el evento de la fila anterior que tiene el tiempo mas chico 
+        Me.evento = filaAnterior.proxEvento() 'Determinado por el evento de la fila anterior que tiene el tiempo mas chico
+        Me.reloj = filaAnterior.proxReloj() 'Determinado por el evento de la fila anterior que tiene el tiempo mas chico 
 
-        Me.rnd1 = Rnd()
-        Me.rnd2 = Rnd()
-        Me.rnd3 = Rnd()
-        Me.rnd4 = Rnd()
+        copiarDeFilaAnterior(filaAnterior)
 
         Select Case evento
             Case eventos.LlegadaConsulta
                 completarLlegadaConsulta(filaAnterior)
 
+
             Case eventos.LlegadaUrgencia
                 completarLlegadaUrgencia(filaAnterior)
+                Me.rnd2 = Rnd()
 
             Case eventos.FinAtConsulta
                 completarFinAtConsulta(filaAnterior)
@@ -93,198 +96,161 @@
             Case Else
         End Select
 
-        'Asignacion del estado del médico
-        If Not Me.consultaEnEspera And Me.colaConsulta = 0 And Me.colaUrgencia = 0 And Me.tLlegConsulta > Me.reloj And Me.tLlegUrgencia > Me.reloj Then
-            'Si no hay nadie en las colas, no hay consulta en suspendida y todavia no llego nadie, entonces el medico esta libre
-            Me.estadoMedico = estadosMedico.Libre
-        Else
-            Me.estadoMedico = estadosMedico.Atendiendo
-        End If
+    End Sub
 
-        If Me.colaConsulta <> 0 Then
-            Me.copiarUltimaFila()
-        End If
+    Private Sub copiarDeFilaAnterior(filaAnterior As FilaEvento)
+        Me.rnd1 = -1
+        Me.rnd2 = -1
+        Me.rnd3 = -1
+        Me.rnd4 = -1
+        Me.tProxConsulta = -1
+        Me.tLlegConsulta = filaAnterior.tLlegConsulta
+        Me.tProxUrgencia = -1
+        Me.tLlegUrgencia = filaAnterior.tLlegUrgencia
+        Me.estadoMedico = filaAnterior.estadoMedico
 
+        Me.colaConsulta = New List(Of ConsultaEnCola)
+        For i = 0 To filaAnterior.colaConsulta.Count - 1
+            Me.colaConsulta.Add(filaAnterior.colaConsulta(i))
+        Next
+
+        Me.colaUrgencia = New List(Of UrgenciaEnCola)
+        For i = 0 To filaAnterior.colaUrgencia.Count - 1
+            Me.colaUrgencia.Add(filaAnterior.colaUrgencia(i))
+        Next
+
+        Me.consultaEnEspera = filaAnterior.consultaEnEspera
+        Me.tFaltanteConsulta = filaAnterior.tFaltanteConsulta
+        Me.tAtencionConsulta = -1
+        Me.tFinAtencionConsulta = filaAnterior.tFinAtencionConsulta
+        Me.tAtencionUrgencia = -1
+        Me.tFinAtencionUrgencia = filaAnterior.tFinAtencionUrgencia
+        Me.sumUrgencias = filaAnterior.sumUrgencias
+        Me.sumPacientes = filaAnterior.sumPacientes
+
+        Me.atendiendoUrgencia = filaAnterior.atendiendoUrgencia
     End Sub
 
     Private Sub completarFinAtUrgencia(filaAnterior As FilaEvento)
-        Me.tProxConsulta = filaAnterior.tProxConsulta
-        Me.tLlegConsulta = filaAnterior.tLlegConsulta
-        Me.tProxUrgencia = filaAnterior.tProxUrgencia
-        Me.tLlegUrgencia = filaAnterior.tLlegUrgencia
-        Me.rnd1 = 0
-        Me.rnd2 = 0
 
-        If filaAnterior.colaUrgencia <> 0 Then
-            estadoMedico = estadosMedico.Atendiendo
-            Me.colaConsulta = filaAnterior.colaConsulta
-            Me.colaUrgencia = filaAnterior.colaUrgencia - 1
-
-            Me.consultaEnEspera = filaAnterior.consultaEnEspera
-            Me.tFaltanteConsulta = filaAnterior.tFaltanteConsulta
-
-            Me.rnd3 = 0
-            Me.tAtencionConsulta = 0
-            Me.tFinAtencionConsulta = 0
-
+        If Me.colaUrgencia.Count > 0 Then
+            'Pasar a la proxima urgencia
+            Me.rnd4 = Rnd()
+            Me.colaUrgencia.RemoveAt(0)
             Me.tAtencionUrgencia = obtenerRNDUniforme(15, 30, Me.rnd4)
             Me.tFinAtencionUrgencia = Me.reloj + Me.tAtencionUrgencia
-        ElseIf filaAnterior.consultaEnEspera Then
 
-            estadoMedico = estadosMedico.Atendiendo
-            Me.colaConsulta = filaAnterior.colaConsulta
-            Me.colaUrgencia = filaAnterior.colaUrgencia
-
-            Me.consultaEnEspera = False
-            Me.tFaltanteConsulta = 0
-
-            Me.rnd3 = 0
-            Me.tAtencionConsulta = filaAnterior.tFaltanteConsulta
-            Me.tFinAtencionConsulta = Me.reloj + filaAnterior.tFaltanteConsulta
-
-            Me.rnd4 = 0
-            Me.tAtencionUrgencia = 0
-            Me.tFinAtencionUrgencia = 0
-
-        ElseIf filaAnterior.colaConsulta <> 0 Then
-            estadoMedico = estadosMedico.Atendiendo
-            Me.colaConsulta = filaAnterior.colaConsulta - 1
-            Me.colaUrgencia = filaAnterior.colaUrgencia
-
-            Me.consultaEnEspera = filaAnterior.consultaEnEspera 'Es false
-            Me.tFaltanteConsulta = filaAnterior.tFaltanteConsulta 'Es 0
-
-            Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
-            Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
-
-            Me.rnd4 = 0
-            Me.tAtencionUrgencia = 0
-            Me.tFinAtencionUrgencia = 0
         Else
-            estadoMedico = estadosMedico.Libre
-            Me.colaConsulta = filaAnterior.colaConsulta 'Es 0
-            Me.colaUrgencia = filaAnterior.colaUrgencia
+            If filaAnterior.consultaEnEspera Then
+                ' Reanudar consulta
+                Me.consultaEnEspera = False
+                Me.tFaltanteConsulta = -1
+                Me.tFinAtencionConsulta = Me.reloj + filaAnterior.tFaltanteConsulta
+                Me.atendiendoUrgencia = False
 
-            Me.consultaEnEspera = filaAnterior.consultaEnEspera 'Es false
-            Me.tFaltanteConsulta = filaAnterior.tFaltanteConsulta 'Es 0
+            ElseIf Me.colaConsulta.Count > 0 Then
+                ' Pasar a la proxima Consulta
+                Me.colaConsulta.RemoveAt(0)
+                Me.rnd3 = Rnd()
+                Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
+                Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
+                Me.atendiendoUrgencia = False
 
-            Me.rnd3 = 0
-            Me.tAtencionConsulta = 0
-            Me.tFinAtencionConsulta = 0
-
-            Me.rnd4 = 0
-            Me.tAtencionUrgencia = 0
-            Me.tFinAtencionUrgencia = 0
+            Else
+                ' Liberar
+                estadoMedico = estadosMedico.Libre
+            End If
+            Me.tAtencionUrgencia = -1
+            Me.tFinAtencionUrgencia = -1
+            Me.atendiendoUrgencia = False
         End If
-        Me.sumUrgencias = filaAnterior.sumUrgencias + 1
-        Me.sumPacientes = filaAnterior.sumPacientes + 1
+
+        Me.sumUrgencias += 1
+        Me.sumPacientes += 1
     End Sub
 
     Private Sub completarFinAtConsulta(filaAnterior As FilaEvento)
-        Me.tProxConsulta = filaAnterior.tProxConsulta
-        Me.tLlegConsulta = filaAnterior.tLlegConsulta
-        Me.tProxUrgencia = filaAnterior.tProxUrgencia
-        Me.tLlegUrgencia = filaAnterior.tLlegUrgencia
-        Me.rnd1 = 0
-        Me.rnd2 = 0
 
-        If filaAnterior.colaConsulta <> 0 Then
-            estadoMedico = estadosMedico.Atendiendo
-            Me.colaConsulta = filaAnterior.colaConsulta - 1 'Actualizar la grilla de la cola de consultas
-
+        If filaAnterior.colaConsulta.Count > 0 Then
+            Me.colaConsulta.RemoveAt(0)
+            Me.rnd3 = Rnd()
             Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
             Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
         Else
-            estadoMedico = estadosMedico.Libre 'Deberia ser la unica asignacion a estado Libre
-            Me.colaConsulta = filaAnterior.colaConsulta 'Es 0
-
-            Me.rnd3 = 0
-            Me.tAtencionConsulta = 0
-            Me.tFinAtencionConsulta = 0
+            estadoMedico = estadosMedico.Libre
+            Me.tAtencionConsulta = -1
+            Me.tFinAtencionConsulta = -1
         End If
 
-        Me.consultaEnEspera = filaAnterior.consultaEnEspera 'Es false
-        Me.tFaltanteConsulta = filaAnterior.tFaltanteConsulta 'Es 0
-        Me.rnd4 = 0
-        Me.tAtencionUrgencia = 0
-        Me.tFinAtencionUrgencia = 0
-        Me.colaUrgencia = filaAnterior.colaUrgencia
-        Me.sumUrgencias = filaAnterior.sumUrgencias
-        Me.sumPacientes = filaAnterior.sumPacientes + 1
+        Me.sumPacientes += 1
     End Sub
 
     Private Sub completarLlegadaUrgencia(filaAnterior As FilaEvento)
-        Me.tProxConsulta = filaAnterior.tProxConsulta
-        Me.tLlegConsulta = filaAnterior.tLlegConsulta
+        Me.rnd2 = Rnd()
         Me.tProxUrgencia = obtenerRNDExponencial(1 / 90, rnd2) 'lambda (2 cada 3 horas = 180 minutos)
         Me.tLlegUrgencia = Me.reloj + Me.tProxUrgencia
-        Me.rnd1 = 0
 
-        If filaAnterior.evento = eventos.LlegadaConsulta Or filaAnterior.evento = eventos.LlegadaUrgencia Or filaAnterior.colaConsulta <> 0 Or filaAnterior.colaUrgencia <> 0 Or filaAnterior.consultaEnEspera Then
-            Me.estadoMedico = estadosMedico.Atendiendo
-        Else
-            Me.estadoMedico = estadosMedico.Libre
-        End If
-
-        Me.colaConsulta = filaAnterior.colaConsulta
-
-        If filaAnterior.tFinAtencionConsulta <> 0 Then
-            Me.consultaEnEspera = True
-            Me.tFaltanteConsulta = filaAnterior.tFinAtencionConsulta - Me.reloj
-        End If
-
-        If filaAnterior.tFinAtencionUrgencia <> 0 Then
-            Me.colaUrgencia = Me.colaUrgencia + 1
-            Me.tAtencionUrgencia = filaAnterior.tAtencionUrgencia
-            Me.tFinAtencionUrgencia = filaAnterior.tFinAtencionUrgencia
-        Else
+        If filaAnterior.estadoMedico = estadosMedico.Libre Then
+            Me.atendiendoUrgencia = True
+            Me.rnd4 = Rnd()
             Me.tAtencionUrgencia = obtenerRNDUniforme(15, 30, Me.rnd4)
             Me.tFinAtencionUrgencia = Me.reloj + Me.tAtencionUrgencia
-        End If
+            Me.estadoMedico = estadosMedico.Atendiendo
+        Else
+            If filaAnterior.atendiendoUrgencia Then
+                'Agregar a la cola
+                Me.colaUrgencia.Add(New UrgenciaEnCola(Me.reloj))
+            Else
+                ' Suspender consulta
+                Me.atendiendoUrgencia = True
+                Me.rnd4 = Rnd()
+                Me.tAtencionUrgencia = obtenerRNDUniforme(15, 30, Me.rnd4)
+                Me.tFinAtencionUrgencia = Me.reloj + Me.tAtencionUrgencia
 
-        Me.rnd3 = 0
-        Me.tAtencionConsulta = 0
-        Me.tFinAtencionConsulta = 0
-        Me.sumUrgencias = filaAnterior.sumUrgencias
-        Me.sumPacientes = filaAnterior.sumPacientes
+                Me.consultaEnEspera = True
+                Me.tFaltanteConsulta = filaAnterior.tFinAtencionConsulta - Me.reloj
+                Me.tFinAtencionConsulta = -1
+            End If
+        End If
     End Sub
 
     Private Sub completarLlegadaConsulta(filaAnterior As FilaEvento)
+        Me.rnd1 = Rnd()
         Me.tProxConsulta = obtenerRNDExponencial(1 / 30, rnd1) 'lambda (1 cada 30 minutos)
         Me.tLlegConsulta = Me.reloj + Me.tProxConsulta
         Me.tProxUrgencia = filaAnterior.tProxUrgencia
         Me.tLlegUrgencia = filaAnterior.tLlegUrgencia
-        Me.rnd2 = 0
 
-        If filaAnterior.evento = eventos.LlegadaConsulta Or filaAnterior.evento = eventos.LlegadaUrgencia Or filaAnterior.colaConsulta <> 0 Or filaAnterior.colaUrgencia <> 0 Or filaAnterior.consultaEnEspera Then
+        If filaAnterior.estadoMedico = estadosMedico.Libre Then
             Me.estadoMedico = estadosMedico.Atendiendo
-        Else
-            Me.estadoMedico = estadosMedico.Libre
-        End If
-
-        If filaAnterior.evento = eventos.FinAtConsulta Or filaAnterior.evento = eventos.FinAtUrgencia Or filaAnterior.evento = eventos.Inicio Then
+            Me.rnd3 = Rnd()
             Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
             Me.tFinAtencionConsulta = Me.reloj + Me.tAtencionConsulta
-            Me.colaConsulta = filaAnterior.colaConsulta
         Else
-            Me.colaConsulta = filaAnterior.colaConsulta + 1
-            Me.tAtencionConsulta = filaAnterior.tAtencionConsulta
-            Me.tFinAtencionConsulta = filaAnterior.tFinAtencionConsulta
-            Me.rnd3 = 0
-            Me.sumarColaConsultas()
+            ' Incrementar Cola
+            Me.colaConsulta.Add(New ConsultaEnCola(Me.reloj))
         End If
 
-        Me.consultaEnEspera = filaAnterior.consultaEnEspera
-        Me.tFaltanteConsulta = filaAnterior.tFaltanteConsulta
-        Me.colaUrgencia = filaAnterior.colaUrgencia
-
-        Me.rnd4 = 0
-        Me.tAtencionUrgencia = filaAnterior.tAtencionUrgencia
-        Me.tFinAtencionUrgencia = filaAnterior.tFinAtencionUrgencia
-
-        Me.sumUrgencias = filaAnterior.sumUrgencias
-        Me.sumPacientes = filaAnterior.sumPacientes
     End Sub
+
+    Public Sub cargarGrids(gridUrgencia As DataGridView, gridConsultas As DataGridView)
+        gridConsultas.Rows.Clear()
+        For i As Integer = 0 To colaConsulta.Count - 1
+            Dim j As Integer = gridConsultas.Rows.Add()
+            gridConsultas.Rows(j).Cells(0).Value = i + 1
+            gridConsultas.Rows(j).Cells(1).Value = colaConsulta(i).llegada
+        Next
+
+        gridUrgencia.Rows.Clear()
+        For i As Integer = 0 To colaUrgencia.Count - 1
+            Dim j As Integer = gridUrgencia.Rows.Add()
+            gridUrgencia.Rows(j).Cells(0).Value = i + 1
+            gridUrgencia.Rows(j).Cells(1).Value = colaUrgencia(i).llegada
+        Next
+
+
+    End Sub
+
 
     Public Function obtenerRNDExponencial(lambda As Double, rnd As Double)
         Dim res As Double
@@ -313,7 +279,7 @@
             Formulario.gridConsultas.Rows(0).Cells(0).Value = Me.reloj
             Formulario.gridConsultas.Rows(0).Cells(1).Value = Me.colaConsulta
         Else
-            If (Me.colaConsulta * 2) > cantidadC Then
+            If (Me.colaConsulta.Count * 2) > cantidadC Then
 
                 Dim col = (cantidadC / 2) + 1
                 Formulario.gridConsultas.Columns.Add(tiempoCol & col, "T. llegada")
@@ -348,7 +314,7 @@
         Dim listaMin As New List(Of Integer)
 
         For Each elemento As Integer In lista
-            If (elemento <> 0) Then
+            If (elemento >= 0) Then
                 listaMin.Add(elemento)
             End If
         Next
@@ -368,7 +334,6 @@
             Case Else
                 Return -1
         End Select
-
     End Function
 
     Private Function proxReloj()
@@ -382,7 +347,7 @@
         Dim listaMin As New List(Of Integer)
 
         For Each elemento As Integer In lista
-            If (elemento <> 0) Then
+            If (elemento >= 0) Then
                 listaMin.Add(elemento)
             End If
         Next

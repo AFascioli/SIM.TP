@@ -67,6 +67,7 @@ Partial Class Formulario
         Me.tFinAtUrgencia = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.rndTInterrupcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.porcentaje = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tDeInterurpcio = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tInterrupcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.tFinInterrupcion = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.sumUrgencias = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -80,7 +81,7 @@ Partial Class Formulario
         '
         Me.grid.AllowUserToAddRows = False
         Me.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.evento, Me.reloj, Me.rndLlegadaConsulta, Me.tProxConsulta, Me.tLlegadaConsulta, Me.rndLlegadaUrgencia, Me.tProxUrgencia, Me.tLlegadaUrgencia, Me.estadoMedico, Me.colaConsultas, Me.colaUrgencias, Me.consultaEnEspera, Me.tFaltanteConsulta, Me.rndTiempoAtConsulta, Me.tAtConsulta, Me.tFinAtConsulta, Me.urgenciaEnEspera, Me.tFaltanteUrgencia, Me.rndTiempoAtUrgencia, Me.tAtUrgencia, Me.tFinAtUrgencia, Me.rndTInterrupcion, Me.porcentaje, Me.tInterrupcion, Me.tFinInterrupcion, Me.sumUrgencias, Me.sumPacientes})
+        Me.grid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.evento, Me.reloj, Me.rndLlegadaConsulta, Me.tProxConsulta, Me.tLlegadaConsulta, Me.rndLlegadaUrgencia, Me.tProxUrgencia, Me.tLlegadaUrgencia, Me.estadoMedico, Me.colaConsultas, Me.colaUrgencias, Me.consultaEnEspera, Me.tFaltanteConsulta, Me.rndTiempoAtConsulta, Me.tAtConsulta, Me.tFinAtConsulta, Me.urgenciaEnEspera, Me.tFaltanteUrgencia, Me.rndTiempoAtUrgencia, Me.tAtUrgencia, Me.tFinAtUrgencia, Me.rndTInterrupcion, Me.porcentaje, Me.tDeInterurpcio, Me.tInterrupcion, Me.tFinInterrupcion, Me.sumUrgencias, Me.sumPacientes})
         Me.grid.Location = New System.Drawing.Point(8, 203)
         Me.grid.Margin = New System.Windows.Forms.Padding(2)
         Me.grid.Name = "grid"
@@ -333,11 +334,13 @@ Partial Class Formulario
         '
         Me.urgenciaEnEspera.HeaderText = "Hay urgencia en espera?"
         Me.urgenciaEnEspera.Name = "urgenciaEnEspera"
+        Me.urgenciaEnEspera.Width = 60
         '
         'tFaltanteUrgencia
         '
         Me.tFaltanteUrgencia.HeaderText = "Tiempo faltante urgencia"
         Me.tFaltanteUrgencia.Name = "tFaltanteUrgencia"
+        Me.tFaltanteUrgencia.Width = 60
         '
         'rndTiempoAtUrgencia
         '
@@ -363,21 +366,31 @@ Partial Class Formulario
         '
         Me.rndTInterrupcion.HeaderText = "RND Porcentaje"
         Me.rndTInterrupcion.Name = "rndTInterrupcion"
+        Me.rndTInterrupcion.Width = 60
         '
         'porcentaje
         '
         Me.porcentaje.HeaderText = "Porcentaje"
         Me.porcentaje.Name = "porcentaje"
+        Me.porcentaje.Width = 60
+        '
+        'tDeInterurpcio
+        '
+        Me.tDeInterurpcio.HeaderText = "Tiempo de interrupcion"
+        Me.tDeInterurpcio.Name = "tDeInterurpcio"
+        Me.tDeInterurpcio.Width = 60
         '
         'tInterrupcion
         '
         Me.tInterrupcion.HeaderText = "Tiempo prox. interrupcion"
         Me.tInterrupcion.Name = "tInterrupcion"
+        Me.tInterrupcion.Width = 60
         '
         'tFinInterrupcion
         '
         Me.tFinInterrupcion.HeaderText = "Tiempo de fin de interrupcion"
         Me.tFinInterrupcion.Name = "tFinInterrupcion"
+        Me.tFinInterrupcion.Width = 60
         '
         'sumUrgencias
         '
@@ -463,6 +476,7 @@ Partial Class Formulario
     Friend WithEvents tFinAtUrgencia As DataGridViewTextBoxColumn
     Friend WithEvents rndTInterrupcion As DataGridViewTextBoxColumn
     Friend WithEvents porcentaje As DataGridViewTextBoxColumn
+    Friend WithEvents tDeInterurpcio As DataGridViewTextBoxColumn
     Friend WithEvents tInterrupcion As DataGridViewTextBoxColumn
     Friend WithEvents tFinInterrupcion As DataGridViewTextBoxColumn
     Friend WithEvents sumUrgencias As DataGridViewTextBoxColumn

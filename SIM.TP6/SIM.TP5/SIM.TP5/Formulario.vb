@@ -3,8 +3,8 @@
     Dim filaAnterior As FilaEvento
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Me.txt_cantSimulaciones.Text = 20
-        Me.txt_cant_filas.Text = 20
+        Me.txt_cantSimulaciones.Text = 200
+        Me.txt_cant_filas.Text = 200
         Me.txt_fila_inicial.Text = 1
     End Sub
 
@@ -78,12 +78,15 @@
         If filaEvento.tInterrupcion >= 0 Then
             Me.grid.Rows(indice).Cells(23).Value = filaEvento.tInterrupcion
         End If
+        If Not filaEvento.tProxInterrupcion.Equals(Nothing) Then
+            Me.grid.Rows(indice).Cells(24).Value = filaEvento.tProxInterrupcion.TimeOfDay
+        End If
         If Not filaEvento.tFinInterrupcion.Equals(Nothing) Then
-            Me.grid.Rows(indice).Cells(24).Value = filaEvento.tFinInterrupcion
+            Me.grid.Rows(indice).Cells(25).Value = filaEvento.tFinInterrupcion.TimeOfDay
         End If
 
-        Me.grid.Rows(indice).Cells(25).Value = filaEvento.sumUrgencias
-        Me.grid.Rows(indice).Cells(26).Value = filaEvento.sumPacientes
+        Me.grid.Rows(indice).Cells(26).Value = filaEvento.sumUrgencias
+        Me.grid.Rows(indice).Cells(27).Value = filaEvento.sumPacientes
     End Sub
 
     Private Sub cargarTabla()

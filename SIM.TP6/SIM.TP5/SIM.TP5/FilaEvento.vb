@@ -201,7 +201,7 @@
         Me.porcentaje = -1
         Me.tInterrupcion = -1
         Me.tProxInterrupcion = filaAnterior.tProxInterrupcion
-        Me.tFinInterrupcion = Nothing
+        Me.tFinInterrupcion = filaAnterior.tFinInterrupcion
 
         Me.sumUrgencias += 1
         Me.sumPacientes += 1
@@ -227,7 +227,7 @@
         Me.porcentaje = -1
         Me.tInterrupcion = -1
         Me.tProxInterrupcion = filaAnterior.tProxInterrupcion
-        Me.tFinInterrupcion = Nothing
+        Me.tFinInterrupcion = filaAnterior.tFinInterrupcion
 
         Me.sumPacientes += 1
     End Sub
@@ -267,7 +267,7 @@
         Me.porcentaje = -1
         Me.tInterrupcion = -1
         Me.tProxInterrupcion = filaAnterior.tProxInterrupcion
-        Me.tFinInterrupcion = Nothing
+        Me.tFinInterrupcion = filaAnterior.tFinInterrupcion
     End Sub
 
     Private Sub completarLlegadaConsulta(filaAnterior As FilaEvento)
@@ -287,11 +287,17 @@
             Me.colaConsulta.Add(New ConsultaEnCola(Me.reloj))
         End If
 
+        Me.porcentaje = -1
+        Me.tInterrupcion = -1
+        Me.tProxInterrupcion = filaAnterior.tProxInterrupcion
+        Me.tFinInterrupcion = filaAnterior.tFinInterrupcion
+
     End Sub
 
     Private Sub completarEsHoraInterrupcion(filaAnterior As FilaEvento)
 
-        Me.tFinInterrupcion = Me.reloj.AddMinutes(15)
+        Me.tFinInterrupcion = Me.reloj.AddMinutes(30)
+        Me.tProxInterrupcion = Nothing
 
         If estadoMedico = estadosMedico.Libre Then
             estadoMedico = estadosMedico.Suspendido
@@ -459,11 +465,11 @@
     Private Function obtenerPorcentajeInterrupcion(rnd As Double)
 
         Select Case rnd
-            Case rnd < 0.2
+            Case 0 To 0.199
                 Return 50
-            Case rnd < 0.5 And rnd >= 0.2
+            Case 0.2 To 0.499
                 Return 70
-            Case rnd < 1 And rnd >= 0.5
+            Case 0.5 To 0.999
                 Return 100
             Case Else
                 Return -1
@@ -474,11 +480,11 @@
     Private Function obtenerTiempoInterrupcion(val As Int16)
 
         Select Case val
-            Case val = 50
+            Case 50
                 Return 425
-            Case val = 70
+            Case 70
                 Return 500
-            Case val = 100
+            Case 100
                 Return 550
             Case Else
                 Return -1

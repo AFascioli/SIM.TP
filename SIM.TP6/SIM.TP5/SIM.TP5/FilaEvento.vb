@@ -261,8 +261,8 @@
         End If
 
         'Agregados por TP6
-        Me.urgenciaEnEspera = False
-        Me.tFaltanteUrgencia = -1
+        Me.tFaltanteUrgencia = filaAnterior.tFaltanteUrgencia
+        Me.urgenciaEnEspera = filaAnterior.urgenciaEnEspera
 
         Me.porcentaje = -1
         Me.tInterrupcion = -1
@@ -287,6 +287,8 @@
             Me.colaConsulta.Add(New ConsultaEnCola(Me.reloj))
         End If
 
+        Me.tFaltanteUrgencia = filaAnterior.tFaltanteUrgencia
+        Me.urgenciaEnEspera = filaAnterior.urgenciaEnEspera
         Me.porcentaje = -1
         Me.tInterrupcion = -1
         Me.tProxInterrupcion = filaAnterior.tProxInterrupcion
@@ -298,9 +300,10 @@
 
         Me.tFinInterrupcion = Me.reloj.AddMinutes(30)
         Me.tProxInterrupcion = Nothing
+        estadoMedico = estadosMedico.Suspendido
 
         If estadoMedico = estadosMedico.Libre Then
-            estadoMedico = estadosMedico.Suspendido
+
         Else
             If Me.atendiendoUrgencia Then
                 'Suspender urgencia
@@ -329,7 +332,7 @@
             Me.tFaltanteUrgencia = -1
             Me.tFinAtencionUrgencia = Me.reloj.AddMinutes(filaAnterior.tFaltanteUrgencia)
             Me.atendiendoUrgencia = True
-
+            Me.estadoMedico = estadosMedico.Atendiendo
         Else
             'Si hay consultas
             If filaAnterior.consultaEnEspera Then
@@ -338,6 +341,7 @@
                 Me.tFaltanteConsulta = -1
                 Me.tFinAtencionConsulta = Me.reloj.AddMinutes(filaAnterior.tFaltanteConsulta)
                 Me.atendiendoUrgencia = False
+                Me.estadoMedico = estadosMedico.Atendiendo
 
             ElseIf Me.colaConsulta.Count > 0 Then
                 ' Pasar a la proxima Consulta
@@ -346,6 +350,7 @@
                 Me.tAtencionConsulta = obtenerRNDUniforme(10, 20, rnd3)
                 Me.tFinAtencionConsulta = Me.reloj.AddMinutes(Me.tAtencionConsulta)
                 Me.atendiendoUrgencia = False
+                Me.estadoMedico = estadosMedico.Atendiendo
 
             Else
                 ' Liberar
